@@ -6,6 +6,7 @@ from threading import Thread
 
 class FileLoad(Thread):
     def __init__(self, file_name):
+        super().__init__()
         self.file_name = str(file_name)
         self.pcd = None
         # self.points = None
@@ -78,6 +79,39 @@ class FileLoad(Thread):
                 print("[Info] Successfully read", self.file_name)
                 # Point cloud
                 return self.pcd
+        elif self.file_name.endswith(".pts"):
+            try:
+                with open(self.file_name, "r") as f:
+                    points_np = []
+                    for line in f:
+                        if len(line.split()) == 4:
+                            x, y, z, i = [num for num in line.split()]
+                            points_np.append([float(x), float(y), float(z), int(float(i))])
+                            print('point', len(points_np))
+                        elif len(line.split()) == 3:
+                            x, y, z = [num for num in line.split()]
+                            points_np.append([float(x), float(y), float(z)])
+                            print('point', len(points_np))
+                        elif len(line.split()) == 5:
+                            x, y, z, i, zeroes_v = [num for num in line.split()]
+                            points_np.append([float(x), float(y), float(z), int(float(i))])
+                            print('point', len(points_np))
+                        else:
+                            print("[Info] The file has unregistered format")
+                print('loop end')
+                points_arr = np.array(points_np).transpose()
+                print(len(points_arr))
+                point_xyz = points_arr[:3].transpose()
+                # points_intensity = points_arr[3]
+                self.pcd = o3d.geometry.PointCloud()
+                self.pcd.points = o3d.utility.Vector3dVector(point_xyz)
+                if self.pcd is not None:
+                    print("[Info] Successfully read", self.file_name)
+                    # Point cloud
+                    return self.pcd
+
+            except Exception:
+                print("[Info] Unsuccessfully read .pts file", self.file_name)
 
         else:
             self.pcd = None
@@ -91,29 +125,10 @@ class FileLoad(Thread):
                 print("[Info]", self.file_name, "appears to be a point cloud")
                 cloud = None
                 try:
-                    if geometry_type == o3d.io.FileGeometry.CONTAINS_POINTS:
-                        with open(self.file_name, "r") as f:
-                            points_np = []
-                            for line in f:
-                                if len(line.split()) == 4:
-                                    x, y, z, i = [num for num in line.split()]
-                                    points_np.append([float(x), float(y), float(z), int(i)])
-                                elif len(line.split()) == 3:
-                                    x, y, z = [num for num in line.split()]
-                                    points_np.append([float(x), float(y), float(z)])
-                                else:
-                                    print("[Info] The file has unregistered format")
-                        points_arr = np.array(points_np).transpose()
-                        print(len(points_arr))
-                        point_xyz = points_arr[:3].transpose()
-                        # points_intensity = points_arr[3]
-                        cloud = o3d.geometry.PointCloud()
-                        cloud.points = o3d.utility.Vector3dVector(point_xyz)
-                    else:
-                        cloud = o3d.io.read_point_cloud(self.file_name)
+                    cloud = o3d.io.read_point_cloud(self.file_name)
                     # print(type(cloud))
                 except Exception:
-                    pass
+                    print("[Info] Unknown filename", self.file_name)
                 if cloud is not None:
                     print("[Info] Successfully read", self.file_name)
 
@@ -121,8 +136,8 @@ class FileLoad(Thread):
                         cloud.estimate_normals()
                     cloud.normalize_normals()
                     self.pcd = cloud
-                    # self.points = cloud.points
-                    self.pcd.points = o3d.utility.Vector3dVector(point_xyz)
+                    #self.points = cloud.points
+                    self.pcd.points = o3d.utility.Vector3dVector(cloud.points)
                 else:
                     print("[WARNING] Failed to read points", self.file_name)
 
