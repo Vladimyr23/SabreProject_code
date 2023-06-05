@@ -3,6 +3,7 @@ import open3d as o3d
 from threading import Thread
 import matplotlib.pyplot as plt
 import copy
+import argparse
 
 
 class VisualizePCD(Thread):
@@ -37,7 +38,7 @@ class VisualizePCD(Thread):
         with o3d.utility.VerbosityContextManager(
                 o3d.utility.VerbosityLevel.Debug) as cm:
             labels = np.array(
-                pcd.cluster_dbscan(eps=0.2, min_points=100, print_progress=True))
+                pcd.cluster_dbscan(eps=0.02, min_points=100, print_progress=True))
 
         max_label = labels.max()
         print(f"point cloud has {max_label + 1} clusters")
@@ -46,31 +47,109 @@ class VisualizePCD(Thread):
         pcd.colors = o3d.utility.Vector3dVector(colors[:, :3])
         o3d.visualization.draw_geometries([pcd])
 
-    def visualize_strip(self, source, target):
-        trans_init = np.asarray([[1.0, 0.0, 0.0, 0.0],
-                                 [0.0, 1.0, 0.0, 0.0],
-                                 [0.0, 0.0, 1.0, 0.0],
-                                 [0.0, 0.0, 0.0, 1.0]])
-        # Mean and standard deviation.
-        mu, sigma = 0, 0.1
-        threshold = 50.0
-        print("Using the noisy source pointcloud to perform robust ICP.\n")
-        print("Robust point-to-plane ICP, threshold={}:".format(threshold))
-        loss = o3d.pipelines.registration.TukeyLoss(k=sigma)
-        print("Using robust loss:", loss)
-        p2l = o3d.pipelines.registration.TransformationEstimationPointToPlane(loss)
-        reg_p2l = o3d.pipelines.registration.registration_icp(
-            source, target, threshold, init=trans_init)
-        print(reg_p2l)
-        print("Transformation is:")
-        print(reg_p2l.transformation)
+    #Pre-process data for FGR Registration
+    def preprocess_point_cloud(self, pcd, voxel_size):
+        pcd_down = pcd.voxel_down_sample(voxel_size)
+        pcd_down.estimate_normals(
+            o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 2.0,
+                                                 max_nn=30))
+        pcd_fpfh = o3d.pipelines.registration.compute_fpfh_feature(
+            pcd_down,
+            o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 5.0,
+                                                 max_nn=100))
+        return (pcd_down, pcd_fpfh)
 
-        source_temp = copy.deepcopy(source)
-        target_temp = copy.deepcopy(target)
-        source_temp.paint_uniform_color([1, 0.706, 0])
-        target_temp.paint_uniform_color([0, 0.651, 0.929])
-        source_temp.transform(reg_p2l.transformation)
-        o3d.visualization.draw([source_temp, target_temp])
+    def visualize_strip(self, source, target):
+        #ROBUST ICP REGISTRATION START--------------------
+        # trans_init = np.asarray([[1.0, 0.0, 0.0, 0.0],
+        #                          [0.0, 1.0, 0.0, 0.0],
+        #                          [0.0, 0.0, 1.0, 0.0],
+        #                          [0.0, 0.0, 0.0, 1.0]])
+        # # Mean and standard deviation.
+        # mu, sigma = 0, 0.1
+        # threshold = 50.0
+        # print("Using the noisy source pointcloud to perform robust ICP.\n")
+        # print("Robust point-to-plane ICP, threshold={}:".format(threshold))
+        # loss = o3d.pipelines.registration.TukeyLoss(k=sigma)
+        # print("Using robust loss:", loss)
+        # p2l = o3d.pipelines.registration.TransformationEstimationPointToPlane(loss)
+        # reg_p2l = o3d.pipelines.registration.registration_icp(
+        #     source, target, threshold, init=trans_init)
+        # print(reg_p2l)
+        # print("Transformation is:")
+        # print(reg_p2l.transformation)
+        #
+        # source_temp = copy.deepcopy(source)
+        # target_temp = copy.deepcopy(target)
+        # source_temp.paint_uniform_color([1, 0.706, 0])
+        # target_temp.paint_uniform_color([0, 0.651, 0.929])
+        # source_temp.transform(reg_p2l.transformation)
+        # o3d.visualization.draw([source_temp, target_temp])
+        #--------------------ROBUST ICP REGISTRATION END
+
+        #FGR REGISTRATION START--------------------
+        parser = argparse.ArgumentParser(
+            'Global point cloud registration example with RANSAC')
+        parser.add_argument('src',
+                            type=str,
+                            default=source,
+                            nargs='?',
+                            help='path to src point cloud')
+        parser.add_argument('dst',
+                            type=str,
+                            default=target,
+                            nargs='?',
+                            help='path to dst point cloud')
+        parser.add_argument('--voxel_size',
+                            type=float,
+                            default=0.05,
+                            help='voxel size in meter used to downsample inputs')
+        parser.add_argument(
+            '--distance_multiplier',
+            type=float,
+            default=1.5,
+            help='multipler used to compute distance threshold'
+                 'between correspondences.'
+                 'Threshold is computed by voxel_size * distance_multiplier.')
+        parser.add_argument('--max_iterations',
+                            type=int,
+                            default=64,
+                            help='number of max FGR iterations')
+        parser.add_argument(
+            '--max_tuples',
+            type=int,
+            default=1000,
+            help='max number of accepted tuples for correpsondence filtering')
+
+        args = parser.parse_args()
+
+        voxel_size = args.voxel_size
+        distance_threshold = args.distance_multiplier * voxel_size
+        print("Distance threshold: ", distance_threshold)
+
+        o3d.utility.set_verbosity_level(o3d.utility.VerbosityLevel.Debug)
+        print('Reading inputs')
+        src = source
+        dst = target
+
+        print('Downsampling inputs')
+        src_down, src_fpfh = self.preprocess_point_cloud(src, voxel_size)
+        dst_down, dst_fpfh = self.preprocess_point_cloud(dst, voxel_size)
+
+        print('Running FGR')
+        result = o3d.pipelines.registration.registration_fgr_based_on_feature_matching(
+            src_down, dst_down, src_fpfh, dst_fpfh,
+            o3d.pipelines.registration.FastGlobalRegistrationOption(
+                maximum_correspondence_distance=distance_threshold,
+                iteration_number=args.max_iterations,
+                maximum_tuple_count=args.max_tuples))
+
+        src.paint_uniform_color([1, 0, 0])
+        dst.paint_uniform_color([0, 1, 0])
+        o3d.visualization.draw([src.transform(result.transformation), dst])
+        #--------------------FGR REGISTRATION END
+
+
 
     def pick_points(self,pcd):
         print("")
