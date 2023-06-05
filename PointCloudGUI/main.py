@@ -15,15 +15,19 @@ class AppWithGUI(tk.Tk):
     def __init__(self):
         super().__init__()
         # create the root window
-        self.close_vis_button = None
-        self.visualize_button = None
-        self.save_button = None
         self.open_button = None
+        self.open_strip_match_button = None
+        self.save_button = None
+        self.visualize_button = None
+        self.visualize_strip_button = None
+        self.close_vis_button = None
+
         self.title('Tkinter Open File Dialog')
         self.resizable(False, False)
-        self.geometry('300x150')
+        self.geometry('300x250')
         self.vis_pcd = None
         self.pcd = None
+        self.pcd1 = None
 
         # create the menu button
         self.create_menu_buttons()
@@ -66,16 +70,30 @@ class AppWithGUI(tk.Tk):
             #     message=filename
             # )
             load = FileLoad(filename)
-            self.pcd = load.load_file()
-            showinfo(
-                title='Selected File successfully loaded',
-                message=filename
-            )
-            print("-------PCD: \n",self.pcd)
-            # print("------Points: \n",self.points)
-            self.visualize_button.config(state="normal")
-            self.close_vis_button.config(state="normal")
-            self.save_button.config(state="normal")
+            if self.pcd is None:
+                self.pcd = load.load_file()
+                showinfo(
+                    title='Selected File successfully loaded',
+                    message=filename
+                )
+                print("-------PCD: \n", self.pcd)
+                # print("------Points: \n",self.points)
+                self.visualize_button.config(state="normal")
+                #self.close_vis_button.config(state="normal")
+                self.save_button.config(state="normal")
+            else:
+                self.pcd1 = load.load_file()
+                showinfo(
+                    title='Selected File successfully loaded',
+                    message=filename
+                )
+                print("-------PCD: \n", self.pcd1)
+                # print("------Points: \n",self.points)
+                #self.visualize_button.config(state="disabled")
+                self.visualize_strip_button.config(state="normal")
+                #self.close_vis_button.config(state="normal")
+                self.save_button.config(state="normal")
+
 
 
     def select_save_file(self):
@@ -140,10 +158,16 @@ class AppWithGUI(tk.Tk):
             )
             print("-------JSON2: \n", json_clip)
 
-    # TODO Visualization as thread?
+
     def visualize_pcd(self):
-        self.vis_pcd = VisualizePCD(self.pcd)
-        self.vis_pcd.visualize()
+        self.vis_pcd = VisualizePCD()
+        self.close_vis_button.config(state="normal")
+        self.vis_pcd.visualize(self.pcd)
+
+    def visualize_strip_pcd(self):
+        self.vis_pcd = VisualizePCD()
+        self.close_vis_button.config(state="normal")
+        self.vis_pcd.visualize_strip(self.pcd, self.pcd1)
 
     def close_vis(self):
         self.vis_pcd.vis_close()
@@ -162,8 +186,15 @@ class AppWithGUI(tk.Tk):
             text='Open a Point Cloud File',
             command=self.select_load_file
         )
-
         self.open_button.pack(expand=True)
+
+        # open target and source files button
+        self.open_strip_match_button = ttk.Button(
+            self,
+            text='Open a source and target Point Cloud Files',
+            command=lambda: [self.select_load_file(), self.select_load_file()]
+        )
+        self.open_strip_match_button.pack(expand=True)
 
         # save image button
         self.save_button = ttk.Button(
@@ -172,7 +203,6 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.select_save_file
         )
-
         self.save_button.pack(expand=True)
 
         # visualize Point Cloud button
@@ -182,10 +212,18 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.visualize_pcd
         )
-
-        # self.visualize_button["state"] = "disabled"
-
+        #self.visualize_button["state"] = "disabled"
         self.visualize_button.pack(expand=True)
+
+        # visualize Strip match Point Cloud button
+        self.visualize_strip_button = ttk.Button(
+            self,
+            text='Visualize a Strip matched Point Cloud',
+            state="disabled",
+            command=self.visualize_strip_pcd
+        )
+        #self.visualize_strip_button["state"] = "disabled"
+        self.visualize_strip_button.pack(expand=True)
 
         # close visualization Point Cloud button
         self.close_vis_button = ttk.Button(
@@ -194,9 +232,7 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.close_vis
         )
-
         # self.visualize_button["state"] = "disabled"
-
         self.close_vis_button.pack(expand=True)
 
 
