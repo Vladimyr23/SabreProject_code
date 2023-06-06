@@ -5,21 +5,21 @@ import pye57
 from threading import Thread
 
 class FileLoad(Thread):
-    def __init__(self, file_name):
+    def __init__(self):
         super().__init__()
-        self.file_name = str(file_name)
+        #self.file_name = None
         self.pcd = None
         # self.points = None
 
 
-    def load_file(self):
-        print(self.file_name)
+    def load_file(self, file_name):
+        print(file_name)
 
-        if self.file_name.endswith(".las") or self.file_name.endswith(".laz"):
+        if file_name.endswith(".las") or file_name.endswith(".laz"):
             print("[INFO] .las (.laz) file loading")
             try:
                 # import lidar .las data and assign to variable
-                self.pcd = laspy.read(self.file_name)
+                self.pcd = laspy.read(file_name)
                 # examine the available features for the lidar file we have read
                 # list(las.point_format.dimension_names)
                 #
@@ -32,7 +32,7 @@ class FileLoad(Thread):
                 self.pcd.points = o3d.utility.Vector3dVector(point_data)
                 # self.points = point_data
                 if self.pcd is not None:
-                    print("[Info] Successfully read", self.file_name)
+                    print("[Info] Successfully read", file_name)
 
                     # Point cloud
                     return self.pcd
@@ -40,10 +40,10 @@ class FileLoad(Thread):
             except Exception:
                 print(".las, .laz file load failed")
 
-        elif self.file_name.endswith(".e57"):
+        elif file_name.endswith(".e57"):
             print("[INFO] .e57 file loading")
             try:
-                e57_file = pye57.E57(self.file_name)
+                e57_file = pye57.E57(file_name)
 
                 # other attributes can be read using:
                 data = e57_file.read_scan(0)
@@ -63,25 +63,25 @@ class FileLoad(Thread):
                 # self.points = point_xyz
                 # self.pcd.colors = o3d.utility.Vector3dVector(points_rgb)
                 # self.pcd.colors[:, 0] = points_intensity
-                print("[Info] Successfully read", self.file_name)
+                print("[Info] Successfully read", file_name)
                 return self.pcd
 
             except Exception:
                 print(".e57 file load failed")
 
-        elif self.file_name.endswith(".ply"):
-            self.pcd = o3d.io.read_point_cloud(self.file_name)
+        elif file_name.endswith(".ply"):
+            self.pcd = o3d.io.read_point_cloud(file_name)
             points_xyz = np.asarray(self.pcd.points)
             #self.pcd = o3d.geometry.PointCloud() # No need to do that already a PointCloud
             self.pcd.points = o3d.utility.Vector3dVector(points_xyz)
             # self.points = points_xyz
             if self.pcd is not None:
-                print("[Info] Successfully read", self.file_name)
+                print("[Info] Successfully read", file_name)
                 # Point cloud
                 return self.pcd
-        elif self.file_name.endswith(".pts"):
+        elif file_name.endswith(".pts"):
             try:
-                with open(self.file_name, "r") as f:
+                with open(file_name, "r") as f:
                     points_np = []
                     for line in f:
                         if len(line.split()) == 4:
@@ -106,31 +106,31 @@ class FileLoad(Thread):
                 self.pcd = o3d.geometry.PointCloud()
                 self.pcd.points = o3d.utility.Vector3dVector(point_xyz)
                 if self.pcd is not None:
-                    print("[Info] Successfully read", self.file_name)
+                    print("[Info] Successfully read", file_name)
                     # Point cloud
                     return self.pcd
 
             except Exception:
-                print("[Info] Unsuccessfully read .pts file", self.file_name)
+                print("[Info] Unsuccessfully read .pts file", file_name)
 
         else:
             self.pcd = None
-            geometry_type = o3d.io.read_file_geometry_type(self.file_name)
+            geometry_type = o3d.io.read_file_geometry_type(file_name)
             print(geometry_type)
 
             mesh = None
             if geometry_type & o3d.io.CONTAINS_TRIANGLES:
-                mesh = o3d.io.read_triangle_model(self.file_name)
+                mesh = o3d.io.read_triangle_model(file_name)
             if mesh is None:
-                print("[Info]", self.file_name, "appears to be a point cloud")
+                print("[Info]", file_name, "appears to be a point cloud")
                 cloud = None
                 try:
-                    cloud = o3d.io.read_point_cloud(self.file_name)
+                    cloud = o3d.io.read_point_cloud(file_name)
                     # print(type(cloud))
                 except Exception:
-                    print("[Info] Unknown filename", self.file_name)
+                    print("[Info] Unknown filename", file_name)
                 if cloud is not None:
-                    print("[Info] Successfully read", self.file_name)
+                    print("[Info] Successfully read", file_name)
 
                     if not cloud.has_normals():
                         cloud.estimate_normals()
@@ -139,7 +139,7 @@ class FileLoad(Thread):
                     #self.points = cloud.points
                     self.pcd.points = o3d.utility.Vector3dVector(cloud.points)
                 else:
-                    print("[WARNING] Failed to read points", self.file_name)
+                    print("[WARNING] Failed to read points", file_name)
 
             if self.pcd is not None or mesh is not None:
                 try:

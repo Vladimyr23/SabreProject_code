@@ -29,6 +29,11 @@ class AppWithGUI(tk.Tk):
         self.pcd = None
         self.pcd1 = None
 
+        # Visualisation class
+        self.vis_pcd = VisualizePCD()
+        # Point cloud load class
+        self.load = FileLoad()
+
         # create the menu button
         self.create_menu_buttons()
 
@@ -64,14 +69,14 @@ class AppWithGUI(tk.Tk):
         if not filename:
             showerror(title='Error',
                       message='Point cloud filename is missing.')
+            return
         else:
             # showinfo(
             #     title='Selected File',
             #     message=filename
             # )
-            load = FileLoad(filename)
             if self.pcd is None:
-                self.pcd = load.load_file()
+                self.pcd = self.load.load_file(filename)
                 showinfo(
                     title='Selected File successfully loaded',
                     message=filename
@@ -82,7 +87,7 @@ class AppWithGUI(tk.Tk):
                 #self.close_vis_button.config(state="normal")
                 self.save_button.config(state="normal")
             else:
-                self.pcd1 = load.load_file()
+                self.pcd1 = self.load.load_file(filename)
                 showinfo(
                     title='Selected File successfully loaded',
                     message=filename
@@ -114,6 +119,7 @@ class AppWithGUI(tk.Tk):
         if not filename:
             showerror(title='Error',
                       message='Point cloud filename is missing.')
+            return
         else:
             # showinfo(
             #     title='Selected File',
@@ -142,6 +148,7 @@ class AppWithGUI(tk.Tk):
         if not filename:
             showerror(title='Error',
                       message='Point cloud filename is missing.')
+            return
         else:
             # showinfo(
             #     title='Selected File',
@@ -160,18 +167,17 @@ class AppWithGUI(tk.Tk):
 
 
     def visualize_pcd(self):
-        self.vis_pcd = VisualizePCD()
         self.close_vis_button.config(state="normal")
         self.vis_pcd.visualize(self.pcd)
 
     def visualize_strip_pcd(self):
-        self.vis_pcd = VisualizePCD()
         self.close_vis_button.config(state="normal")
         self.vis_pcd.visualize_strip(self.pcd, self.pcd1)
 
     def close_vis(self):
         self.vis_pcd.vis_close()
         self.pcd = None
+        self.pcd1 = None
         self.vis_pcd = None
         self.visualize_button.config(state="disabled")
         self.close_vis_button.config(state="disabled")

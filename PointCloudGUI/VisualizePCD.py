@@ -15,38 +15,39 @@ class VisualizePCD(Thread):
         #self.pcd = pcd
         # self.pcd.points = pcd
 
-    def visualize(self,pcd):
-        # # Create a visualizer object
-        # self.vis = o3d.visualization.VisualizerWithEditing()
-        # self.vis.create_window()
-        # # opt = vis.get_render_option() # This one and the next lines are to place black background
-        # # opt.background_color = np.asarray([0, 0, 0])    # Add point cloud to visualizer
-        # self.vis.add_geometry(pcd)
-        # pr=o3d.visualization.PickedPoint.coord
-        # print(pr)
-        # # This will measure the distance between the last 2 selected points
-        # #self.vis.register_selection_changed_callback(self.measure_dist) # working with o3d.visualization.VisualizerWithVertexSelection()
-        # # Start visualizer
-        # fig = self.vis.run()
+    def visualize(self, pcd):
+        # Create a visualizer object
+        self.vis = o3d.visualization.VisualizerWithEditing()
+        self.vis.create_window()
+        # opt = vis.get_render_option() # This one and the next lines are to place black background
+        # opt.background_color = np.asarray([0, 0, 0])    # Add point cloud to visualizer
+        self.vis.add_geometry(pcd)
+        pr = o3d.visualization.PickedPoint.coord
+        print(pr)
+        # This will measure the distance between the last 2 selected points
+        #self.vis.register_selection_changed_callback(self.measure_dist) # working with o3d.visualization.VisualizerWithVertexSelection()
+        # Start visualizer
+        self.vis.run()
+
+        pts_index = self.vis.get_picked_points()
+        pts = np.asarray(pcd.points)[pts_index]
+        if len(pts) > 1:
+            self.measure_dist(pts)
+        self.vis.close()
+
+        #DBSCAN clustering method------
+        # with o3d.utility.VerbosityContextManager(
+        #         o3d.utility.VerbosityLevel.Debug) as cm:
+        #     labels = np.array(
+        #         pcd.cluster_dbscan(eps=0.02, min_points=100, print_progress=True))
         #
-        # pts_index = self.vis.get_picked_points()
-        # pts = np.asarray(pcd.points)[pts_index]
-        # if len(pts) > 1:
-        #     self.measure_dist(pts)
-        # #self.vis_close()
-
-        #DBSCAN clustering method
-        with o3d.utility.VerbosityContextManager(
-                o3d.utility.VerbosityLevel.Debug) as cm:
-            labels = np.array(
-                pcd.cluster_dbscan(eps=0.02, min_points=100, print_progress=True))
-
-        max_label = labels.max()
-        print(f"point cloud has {max_label + 1} clusters")
-        colors = plt.get_cmap("tab20")(labels / (max_label if max_label > 0 else 1))
-        colors[labels < 0] = 0
-        pcd.colors = o3d.utility.Vector3dVector(colors[:, :3])
-        o3d.visualization.draw_geometries([pcd])
+        # max_label = labels.max()
+        # print(f"point cloud has {max_label + 1} clusters")
+        # colors = plt.get_cmap("tab20")(labels / (max_label if max_label > 0 else 1))
+        # colors[labels < 0] = 0
+        # pcd.colors = o3d.utility.Vector3dVector(colors[:, :3])
+        # o3d.visualization.draw_geometries([pcd])
+        # ---------------DBSCAN clustering method end
 
     #Pre-process data for FGR Registration
     def preprocess_point_cloud(self, pcd, voxel_size):
@@ -203,7 +204,7 @@ class VisualizePCD(Thread):
         dst_down, dst_fpfh = self.preprocess_point_cloud(target, voxel_size)
 
         start = time.time()
-        print('RANSAC Started', start)
+        print('RANSAC Started', time.localtime(start))
         print('Running RANSAC')
         result = o3d.pipelines.registration.registration_ransac_based_on_feature_matching(
             src_down, dst_down, src_fpfh, dst_fpfh,
@@ -220,15 +221,15 @@ class VisualizePCD(Thread):
             ],
             criteria=o3d.pipelines.registration.RANSACConvergenceCriteria(
                 args.max_iterations, args.confidence))
-        print('RANSAC Finished', time.time(),
+        print('RANSAC Finished', time.localtime(time.time()),
               "Global registration took %.3f sec.\n" % (time.time() - start))
 
-        source.paint_uniform_color([1, 0, 0])
-        target.paint_uniform_color([0, 1, 0])
+        # source.paint_uniform_color([1, 0, 0])
+        # target.paint_uniform_color([0, 1, 0])
         o3d.visualization.draw([source.transform(result.transformation), target])
         # --------------------RANSAC REGISTRATION END
 
-    def pick_points(self,pcd):
+    def pick_points(self, pcd):
         print("")
         print(
             "1) Please pick at least three correspondences using [shift + left click]"
@@ -239,7 +240,8 @@ class VisualizePCD(Thread):
         vis.create_window()
         vis.add_geometry(pcd)
         vis.run()  # user picks points
-        vis.destroy_window()
+        #vis.destroy_window()
+
         print("")
         return vis.get_picked_points()
 
@@ -271,7 +273,7 @@ class VisualizePCD(Thread):
         else:
             print("Select at least 2 points to calculate Dist")
         
-    def vis_close(self,pcd):
-        self.vis.remove_geometry([pcd])
+    def vis_close(self):
+        #self.vis.remove_geometry(pcd)
         self.vis.destroy_window()
         self.vis.close()
