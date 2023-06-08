@@ -7,7 +7,7 @@ import argparse
 import time
 
 
-class VisualizePCD(Thread):
+class VisualizePCD():
 
     def __init__(self):
         super().__init__()
@@ -49,7 +49,7 @@ class VisualizePCD(Thread):
         # o3d.visualization.draw_geometries([pcd])
         # ---------------DBSCAN clustering method end
 
-    #Pre-process data for FGR Registration
+    #Pre-process data for FGR and RANSAC Registration
     def preprocess_point_cloud(self, pcd, voxel_size):
         pcd_down = pcd.voxel_down_sample(voxel_size)
         pcd_down.estimate_normals(
@@ -59,9 +59,59 @@ class VisualizePCD(Thread):
             pcd_down,
             o3d.geometry.KDTreeSearchParamHybrid(radius=voxel_size * 5.0,
                                                  max_nn=100))
-        return (pcd_down, pcd_fpfh)
+        return pcd_down, pcd_fpfh
 
-    def visualize_strip(self, source, target):
+    #This function is part of the Multiway registration
+    def pairwise_registration(self, source, target, max_correspondence_distance_coarse,
+                              max_correspondence_distance_fine):
+        print("Apply point-to-plane ICP\n", source, target)
+        icp_coarse = o3d.pipelines.registration.registration_icp(
+            source, target, max_correspondence_distance_coarse, np.identity(4)) #VY removed , o3d.pipelines.registration.TransformationEstimationPointToPlane())
+        icp_fine = o3d.pipelines.registration.registration_icp(
+            source, target, max_correspondence_distance_fine,
+            icp_coarse.transformation) #VY removed , o3d.pipelines.registration.TransformationEstimationPointToPlane())
+        transformation_icp = icp_fine.transformation
+        information_icp = o3d.pipelines.registration.get_information_matrix_from_point_clouds(
+            source, target, max_correspondence_distance_fine,
+            transformation_icp)
+        return transformation_icp, information_icp
+
+    # This function is part of the Multiway registration
+    def full_registration(self, pcds, max_correspondence_distance_coarse,
+                          max_correspondence_distance_fine):
+        pose_graph = o3d.pipelines.registration.PoseGraph()
+        odometry = np.identity(4)
+        pose_graph.nodes.append(o3d.pipelines.registration.PoseGraphNode(odometry))
+        n_pcds = len(pcds)
+        print("Pcd's #: ", n_pcds)
+        for source_id in range(n_pcds-1):
+            for target_id in range(source_id + 1, n_pcds):
+                transformation_icp, information_icp = self.pairwise_registration(
+                    pcds[source_id], pcds[target_id],
+                    max_correspondence_distance_coarse,
+                    max_correspondence_distance_fine)
+                print("Build o3d.pipelines.registration.PoseGraph")
+                if target_id == source_id + 1:  # odometry case
+                    odometry = np.dot(transformation_icp, odometry)
+                    pose_graph.nodes.append(
+                        o3d.pipelines.registration.PoseGraphNode(
+                            np.linalg.inv(odometry)))
+                    pose_graph.edges.append(
+                        o3d.pipelines.registration.PoseGraphEdge(source_id,
+                                                                 target_id,
+                                                                 transformation_icp,
+                                                                 information_icp,
+                                                                 uncertain=False))
+                else:  # loop closure case
+                    pose_graph.edges.append(
+                        o3d.pipelines.registration.PoseGraphEdge(source_id,
+                                                                 target_id,
+                                                                 transformation_icp,
+                                                                 information_icp,
+                                                                 uncertain=True))
+        return pose_graph
+
+    def visualize_strip(self, sour, targ):
         #ROBUST ICP REGISTRATION START--------------------
         # trans_init = np.asarray([[1.0, 0.0, 0.0, 0.0],
         #                          [0.0, 1.0, 0.0, 0.0],
@@ -70,7 +120,7 @@ class VisualizePCD(Thread):
         # # Mean and standard deviation.
         # mu, sigma = 0, 0.1
         # threshold = 50.0
-        # print("Using the noisy source pointcloud to perform robust ICP.\n")
+        # print("Using the noisy source point cloud to perform robust ICP.\n")
         # print("Robust point-to-plane ICP, threshold={}:".format(threshold))
         # loss = o3d.pipelines.registration.TukeyLoss(k=sigma)
         # print("Using robust loss:", loss)
@@ -105,12 +155,12 @@ class VisualizePCD(Thread):
         # parser.add_argument('--voxel_size',
         #                     type=float,
         #                     default=0.05,
-        #                     help='voxel size in meter used to downsample inputs')
+        #                     help='voxel size in meter used to down sample inputs')
         # parser.add_argument(
         #     '--distance_multiplier',
         #     type=float,
         #     default=1.5,
-        #     help='multipler used to compute distance threshold'
+        #     help='multiplier used to compute distance threshold'
         #          'between correspondences.'
         #          'Threshold is computed by voxel_size * distance_multiplier.')
         # parser.add_argument('--max_iterations',
@@ -121,7 +171,7 @@ class VisualizePCD(Thread):
         #     '--max_tuples',
         #     type=int,
         #     default=1000,
-        #     help='max number of accepted tuples for correpsondence filtering')
+        #     help='max number of accepted tuples for correspondence filtering')
         #
         # args = parser.parse_args()
         #
@@ -134,7 +184,7 @@ class VisualizePCD(Thread):
         # src = source
         # dst = target
         #
-        # print('Downsampling inputs')
+        # print('Down sampling inputs')
         # src_down, src_fpfh = self.preprocess_point_cloud(src, voxel_size)
         # dst_down, dst_fpfh = self.preprocess_point_cloud(dst, voxel_size)
         # start = time.time()
@@ -151,83 +201,119 @@ class VisualizePCD(Thread):
         # o3d.visualization.draw([src.transform(result.transformation), dst])
         # #--------------------FGR REGISTRATION END
 
-        # RANSAC REGISTRATION START--------------------
-        parser = argparse.ArgumentParser(
-            'Global point cloud registration example with RANSAC')
-        parser.add_argument('src',
-                            type=str,
-                            default=source,
-                            nargs='?',
-                            help='path to src point cloud')
-        parser.add_argument('dst',
-                            type=str,
-                            default=target,
-                            nargs='?',
-                            help='path to dst point cloud')
-        parser.add_argument('--voxel_size',
-                            type=float,
-                            default=0.05,
-                            help='voxel size in meter used to downsample inputs')
-        parser.add_argument(
-            '--distance_multiplier',
-            type=float,
-            default=1.5,
-            help='multipler used to compute distance threshold'
-                 'between correspondences.'
-                 'Threshold is computed by voxel_size * distance_multiplier.')
-        parser.add_argument('--max_iterations',
-                            type=int,
-                            default=1000000,
-                            help='number of max RANSAC iterations')
-        parser.add_argument('--confidence',
-                            type=float,
-                            default=0.999,
-                            help='RANSAC confidence')
-        parser.add_argument(
-            '--mutual_filter',
-            action='store_true',
-            help='whether to use mutual filter for putative correspondences')
+        # # RANSAC REGISTRATION START--------------------
+        # parser = argparse.ArgumentParser(
+        #     'Global point cloud registration example with RANSAC')
+        # parser.add_argument('src',
+        #                     type=str,
+        #                     default=source,
+        #                     nargs='?',
+        #                     help='path to src point cloud')
+        # parser.add_argument('dst',
+        #                     type=str,
+        #                     default=target,
+        #                     nargs='?',
+        #                     help='path to dst point cloud')
+        # parser.add_argument('--voxel_size',
+        #                     type=float,
+        #                     default=0.05,
+        #                     help='voxel size in meter used to down sample inputs')
+        # parser.add_argument(
+        #     '--distance_multiplier',
+        #     type=float,
+        #     default=1.5,
+        #     help='multiplier used to compute distance threshold'
+        #          'between correspondences.'
+        #          'Threshold is computed by voxel_size * distance_multiplier.')
+        # parser.add_argument('--max_iterations',
+        #                     type=int,
+        #                     default=1000000,
+        #                     help='number of max RANSAC iterations')
+        # parser.add_argument('--confidence',
+        #                     type=float,
+        #                     default=0.999,
+        #                     help='RANSAC confidence')
+        # parser.add_argument(
+        #     '--mutual_filter',
+        #     action='store_true',
+        #     help='whether to use mutual filter for putative correspondences')
+        #
+        # args = parser.parse_args()
+        #
+        # voxel_size = args.voxel_size
+        # distance_threshold = args.distance_multiplier * voxel_size
+        # print("Distance threshold: ", distance_threshold)
+        #
+        # o3d.utility.set_verbosity_level(o3d.utility.VerbosityLevel.Debug)
+        # # print('Reading inputs')
+        # # src = source
+        # # dst = target
+        #
+        # print('Down sampling inputs')
+        # src_down, src_fpfh = self.preprocess_point_cloud(source, voxel_size)
+        # dst_down, dst_fpfh = self.preprocess_point_cloud(target, voxel_size)
+        #
+        # start = time.time()
+        # print('RANSAC Started', time.localtime(start))
+        # print('Running RANSAC')
+        # result = o3d.pipelines.registration.registration_ransac_based_on_feature_matching(
+        #     src_down, dst_down, src_fpfh, dst_fpfh,
+        #     mutual_filter=args.mutual_filter,
+        #     max_correspondence_distance=distance_threshold,
+        #     estimation_method=o3d.pipelines.registration.
+        #     TransformationEstimationPointToPoint(False),
+        #     ransac_n=3,
+        #     checkers=[
+        #         o3d.pipelines.registration.CorrespondenceCheckerBasedOnEdgeLength(
+        #             0.9),
+        #         o3d.pipelines.registration.CorrespondenceCheckerBasedOnDistance(
+        #             distance_threshold)
+        #     ],
+        #     criteria=o3d.pipelines.registration.RANSACConvergenceCriteria(
+        #         args.max_iterations, args.confidence))
+        # print('RANSAC Finished', time.localtime(time.time()),
+        #       "Global registration took %.3f sec.\n" % (time.time() - start))
+        #
+        # # source.paint_uniform_color([1, 0, 0])
+        # # target.paint_uniform_color([0, 1, 0])
+        # o3d.visualization.draw([source.transform(result.transformation), target])
+        # # --------------------RANSAC REGISTRATION END
 
-        args = parser.parse_args()
+        # Multiway REGISTRATION START--------------------
+        voxel_size = 0.02
+        pcds_down = []
+        source_down = sour.voxel_down_sample(voxel_size=voxel_size)
+        pcds_down.append(source_down)
+        target_down = targ.voxel_down_sample(voxel_size=voxel_size)
+        pcds_down.append(target_down)
+        print("Full registration ...")
+        max_correspondence_distance_coarse = voxel_size * 15
+        max_correspondence_distance_fine = voxel_size * 1.5
+        with o3d.utility.VerbosityContextManager(
+                o3d.utility.VerbosityLevel.Debug) as cm:
+            pose_graph = self.full_registration(pcds_down,
+                                           max_correspondence_distance_coarse,
+                                           max_correspondence_distance_fine)
 
-        voxel_size = args.voxel_size
-        distance_threshold = args.distance_multiplier * voxel_size
-        print("Distance threshold: ", distance_threshold)
+        print("Optimizing PoseGraph ...")
+        option = o3d.pipelines.registration.GlobalOptimizationOption(
+            max_correspondence_distance=max_correspondence_distance_fine,
+            edge_prune_threshold=0.25,
+            reference_node=0)
+        with o3d.utility.VerbosityContextManager(
+                o3d.utility.VerbosityLevel.Debug) as cm:
+            o3d.pipelines.registration.global_optimization(
+                pose_graph,
+                o3d.pipelines.registration.GlobalOptimizationLevenbergMarquardt(),
+                o3d.pipelines.registration.GlobalOptimizationConvergenceCriteria(),
+                option)
 
-        o3d.utility.set_verbosity_level(o3d.utility.VerbosityLevel.Debug)
-        # print('Reading inputs')
-        # src = source
-        # dst = target
-
-        print('Downsampling inputs')
-        src_down, src_fpfh = self.preprocess_point_cloud(source, voxel_size)
-        dst_down, dst_fpfh = self.preprocess_point_cloud(target, voxel_size)
-
-        start = time.time()
-        print('RANSAC Started', time.localtime(start))
-        print('Running RANSAC')
-        result = o3d.pipelines.registration.registration_ransac_based_on_feature_matching(
-            src_down, dst_down, src_fpfh, dst_fpfh,
-            mutual_filter=args.mutual_filter,
-            max_correspondence_distance=distance_threshold,
-            estimation_method=o3d.pipelines.registration.
-            TransformationEstimationPointToPoint(False),
-            ransac_n=3,
-            checkers=[
-                o3d.pipelines.registration.CorrespondenceCheckerBasedOnEdgeLength(
-                    0.9),
-                o3d.pipelines.registration.CorrespondenceCheckerBasedOnDistance(
-                    distance_threshold)
-            ],
-            criteria=o3d.pipelines.registration.RANSACConvergenceCriteria(
-                args.max_iterations, args.confidence))
-        print('RANSAC Finished', time.localtime(time.time()),
-              "Global registration took %.3f sec.\n" % (time.time() - start))
-
-        # source.paint_uniform_color([1, 0, 0])
-        # target.paint_uniform_color([0, 1, 0])
-        o3d.visualization.draw([source.transform(result.transformation), target])
-        # --------------------RANSAC REGISTRATION END
+        print("Transform points and display")
+        for point_id in range(len(pcds_down)):
+            print(pose_graph.nodes[point_id].pose)
+            pcds_down[point_id].transform(pose_graph.nodes[point_id].pose)
+        o3d.visualization.draw(pcds_down)
+        # --------------------Multiway REGISTRATION END
 
     def pick_points(self, pcd):
         print("")

@@ -82,20 +82,25 @@ class FileLoad(Thread):
         elif file_name.endswith(".pts"):
             try:
                 with open(file_name, "r") as f:
+                    # Log every 1000000 lines.
+                    LOG_EVERY_N = 1000000
                     points_np = []
                     for line in f:
                         if len(line.split()) == 4:
                             x, y, z, i = [num for num in line.split()]
                             points_np.append([float(x), float(y), float(z), int(float(i))])
-                            print('point', len(points_np))
+                            if (len(points_np) % LOG_EVERY_N) == 0:
+                                print('point', len(points_np))
                         elif len(line.split()) == 3:
                             x, y, z = [num for num in line.split()]
                             points_np.append([float(x), float(y), float(z)])
-                            print('point', len(points_np))
+                            if (len(points_np) % LOG_EVERY_N) == 0:
+                                print('point', len(points_np))
                         elif len(line.split()) == 5:
                             x, y, z, i, zeroes_v = [num for num in line.split()]
                             points_np.append([float(x), float(y), float(z), int(float(i))])
-                            print('point', len(points_np))
+                            if (len(points_np) % LOG_EVERY_N) == 0:
+                                print('point', len(points_np))
                         else:
                             print("[Info] The file has unregistered format")
                 print('loop end')
