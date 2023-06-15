@@ -1,0 +1,145 @@
+Apply point-to-plane ICP
+ PointCloud with 17008159 points. PointCloud with 17494243 points.
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.1980, RMSE 0.0050
+[Open3D DEBUG] Residual : 1.10e-05 (# of elements : 3368027)
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.2012, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.15e-05 (# of elements : 3422638)
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.2025, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.18e-05 (# of elements : 3444986)
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.2030, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.19e-05 (# of elements : 3453286)
+[Open3D DEBUG] ICP Iteration #4: Fitness 0.2035, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.19e-05 (# of elements : 3460798)
+[Open3D DEBUG] ICP Iteration #5: Fitness 0.2043, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.20e-05 (# of elements : 3474981)
+[Open3D DEBUG] ICP Iteration #6: Fitness 0.2047, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.20e-05 (# of elements : 3481721)
+[Open3D DEBUG] ICP Iteration #7: Fitness 0.2049, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.20e-05 (# of elements : 3485234)
+[Open3D DEBUG] ICP Iteration #8: Fitness 0.2056, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3496163)
+[Open3D DEBUG] ICP Iteration #9: Fitness 0.2059, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3501782)
+[Open3D DEBUG] ICP Iteration #10: Fitness 0.2061, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.20e-05 (# of elements : 3505253)
+[Open3D DEBUG] ICP Iteration #11: Fitness 0.2063, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.20e-05 (# of elements : 3508619)
+[Open3D DEBUG] ICP Iteration #12: Fitness 0.2068, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3518062)
+[Open3D DEBUG] ICP Iteration #13: Fitness 0.2073, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3525096)
+[Open3D DEBUG] ICP Iteration #14: Fitness 0.2075, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3528636)
+[Open3D DEBUG] ICP Iteration #15: Fitness 0.2076, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3531688)
+[Open3D DEBUG] ICP Iteration #16: Fitness 0.2078, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3534339)
+[Open3D DEBUG] ICP Iteration #17: Fitness 0.2080, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3538320)
+[Open3D DEBUG] ICP Iteration #18: Fitness 0.2084, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3545300)
+[Open3D DEBUG] ICP Iteration #19: Fitness 0.2088, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.22e-05 (# of elements : 3550809)
+[Open3D DEBUG] ICP Iteration #20: Fitness 0.2090, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.22e-05 (# of elements : 3554781)
+[Open3D DEBUG] ICP Iteration #21: Fitness 0.2092, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3557652)
+[Open3D DEBUG] ICP Iteration #22: Fitness 0.2093, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3559706)
+[Open3D DEBUG] ICP Iteration #23: Fitness 0.2094, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3561777)
+[Open3D DEBUG] ICP Iteration #24: Fitness 0.2095, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3563493)
+[Open3D DEBUG] ICP Iteration #25: Fitness 0.2096, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3564595)
+[Open3D DEBUG] ICP Iteration #26: Fitness 0.2096, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3565418)
+[Open3D DEBUG] ICP Iteration #27: Fitness 0.2097, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.20e-05 (# of elements : 3566987)
+[Open3D DEBUG] ICP Iteration #28: Fitness 0.2098, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3568544)
+[Open3D DEBUG] ICP Iteration #29: Fitness 0.2099, RMSE 0.0051
+[Open3D DEBUG] Residual : 1.21e-05 (# of elements : 3569990)
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.0300, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.24e-07 (# of elements : 509468)
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.0297, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.22e-07 (# of elements : 505781)
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.0297, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.19e-07 (# of elements : 504561)
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.0298, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.15e-07 (# of elements : 507650)
+[Open3D DEBUG] ICP Iteration #4: Fitness 0.0300, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.25e-07 (# of elements : 510436)
+[Open3D DEBUG] ICP Iteration #5: Fitness 0.0298, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.27e-07 (# of elements : 506824)
+[Open3D DEBUG] ICP Iteration #6: Fitness 0.0298, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.26e-07 (# of elements : 507279)
+[Open3D DEBUG] ICP Iteration #7: Fitness 0.0298, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.16e-07 (# of elements : 507110)
+[Open3D DEBUG] ICP Iteration #8: Fitness 0.0297, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.25e-07 (# of elements : 505451)
+[Open3D DEBUG] ICP Iteration #9: Fitness 0.0302, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.22e-07 (# of elements : 513233)
+[Open3D DEBUG] ICP Iteration #10: Fitness 0.0299, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.20e-07 (# of elements : 508947)
+[Open3D DEBUG] ICP Iteration #11: Fitness 0.0305, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.15e-07 (# of elements : 517985)
+[Open3D DEBUG] ICP Iteration #12: Fitness 0.0304, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.13e-07 (# of elements : 516559)
+[Open3D DEBUG] ICP Iteration #13: Fitness 0.0305, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.18e-07 (# of elements : 518192)
+[Open3D DEBUG] ICP Iteration #14: Fitness 0.0305, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.19e-07 (# of elements : 517915)
+[Open3D DEBUG] ICP Iteration #15: Fitness 0.0306, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.18e-07 (# of elements : 520999)
+[Open3D DEBUG] ICP Iteration #16: Fitness 0.0302, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.45e-07 (# of elements : 513720)
+[Open3D DEBUG] ICP Iteration #17: Fitness 0.0298, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.23e-07 (# of elements : 506110)
+[Open3D DEBUG] ICP Iteration #18: Fitness 0.0294, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.12e-07 (# of elements : 500467)
+[Open3D DEBUG] ICP Iteration #19: Fitness 0.0295, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.20e-07 (# of elements : 502052)
+[Open3D DEBUG] ICP Iteration #20: Fitness 0.0299, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.26e-07 (# of elements : 507728)
+[Open3D DEBUG] ICP Iteration #21: Fitness 0.0303, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.15e-07 (# of elements : 516109)
+[Open3D DEBUG] ICP Iteration #22: Fitness 0.0305, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.37e-07 (# of elements : 518740)
+[Open3D DEBUG] ICP Iteration #23: Fitness 0.0301, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.25e-07 (# of elements : 511983)
+[Open3D DEBUG] ICP Iteration #24: Fitness 0.0303, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.19e-07 (# of elements : 516053)
+[Open3D DEBUG] ICP Iteration #25: Fitness 0.0305, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.17e-07 (# of elements : 519074)
+[Open3D DEBUG] ICP Iteration #26: Fitness 0.0308, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.30e-07 (# of elements : 523593)
+[Open3D DEBUG] ICP Iteration #27: Fitness 0.0308, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.22e-07 (# of elements : 524193)
+[Open3D DEBUG] ICP Iteration #28: Fitness 0.0311, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.24e-07 (# of elements : 529174)
+[Open3D DEBUG] ICP Iteration #29: Fitness 0.0313, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.24e-07 (# of elements : 533032)
+Build o3d.pipelines.registration.PoseGraph
+Optimizing PoseGraph ...
+[Open3D DEBUG] Validating PoseGraph - finished.
+[Open3D DEBUG] [GlobalOptimizationLM] Optimizing PoseGraph having 2 nodes and 1 edges.
+[Open3D DEBUG] Line process weight : 0.776291
+[Open3D DEBUG] [Initial     ] residual : 3.500313e-21, lambda : 4.167501e+12
+[Open3D DEBUG] Delta.norm() < 1.000000e-06 * (x.norm() + 1.000000e-06)
+[Open3D DEBUG] [GlobalOptimizationLM] total time : 0.000 sec.
+[Open3D DEBUG] [GlobalOptimizationLM] Optimizing PoseGraph having 2 nodes and 1 edges.
+[Open3D DEBUG] Line process weight : 0.776291
+[Open3D DEBUG] [Initial     ] residual : 3.500313e-21, lambda : 4.167501e+12
+[Open3D DEBUG] Delta.norm() < 1.000000e-06 * (x.norm() + 1.000000e-06)
+[Open3D DEBUG] [GlobalOptimizationLM] total time : 0.000 sec.
+[Open3D DEBUG] CompensateReferencePoseGraphNode : reference : 0
+Transform points and display
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+[[ 9.99996179e-01  3.28490406e-04  2.74500177e-03 -2.60531806e+02]
+ [-3.33124112e-04  9.99998520e-01  1.68776541e-03  1.24891752e+02]
+ [-2.74444329e-03 -1.68867338e-03  9.99994808e-01  2.36497046e+03]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
