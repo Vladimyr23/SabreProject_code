@@ -1,0 +1,21 @@
+Distance threshold:  0.07500000000000001
+Down sampling inputs
+[Open3D DEBUG] Pointcloud down sampled from 17814760 points to 1071872 points.
+[Open3D DEBUG] Pointcloud down sampled from 18256983 points to 1265273 points.
+RANSAC Started time.struct_time(tm_year=2023, tm_mon=6, tm_mday=8, tm_hour=14, tm_min=49, tm_sec=36, tm_wday=3, tm_yday=159, tm_isdst=1)
+Running RANSAC
+[Open3D DEBUG] Thread 893785: registration fitness=0.036, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 055800: registration fitness=0.015, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 967922: registration fitness=0.133, corres inlier ratio=0.000, Est. max k = 2284375232246.098
+[Open3D DEBUG] Thread 347957: registration fitness=0.012, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 790892: registration fitness=0.033, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 621669: registration fitness=0.056, corres inlier ratio=0.000, Est. max k = 1.2443905640156206e+16
+[Open3D DEBUG] Thread 999770: registration fitness=0.011, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 356360: registration fitness=0.008, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 084426: registration fitness=0.005, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] RANSAC exits after 9 validations. Best inlier ratio 1.331717e-01, RMSE 4.297802e-02
+RANSAC Finished time.struct_time(tm_year=2023, tm_mon=6, tm_mday=8, tm_hour=14, tm_min=57, tm_sec=12, tm_wday=3, tm_yday=159, tm_isdst=1) Global registration took 456.771 sec.
+
+WARNING: Using soft CircularBuffer (6144 KiB)
+FEngine (64 bits) created at 0x558bd16202a0 (threading is enabled)
+FEngine resolved backend: OpenGL

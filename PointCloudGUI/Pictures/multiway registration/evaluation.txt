@@ -1,0 +1,91 @@
+Apply point-to-plane ICP
+ PointCloud with 2407015 points. PointCloud with 2999899 points.
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.2746, RMSE 0.1555
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.3276, RMSE 0.1438
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.3628, RMSE 0.1409
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.3847, RMSE 0.1387
+[Open3D DEBUG] ICP Iteration #4: Fitness 0.3930, RMSE 0.1355
+[Open3D DEBUG] ICP Iteration #5: Fitness 0.3974, RMSE 0.1350
+[Open3D DEBUG] ICP Iteration #6: Fitness 0.3997, RMSE 0.1351
+[Open3D DEBUG] ICP Iteration #7: Fitness 0.4009, RMSE 0.1353
+[Open3D DEBUG] ICP Iteration #8: Fitness 0.4016, RMSE 0.1354
+[Open3D DEBUG] ICP Iteration #9: Fitness 0.4020, RMSE 0.1355
+[Open3D DEBUG] ICP Iteration #10: Fitness 0.4021, RMSE 0.1356
+[Open3D DEBUG] ICP Iteration #11: Fitness 0.4023, RMSE 0.1357
+[Open3D DEBUG] ICP Iteration #12: Fitness 0.4025, RMSE 0.1357
+[Open3D DEBUG] ICP Iteration #13: Fitness 0.4025, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #14: Fitness 0.4026, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #15: Fitness 0.4026, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #16: Fitness 0.4027, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #17: Fitness 0.4027, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #18: Fitness 0.4028, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #19: Fitness 0.4028, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #20: Fitness 0.4028, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #21: Fitness 0.4029, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #22: Fitness 0.4029, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #23: Fitness 0.4029, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #24: Fitness 0.4029, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #25: Fitness 0.4029, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #26: Fitness 0.4029, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #27: Fitness 0.4029, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #28: Fitness 0.4029, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #29: Fitness 0.4030, RMSE 0.1358
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.0760, RMSE 0.0178
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.0768, RMSE 0.0175
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.0775, RMSE 0.0173
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.0781, RMSE 0.0173
+[Open3D DEBUG] ICP Iteration #4: Fitness 0.0789, RMSE 0.0173
+[Open3D DEBUG] ICP Iteration #5: Fitness 0.0798, RMSE 0.0174
+[Open3D DEBUG] ICP Iteration #6: Fitness 0.0808, RMSE 0.0175
+[Open3D DEBUG] ICP Iteration #7: Fitness 0.0819, RMSE 0.0176
+[Open3D DEBUG] ICP Iteration #8: Fitness 0.0831, RMSE 0.0176
+[Open3D DEBUG] ICP Iteration #9: Fitness 0.0842, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #10: Fitness 0.0852, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #11: Fitness 0.0860, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #12: Fitness 0.0865, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #13: Fitness 0.0870, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #14: Fitness 0.0873, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #15: Fitness 0.0875, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #16: Fitness 0.0877, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #17: Fitness 0.0879, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #18: Fitness 0.0881, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #19: Fitness 0.0882, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #20: Fitness 0.0883, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #21: Fitness 0.0885, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #22: Fitness 0.0887, RMSE 0.0177
+[Open3D DEBUG] ICP Iteration #23: Fitness 0.0888, RMSE 0.0176
+[Open3D DEBUG] ICP Iteration #24: Fitness 0.0889, RMSE 0.0176
+[Open3D DEBUG] ICP Iteration #25: Fitness 0.0891, RMSE 0.0176
+[Open3D DEBUG] ICP Iteration #26: Fitness 0.0894, RMSE 0.0176
+[Open3D DEBUG] ICP Iteration #27: Fitness 0.0896, RMSE 0.0176
+[Open3D DEBUG] ICP Iteration #28: Fitness 0.0899, RMSE 0.0176
+[Open3D DEBUG] ICP Iteration #29: Fitness 0.0903, RMSE 0.0176
+Build o3d.pipelines.registration.PoseGraph
+Optimizing PoseGraph ...
+[Open3D DEBUG] Validating PoseGraph - finished.
+[Open3D DEBUG] [GlobalOptimizationLM] Optimizing PoseGraph having 2 nodes and 1 edges.
+[Open3D DEBUG] Line process weight : 196.543800
+[Open3D DEBUG] [Initial     ] residual : 2.040270e-18, lambda : 1.688228e+12
+[Open3D DEBUG] Delta.norm() < 1.000000e-06 * (x.norm() + 1.000000e-06)
+[Open3D DEBUG] [GlobalOptimizationLM] total time : 0.000 sec.
+[Open3D DEBUG] [GlobalOptimizationLM] Optimizing PoseGraph having 2 nodes and 1 edges.
+[Open3D DEBUG] Line process weight : 196.543800
+[Open3D DEBUG] [Initial     ] residual : 2.040270e-18, lambda : 1.688228e+12
+[Open3D DEBUG] Delta.norm() < 1.000000e-06 * (x.norm() + 1.000000e-06)
+[Open3D DEBUG] [GlobalOptimizationLM] total time : 0.000 sec.
+[Open3D DEBUG] CompensateReferencePoseGraphNode : reference : 0
+Transform points and display
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+[[ 9.99449718e-01 -1.16772867e-04  3.31699692e-02  2.95239951e+02]
+ [-1.80304108e-04  9.99959904e-01  8.95307056e-03  9.83113664e+01]
+ [-3.31696847e-02 -8.95412454e-03  9.99409624e-01  1.94539040e+04]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+WARNING: Using soft CircularBuffer (6144 KiB)
+FEngine (64 bits) created at 0x55e82c15b3e0 (threading is enabled)
+FEngine resolved backend: OpenGL
+[Open3D INFO] [o3d] name: obj1_vis1.png.
+[Open3D INFO] [o3d] name: obj2_vis1.png.
+[Open3D INFO] [o3d] name: bothObjs_vis1.png.

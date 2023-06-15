@@ -1,0 +1,53 @@
+Distance threshold:  0.07500000000000001
+Down sampling inputs
+[Open3D DEBUG] Pointcloud down sampled from 17814760 points to 1071872 points.
+[Open3D DEBUG] Pointcloud down sampled from 18256983 points to 1265273 points.
+RANSAC Started time.struct_time(tm_year=2023, tm_mon=6, tm_mday=8, tm_hour=15, tm_min=14, tm_sec=37, tm_wday=3, tm_yday=159, tm_isdst=1)
+Running RANSAC
+[Open3D DEBUG] Thread 587271: registration fitness=0.033, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 765234: registration fitness=0.055, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 488032: registration fitness=0.026, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 017845: registration fitness=0.003, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 620485: registration fitness=0.021, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 511224: registration fitness=0.007, corres inlier ratio=0.000, Est. max k = 3.1109764100390516e+16
+[Open3D DEBUG] Thread 907936: registration fitness=0.007, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 388622: registration fitness=0.002, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] RANSAC exits after 8 validations. Best inlier ratio 5.536109e-02, RMSE 4.605079e-02
+RANSAC Finished time.struct_time(tm_year=2023, tm_mon=6, tm_mday=8, tm_hour=15, tm_min=22, tm_sec=28, tm_wday=3, tm_yday=159, tm_isdst=1) Global registration took 471.139 sec.
+
+
+:: Point-to-plane ICP registration is applied on original point
+   clouds to refine the alignment. This time we use a strict
+   distance threshold 0.020.
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.1050, RMSE 0.0115
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.1056, RMSE 0.0115
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.1062, RMSE 0.0115
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.1068, RMSE 0.0115
+[Open3D DEBUG] ICP Iteration #4: Fitness 0.1075, RMSE 0.0115
+[Open3D DEBUG] ICP Iteration #5: Fitness 0.1081, RMSE 0.0116
+[Open3D DEBUG] ICP Iteration #6: Fitness 0.1089, RMSE 0.0116
+[Open3D DEBUG] ICP Iteration #7: Fitness 0.1097, RMSE 0.0116
+[Open3D DEBUG] ICP Iteration #8: Fitness 0.1107, RMSE 0.0116
+[Open3D DEBUG] ICP Iteration #9: Fitness 0.1116, RMSE 0.0116
+[Open3D DEBUG] ICP Iteration #10: Fitness 0.1130, RMSE 0.0116
+[Open3D DEBUG] ICP Iteration #11: Fitness 0.1146, RMSE 0.0117
+[Open3D DEBUG] ICP Iteration #12: Fitness 0.1165, RMSE 0.0117
+[Open3D DEBUG] ICP Iteration #13: Fitness 0.1186, RMSE 0.0117
+[Open3D DEBUG] ICP Iteration #14: Fitness 0.1210, RMSE 0.0117
+[Open3D DEBUG] ICP Iteration #15: Fitness 0.1235, RMSE 0.0117
+[Open3D DEBUG] ICP Iteration #16: Fitness 0.1261, RMSE 0.0117
+[Open3D DEBUG] ICP Iteration #17: Fitness 0.1288, RMSE 0.0118
+[Open3D DEBUG] ICP Iteration #18: Fitness 0.1322, RMSE 0.0118
+[Open3D DEBUG] ICP Iteration #19: Fitness 0.1359, RMSE 0.0119
+[Open3D DEBUG] ICP Iteration #20: Fitness 0.1396, RMSE 0.0118
+[Open3D DEBUG] ICP Iteration #21: Fitness 0.1445, RMSE 0.0118
+[Open3D DEBUG] ICP Iteration #22: Fitness 0.1510, RMSE 0.0118
+[Open3D DEBUG] ICP Iteration #23: Fitness 0.1570, RMSE 0.0117
+[Open3D DEBUG] ICP Iteration #24: Fitness 0.1602, RMSE 0.0115
+[Open3D DEBUG] ICP Iteration #25: Fitness 0.1626, RMSE 0.0114
+[Open3D DEBUG] ICP Iteration #26: Fitness 0.1648, RMSE 0.0113
+[Open3D DEBUG] ICP Iteration #27: Fitness 0.1671, RMSE 0.0113
+[Open3D DEBUG] ICP Iteration #28: Fitness 0.1699, RMSE 0.0113
+[Open3D DEBUG] ICP Iteration #29: Fitness 0.1736, RMSE 0.0113
+RegistrationResult with fitness=1.781833e-01, inlier_rmse=1.134600e-02, and correspondence_set size of 3174292
+Access transformation to get result.
