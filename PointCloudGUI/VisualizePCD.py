@@ -65,11 +65,17 @@ class VisualizePCD():
     def pairwise_registration(self, source, target, max_correspondence_distance_coarse,
                               max_correspondence_distance_fine):
         print("Apply point-to-plane ICP\n", source, target)
+        source.estimate_normals(
+            o3d.geometry.KDTreeSearchParamHybrid(radius=0.0006 * 2.0,
+                                                 max_nn=30))#VY voxel_size=0.02
+        target.estimate_normals(
+            o3d.geometry.KDTreeSearchParamHybrid(radius=0.0006 * 2.0,
+                                                 max_nn=30))#VY voxel_size=0.02
         icp_coarse = o3d.pipelines.registration.registration_icp(
-            source, target, max_correspondence_distance_coarse, np.identity(4)) #VY removed , o3d.pipelines.registration.TransformationEstimationPointToPlane())
+            source, target, max_correspondence_distance_coarse, np.identity(4), o3d.pipelines.registration.TransformationEstimationPointToPlane()) #VY removed , o3d.pipelines.registration.TransformationEstimationPointToPlane())
         icp_fine = o3d.pipelines.registration.registration_icp(
             source, target, max_correspondence_distance_fine,
-            icp_coarse.transformation) #VY removed , o3d.pipelines.registration.TransformationEstimationPointToPlane())
+            icp_coarse.transformation, o3d.pipelines.registration.TransformationEstimationPointToPlane())#VY removed , o3d.pipelines.registration.TransformationEstimationPointToPlane())
         transformation_icp = icp_fine.transformation
         information_icp = o3d.pipelines.registration.get_information_matrix_from_point_clouds(
             source, target, max_correspondence_distance_fine,
@@ -216,15 +222,15 @@ class VisualizePCD():
                             help='path to dst point cloud')
         parser.add_argument('--voxel_size',
                             type=float,
-                            default=0.05,
-                            help='voxel size in meter used to down sample inputs')
+                            default=0.0005,
+                            help='voxel size in meter used to down sample inputs')# VY changed from 0.05
         parser.add_argument(
             '--distance_multiplier',
             type=float,
-            default=1.5,
+            default=4.5,
             help='multiplier used to compute distance threshold'
                  'between correspondences.'
-                 'Threshold is computed by voxel_size * distance_multiplier.')
+                 'Threshold is computed by voxel_size * distance_multiplier.')# VY changed from 1.5
         parser.add_argument('--max_iterations',
                             type=int,
                             default=1000000,
@@ -279,7 +285,7 @@ class VisualizePCD():
         o3d.visualization.draw([sour.transform(result.transformation), targ])
 
         # result ICP Local refinement
-        distance_threshold = voxel_size * 0.4
+        distance_threshold = voxel_size * 4 # changed from * 0.4
         print(":: Point-to-plane ICP registration is applied on original point")
         print("   clouds to refine the alignment. This time we use a strict")
         print("   distance threshold %.3f." % distance_threshold)
@@ -290,15 +296,15 @@ class VisualizePCD():
         # --------------------RANSAC REGISTRATION END
 
         # # Multiway REGISTRATION START--------------------
-        # voxel_size = 0.02
+        # voxel_size = 0.0006
         # pcds_down = []
         # source_down = sour.voxel_down_sample(voxel_size=voxel_size)
         # pcds_down.append(source_down)
         # target_down = targ.voxel_down_sample(voxel_size=voxel_size)
         # pcds_down.append(target_down)
         # print("Full registration ...")
-        # max_correspondence_distance_coarse = voxel_size * 15
-        # max_correspondence_distance_fine = voxel_size * 1.5
+        # max_correspondence_distance_coarse = voxel_size * 25
+        # max_correspondence_distance_fine = voxel_size * 2.5
         # with o3d.utility.VerbosityContextManager(
         #         o3d.utility.VerbosityLevel.Debug) as cm:
         #     pose_graph = self.full_registration(pcds_down,
