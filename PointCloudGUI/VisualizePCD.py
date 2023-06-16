@@ -222,7 +222,7 @@ class VisualizePCD():
                             help='path to dst point cloud')
         parser.add_argument('--voxel_size',
                             type=float,
-                            default=0.05,
+                            default=0.5,
                             help='voxel size in meter used to down sample inputs')# VY changed from 0.05
         parser.add_argument(
             '--distance_multiplier',
@@ -281,12 +281,12 @@ class VisualizePCD():
         print('RANSAC Finished', time.localtime(time.time()),
               "Global registration took %.3f sec.\n" % (time.time() - start))
 
-        # sour.paint_uniform_color([1, 0, 0])
-        # targ.paint_uniform_color([0, 1, 0])
+        sour.paint_uniform_color([1, 0.706, 0])
+        targ.paint_uniform_color([0, 0.651, 0.929])
         o3d.visualization.draw([sour.transform(result.transformation), targ])
 
         # result ICP Local refinement
-        distance_threshold = voxel_size * 2 # changed from * 0.4
+        distance_threshold = voxel_size * 0.02 # changed from * 0.4
         print(":: Point-to-plane ICP registration is applied on original point")
         print("   clouds to refine the alignment. This time we use a strict")
         print("   distance threshold %.3f." % distance_threshold)

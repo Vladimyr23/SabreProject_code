@@ -1,0 +1,10 @@
+:: Point-to-plane ICP registration is applied on original point
+   clouds to refine the alignment. This time we use a strict
+   distance threshold 0.001.
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.0000, RMSE 0.0007
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.0000, RMSE 0.0007
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.0000, RMSE 0.0007
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.0000, RMSE 0.0007
+[Open3D DEBUG] ICP Iteration #4: Fitness 0.0000, RMSE 0.0007
+RegistrationResult with fitness=1.234931e-06, inlier_rmse=7.011313e-04, and correspondence_set size of 22
+Access transformation to get result.

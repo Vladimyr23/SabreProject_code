@@ -1,0 +1,34 @@
+:: Point-to-plane ICP registration is applied on original point
+   clouds to refine the alignment. This time we use a strict
+   distance threshold 1.000.
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.0734, RMSE 0.5515
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.0896, RMSE 0.4758
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.0966, RMSE 0.4733
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.1015, RMSE 0.4770
+[Open3D DEBUG] ICP Iteration #4: Fitness 0.1059, RMSE 0.4783
+[Open3D DEBUG] ICP Iteration #5: Fitness 0.1104, RMSE 0.4781
+[Open3D DEBUG] ICP Iteration #6: Fitness 0.1155, RMSE 0.4789
+[Open3D DEBUG] ICP Iteration #7: Fitness 0.1208, RMSE 0.4785
+[Open3D DEBUG] ICP Iteration #8: Fitness 0.1272, RMSE 0.4815
+[Open3D DEBUG] ICP Iteration #9: Fitness 0.1344, RMSE 0.4857
+[Open3D DEBUG] ICP Iteration #10: Fitness 0.1421, RMSE 0.4889
+[Open3D DEBUG] ICP Iteration #11: Fitness 0.1547, RMSE 0.5096
+[Open3D DEBUG] ICP Iteration #12: Fitness 0.1753, RMSE 0.5433
+[Open3D DEBUG] ICP Iteration #13: Fitness 0.2177, RMSE 0.6018
+[Open3D DEBUG] ICP Iteration #14: Fitness 0.3185, RMSE 0.6465
+[Open3D DEBUG] ICP Iteration #15: Fitness 0.3903, RMSE 0.5786
+[Open3D DEBUG] ICP Iteration #16: Fitness 0.4233, RMSE 0.5431
+[Open3D DEBUG] ICP Iteration #17: Fitness 0.4500, RMSE 0.5273
+[Open3D DEBUG] ICP Iteration #18: Fitness 0.4751, RMSE 0.5165
+[Open3D DEBUG] ICP Iteration #19: Fitness 0.4957, RMSE 0.5035
+[Open3D DEBUG] ICP Iteration #20: Fitness 0.5145, RMSE 0.4923
+[Open3D DEBUG] ICP Iteration #21: Fitness 0.5328, RMSE 0.4834
+[Open3D DEBUG] ICP Iteration #22: Fitness 0.5498, RMSE 0.4748
+[Open3D DEBUG] ICP Iteration #23: Fitness 0.5657, RMSE 0.4670
+[Open3D DEBUG] ICP Iteration #24: Fitness 0.5828, RMSE 0.4623
+[Open3D DEBUG] ICP Iteration #25: Fitness 0.5986, RMSE 0.4566
+[Open3D DEBUG] ICP Iteration #26: Fitness 0.6150, RMSE 0.4531
+[Open3D DEBUG] ICP Iteration #27: Fitness 0.6311, RMSE 0.4493
+[Open3D DEBUG] ICP Iteration #28: Fitness 0.6470, RMSE 0.4454
+[Open3D DEBUG] ICP Iteration #29: Fitness 0.6624, RMSE 0.4406
+RegistrationResult with fitness=6.766402e-01, inlier_rmse=4.337037e-01, and correspondence_set size of 12054182
