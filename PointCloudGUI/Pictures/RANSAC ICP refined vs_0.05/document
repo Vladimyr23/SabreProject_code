@@ -1,0 +1,22 @@
+Distance threshold:  0.125
+Down sampling inputs
+[Open3D DEBUG] Pointcloud down sampled from 17814760 points to 1071872 points.
+[Open3D DEBUG] Pointcloud down sampled from 18256983 points to 1265273 points.
+RANSAC Started time.struct_time(tm_year=2023, tm_mon=6, tm_mday=16, tm_hour=9, tm_min=53, tm_sec=42, tm_wday=4, tm_yday=167, tm_isdst=1)
+Running RANSAC
+[Open3D DEBUG] Thread 606848: registration fitness=0.240, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 905094: registration fitness=0.101, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 396453: registration fitness=0.011, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 164180: registration fitness=0.074, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 756822: registration fitness=0.024, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 797765: registration fitness=0.038, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 096812: registration fitness=0.083, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 188035: registration fitness=0.011, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 653414: registration fitness=0.016, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 515757: registration fitness=0.033, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 345696: registration fitness=0.003, corres inlier ratio=0.000, Est. max k = -inf
+[Open3D DEBUG] Thread 060352: registration fitness=0.002, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 031271: registration fitness=0.011, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 434844: registration fitness=0.018, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] RANSAC exits after 14 validations. Best inlier ratio 2.398589e-01, RMSE 7.019843e-02
+RANSAC Finished time.struct_time(tm_year=2023, tm_mon=6, tm_mday=16, tm_hour=10, tm_min=1, tm_sec=42, tm_wday=4, tm_yday=167, tm_isdst=1) Global registration took 480.025 sec.

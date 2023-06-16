@@ -1,0 +1,33 @@
+:: Point-to-plane ICP registration is applied on original point
+   clouds to refine the alignment. This time we use a strict
+   distance threshold 0.100.
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.0012, RMSE 0.0634
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.0012, RMSE 0.0633
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.0012, RMSE 0.0633
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.0012, RMSE 0.0633
+[Open3D DEBUG] ICP Iteration #4: Fitness 0.0012, RMSE 0.0632
+[Open3D DEBUG] ICP Iteration #5: Fitness 0.0012, RMSE 0.0632
+[Open3D DEBUG] ICP Iteration #6: Fitness 0.0012, RMSE 0.0631
+[Open3D DEBUG] ICP Iteration #7: Fitness 0.0012, RMSE 0.0631
+[Open3D DEBUG] ICP Iteration #8: Fitness 0.0012, RMSE 0.0631
+[Open3D DEBUG] ICP Iteration #9: Fitness 0.0012, RMSE 0.0631
+[Open3D DEBUG] ICP Iteration #10: Fitness 0.0012, RMSE 0.0630
+[Open3D DEBUG] ICP Iteration #11: Fitness 0.0012, RMSE 0.0628
+[Open3D DEBUG] ICP Iteration #12: Fitness 0.0012, RMSE 0.0628
+[Open3D DEBUG] ICP Iteration #13: Fitness 0.0012, RMSE 0.0629
+[Open3D DEBUG] ICP Iteration #14: Fitness 0.0013, RMSE 0.0628
+[Open3D DEBUG] ICP Iteration #15: Fitness 0.0013, RMSE 0.0629
+[Open3D DEBUG] ICP Iteration #16: Fitness 0.0013, RMSE 0.0629
+[Open3D DEBUG] ICP Iteration #17: Fitness 0.0013, RMSE 0.0630
+[Open3D DEBUG] ICP Iteration #18: Fitness 0.0013, RMSE 0.0631
+[Open3D DEBUG] ICP Iteration #19: Fitness 0.0013, RMSE 0.0631
+[Open3D DEBUG] ICP Iteration #20: Fitness 0.0013, RMSE 0.0630
+[Open3D DEBUG] ICP Iteration #21: Fitness 0.0013, RMSE 0.0629
+[Open3D DEBUG] ICP Iteration #22: Fitness 0.0013, RMSE 0.0628
+[Open3D DEBUG] ICP Iteration #23: Fitness 0.0013, RMSE 0.0628
+[Open3D DEBUG] ICP Iteration #24: Fitness 0.0013, RMSE 0.0627
+[Open3D DEBUG] ICP Iteration #25: Fitness 0.0013, RMSE 0.0627
+[Open3D DEBUG] ICP Iteration #26: Fitness 0.0013, RMSE 0.0626
+[Open3D DEBUG] ICP Iteration #27: Fitness 0.0013, RMSE 0.0627
+[Open3D DEBUG] ICP Iteration #28: Fitness 0.0013, RMSE 0.0627
+[Open3D DEBUG] ICP Iteration #29: Fitness 0.0013, RMSE 0.0627

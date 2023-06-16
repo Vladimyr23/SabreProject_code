@@ -222,12 +222,12 @@ class VisualizePCD():
                             help='path to dst point cloud')
         parser.add_argument('--voxel_size',
                             type=float,
-                            default=0.0005,
+                            default=0.05,
                             help='voxel size in meter used to down sample inputs')# VY changed from 0.05
         parser.add_argument(
             '--distance_multiplier',
             type=float,
-            default=4.5,
+            default=2.5,
             help='multiplier used to compute distance threshold'
                  'between correspondences.'
                  'Threshold is computed by voxel_size * distance_multiplier.')# VY changed from 1.5
@@ -259,6 +259,7 @@ class VisualizePCD():
         src_down, src_fpfh = self.preprocess_point_cloud(sour, voxel_size)
         dst_down, dst_fpfh = self.preprocess_point_cloud(targ, voxel_size)
 
+        max_validation = np.min([len(src_down.points), len(dst_down.points)]) // 2
         start = time.time()
         print('RANSAC Started', time.localtime(start))
         print('Running RANSAC')
@@ -276,7 +277,7 @@ class VisualizePCD():
                     distance_threshold)
             ],
             criteria=o3d.pipelines.registration.RANSACConvergenceCriteria(
-                args.max_iterations, args.confidence))
+                args.max_iterations, max_validation))
         print('RANSAC Finished', time.localtime(time.time()),
               "Global registration took %.3f sec.\n" % (time.time() - start))
 
@@ -285,7 +286,7 @@ class VisualizePCD():
         o3d.visualization.draw([sour.transform(result.transformation), targ])
 
         # result ICP Local refinement
-        distance_threshold = voxel_size * 4 # changed from * 0.4
+        distance_threshold = voxel_size * 2 # changed from * 0.4
         print(":: Point-to-plane ICP registration is applied on original point")
         print("   clouds to refine the alignment. This time we use a strict")
         print("   distance threshold %.3f." % distance_threshold)
