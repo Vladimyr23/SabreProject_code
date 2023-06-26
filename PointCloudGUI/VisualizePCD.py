@@ -281,19 +281,24 @@ class VisualizePCD():
         print('RANSAC Finished', time.localtime(time.time()),
               "Global registration took %.3f sec.\n" % (time.time() - start))
 
+        correspondences = result.correspondence_set
+        print("Correspondence Set:")
+        print(correspondences)
+        print("")
+
         sour.paint_uniform_color([1, 0.706, 0])
         targ.paint_uniform_color([0, 0.651, 0.929])
         o3d.visualization.draw([sour.transform(result.transformation), targ])
 
-        # result ICP Local refinement
-        distance_threshold = voxel_size * 0.02 # changed from * 0.4
-        print(":: Point-to-plane ICP registration is applied on original point")
-        print("   clouds to refine the alignment. This time we use a strict")
-        print("   distance threshold %.3f." % distance_threshold)
-        result_icp_refined = o3d.pipelines.registration.registration_icp(
-            sour, targ, distance_threshold, result.transformation)
-        print(result_icp_refined)
-        o3d.visualization.draw([sour.transform(result_icp_refined.transformation), targ])
+        # # result ICP Local refinement
+        # distance_threshold = voxel_size * 0.02 # changed from * 0.4
+        # print(":: Point-to-plane ICP registration is applied on original point")
+        # print("   clouds to refine the alignment. This time we use a strict")
+        # print("   distance threshold %.3f." % distance_threshold)
+        # result_icp_refined = o3d.pipelines.registration.registration_icp(
+        #     sour, targ, distance_threshold, result.transformation)
+        # print(result_icp_refined)
+        # o3d.visualization.draw([sour.transform(result_icp_refined.transformation), targ])
         # --------------------RANSAC REGISTRATION END
 
         # # Multiway REGISTRATION START--------------------
