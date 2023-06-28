@@ -2,6 +2,7 @@ import numpy as np
 import open3d as o3d
 import laspy
 import pye57
+import struct
 from threading import Thread
 
 class FileLoad(Thread):
@@ -68,6 +69,26 @@ class FileLoad(Thread):
 
             except Exception:
                 print(".e57 file load failed")
+
+        elif file_name.endswith(".bin"):
+            print("[INFO] .bin file loading")
+            try:
+                size_float = 4
+                list_pcd = []
+                with open(file_name, "rb") as f:
+                    byte = f.read(size_float * 4)
+                    while byte:
+                        x, y, z, intensity = struct.unpack("ffff", byte)
+                        list_pcd.append([x, y, z])
+                        byte = f.read(size_float * 4)
+                np_pcd = np.asarray(list_pcd)
+                self.pcd = o3d.geometry.PointCloud()
+                self.pcd.points = o3d.utility.Vector3dVector(np_pcd)
+                print("[Info] Successfully read", file_name)
+                return self.pcd
+
+            except Exception:
+                print(".bin file load failed")
 
         elif file_name.endswith(".ply"):
             self.pcd = o3d.io.read_point_cloud(file_name)

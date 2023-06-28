@@ -58,6 +58,7 @@ class AppWithGUI(tk.Tk):
             ('Polygon files (.ply)', '.ply'),
             ('Point clouds (.las, .laz)', '.las .laz'),
             ('text files', '*.txt'),
+            ('kitti binary files', '*.bin'),
             ('All files', '*.*')
         )
 
@@ -224,7 +225,7 @@ class AppWithGUI(tk.Tk):
         # visualize Strip match Point Cloud button
         self.visualize_strip_button = ttk.Button(
             self,
-            text='Visualize a Strip matched Point Cloud',
+            text='Visualize source and target registration',
             state="disabled",
             command=self.visualize_strip_pcd
         )

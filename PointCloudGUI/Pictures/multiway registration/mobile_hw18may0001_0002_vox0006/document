@@ -1,0 +1,83 @@
+voxel_size = 0.0006  # in pairwise_registration(...) radius=0.0006 * 2.0,max_nn=30
+        pcds_down = []
+        source_down = sour.voxel_down_sample(voxel_size=voxel_size)
+        pcds_down.append(source_down)
+        target_down = targ.voxel_down_sample(voxel_size=voxel_size)
+        pcds_down.append(target_down)
+        print("Full registration ...")
+        max_correspondence_distance_coarse = voxel_size * 25
+        max_correspondence_distance_fine = voxel_size * 2.5
+Terminal:
+/home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/bin/python /home/mekala/PycharmProjects/SabreProject_code/PointCloudGUI/main.py 
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/Highway Sample Set 1/18MAY23S1_ - 0001.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+loop end
+4
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/Highway Sample Set 1/18MAY23S1_ - 0001.pts
+-------PCD: 
+ PointCloud with 7937217 points.
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/Highway Sample Set 1/18MAY23S1_ - 0002.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+point 12000000
+point 13000000
+loop end
+4
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/Highway Sample Set 1/18MAY23S1_ - 0002.pts
+-------PCD: 
+ PointCloud with 13927496 points.
+
+Multiway REGISTRATION Started 06/28/2023, 11:42:28 
+
+Full registration ...
+Pcd's #:  2
+Apply point-to-plane ICP
+ PointCloud with 7282336 points. PointCloud with 13927496 points.
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.0000, RMSE 0.0000
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.0000, RMSE 0.0000
+Build o3d.pipelines.registration.PoseGraph
+Optimizing PoseGraph ...
+[Open3D DEBUG] Validating PoseGraph - finished.
+[Open3D DEBUG] [GlobalOptimizationLM] Optimizing PoseGraph having 2 nodes and 1 edges.
+[Open3D DEBUG] Line process weight : 0.000000
+[Open3D DEBUG] [Initial     ] residual : 0.000000e+00, lambda : 0.000000e+00
+[Open3D DEBUG] Maximum coefficient of right term < 1.000000e-06
+[Open3D DEBUG] [GlobalOptimizationLM] Optimizing PoseGraph having 2 nodes and 1 edges.
+[Open3D DEBUG] Line process weight : 0.000000
+[Open3D DEBUG] [Initial     ] residual : 0.000000e+00, lambda : 0.000000e+00
+[Open3D DEBUG] Maximum coefficient of right term < 1.000000e-06
+[Open3D DEBUG] CompensateReferencePoseGraphNode : reference : 0
+Transform points and display
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+Multiway REGISTRATION Finished 06/28/2023, 11:44:14 
+Global registration took 106.899 sec.
+
+WARNING: Using soft CircularBuffer (6144 KiB)
+FEngine (64 bits) created at 0x55b7091362d0 (threading is enabled)
+FEngine resolved backend: OpenGL
+[Open3D INFO] [o3d] name: multiwayMobile_vis1.png.
+[Open3D INFO] [o3d] name: multiwayMobile_obj1_vis1.png.
+[Open3D INFO] [o3d] name: multiwayMobile_obj2_vis1.png.
+
