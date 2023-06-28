@@ -7,7 +7,7 @@ import argparse
 from datetime import datetime
 
 
-class VisualizePCD(Thread):
+class VisualizePCD():
 
     def __init__(self):
         super().__init__()
@@ -232,7 +232,7 @@ class VisualizePCD(Thread):
                             help='path to dst point cloud')
         parser.add_argument('--voxel_size',
                             type=float,
-                            default=0.1,
+                            default=0.2,
                             help='voxel size in meter used to down sample inputs')  # VY changed from 0.05
         parser.add_argument(
             '--distance_multiplier',
@@ -282,8 +282,8 @@ class VisualizePCD(Thread):
 
         print('Running RANSAC\n')
         result = o3d.pipelines.registration.registration_ransac_based_on_feature_matching(
-            src_down, dst_down, src_fpfh, dst_fpfh, True,
-            #mutual_filter=args.mutual_filter,
+            src_down, dst_down, src_fpfh, dst_fpfh, #True,
+            mutual_filter=args.mutual_filter,
             max_correspondence_distance=distance_threshold,
             estimation_method=o3d.pipelines.registration.
             TransformationEstimationPointToPoint(True),
@@ -293,7 +293,7 @@ class VisualizePCD(Thread):
                 o3d.pipelines.registration.CorrespondenceCheckerBasedOnDistance(distance_threshold)
             ],
             criteria=o3d.pipelines.registration.RANSACConvergenceCriteria(
-                args.max_iterations, max_validation))  # max_validation replaces args.confidence in mobile-static
+                args.max_iterations, args.confidence))  # max_validation replaces args.confidence in mobile-static
         # getting the current date and time
         finish = datetime.now()
         # getting the date and time from the current date and time in the given format
