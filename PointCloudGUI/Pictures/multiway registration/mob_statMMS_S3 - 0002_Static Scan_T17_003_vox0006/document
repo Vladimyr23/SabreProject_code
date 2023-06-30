@@ -1,4 +1,4 @@
-voxel_size = 0.01  # in pairwise_registration(...) radius=0.01 * 2.0,max_nn=30
+voxel_size = 0.0006  # in pairwise_registration(...) radius=0.0006 * 2.0,max_nn=30
         pcds_down = []
         source_down = sour.voxel_down_sample(voxel_size=voxel_size)
         pcds_down.append(source_down)
@@ -50,14 +50,29 @@ loop end
 -------PCD: 
  PointCloud with 17814760 points.
 
-Multiway REGISTRATION Started 06/28/2023, 12:40:31 
+Multiway REGISTRATION Started 06/30/2023, 11:20:06 
 
 Full registration ...
 Pcd's #:  2
 Apply point-to-plane ICP
- PointCloud with 6247865 points. PointCloud with 4343796 points.
+ PointCloud with 11008542 points. PointCloud with 17008159 points.
 [Open3D DEBUG] ICP Iteration #0: Fitness 0.0000, RMSE 0.0000
 [Open3D DEBUG] ICP Iteration #0: Fitness 0.0000, RMSE 0.0000
+Fitness:
+0.0
+
+RMSE of all inlier correspondences:
+0.0
+
+The estimated transformation matrix:
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+
+Correspondence Set:
+std::vector<Eigen::Vector2i> with 0 elements.
+Use numpy.asarray() to access data.
 Build o3d.pipelines.registration.PoseGraph
 Optimizing PoseGraph ...
 [Open3D DEBUG] Validating PoseGraph - finished.
@@ -79,10 +94,13 @@ Transform points and display
  [0. 1. 0. 0.]
  [0. 0. 1. 0.]
  [0. 0. 0. 1.]]
-Multiway REGISTRATION Finished 06/28/2023, 12:41:05 
-Global registration took 33.756 sec.
+Multiway REGISTRATION Finished 06/30/2023, 11:22:09 
+Global registration took 123.037 sec.
 
 WARNING: Using soft CircularBuffer (6144 KiB)
+FEngine (64 bits) created at 0x564d918c81b0 (threading is enabled)
+FEngine resolved backend: OpenGL
+
 FEngine (64 bits) created at 0x55c9012eab30 (threading is enabled)
 FEngine resolved backend: OpenGL
 [Open3D INFO] [o3d] name: multiwayMobile_vis1.png.

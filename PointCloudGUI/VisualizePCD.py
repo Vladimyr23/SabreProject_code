@@ -66,10 +66,10 @@ class VisualizePCD():
                               max_correspondence_distance_fine):
         print("Apply point-to-plane ICP\n", source, target)
         source.estimate_normals(
-            o3d.geometry.KDTreeSearchParamHybrid(radius=0.01 * 2.0,
+            o3d.geometry.KDTreeSearchParamHybrid(radius=0.0006 * 2.0,
                                                  max_nn=30))  # VY voxel_size=0.02
         target.estimate_normals(
-            o3d.geometry.KDTreeSearchParamHybrid(radius=0.01 * 2.0,
+            o3d.geometry.KDTreeSearchParamHybrid(radius=0.0006 * 2.0,
                                                  max_nn=30))  # VY voxel_size=0.02
         icp_coarse = o3d.pipelines.registration.registration_icp(
             source, target, max_correspondence_distance_coarse, np.identity(4),
@@ -82,6 +82,27 @@ class VisualizePCD():
         information_icp = o3d.pipelines.registration.get_information_matrix_from_point_clouds(
             source, target, max_correspondence_distance_fine,
             transformation_icp)
+
+        fitness = icp_fine.fitness
+        print("Fitness:")
+        print(fitness)
+        print("")
+
+        rmse = icp_fine.inlier_rmse
+        print("RMSE of all inlier correspondences:")
+        print(rmse)
+        print("")
+
+        trans = icp_fine.transformation
+        print("The estimated transformation matrix:")
+        print(trans)
+        print("")
+
+        correspondences = icp_fine.correspondence_set
+        print("Correspondence Set:")
+        print(correspondences)
+        # print("")
+
         return transformation_icp, information_icp
 
     # This function is part of the Multiway registration
@@ -232,7 +253,7 @@ class VisualizePCD():
                             help='path to dst point cloud')
         parser.add_argument('--voxel_size',
                             type=float,
-                            default=0.2,
+                            default=0.3,
                             help='voxel size in meter used to down sample inputs')  # VY changed from 0.05
         parser.add_argument(
             '--distance_multiplier',
@@ -243,7 +264,7 @@ class VisualizePCD():
                  'Threshold is computed by voxel_size * distance_multiplier.')  # VY changed from 1.5
         parser.add_argument('--max_iterations',
                             type=int,
-                            default=100000,
+                            default=1000000,
                             help='number of max RANSAC iterations')
         parser.add_argument('--confidence',
                             type=float,
@@ -293,7 +314,7 @@ class VisualizePCD():
                 o3d.pipelines.registration.CorrespondenceCheckerBasedOnDistance(distance_threshold)
             ],
             criteria=o3d.pipelines.registration.RANSACConvergenceCriteria(
-                args.max_iterations, args.confidence))  # max_validation replaces args.confidence in mobile-static
+                args.max_iterations, max_validation))  # max_validation replaces args.confidence in mobile-static
         # getting the current date and time
         finish = datetime.now()
         # getting the date and time from the current date and time in the given format
@@ -343,7 +364,7 @@ class VisualizePCD():
         # start_date_time = start.strftime("%m/%d/%Y, %H:%M:%S")
         # print('\nMultiway REGISTRATION Started', start_date_time, '\n')
         #
-        # voxel_size = 0.01  # in pairwise_registration(...) radius=0.01 * 2.0,max_nn=30
+        # voxel_size = 0.0006  # in pairwise_registration(...) radius=0.0006 * 2.0,max_nn=30
         # pcds_down = []
         # source_down = sour.voxel_down_sample(voxel_size=voxel_size)
         # pcds_down.append(source_down)

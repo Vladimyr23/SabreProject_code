@@ -42,7 +42,7 @@ loop end
 -------PCD: 
  PointCloud with 13927496 points.
 
-Multiway REGISTRATION Started 06/28/2023, 11:42:28 
+Multiway REGISTRATION Started 06/30/2023, 11:28:22 
 
 Full registration ...
 Pcd's #:  2
@@ -50,6 +50,21 @@ Apply point-to-plane ICP
  PointCloud with 7282336 points. PointCloud with 13927496 points.
 [Open3D DEBUG] ICP Iteration #0: Fitness 0.0000, RMSE 0.0000
 [Open3D DEBUG] ICP Iteration #0: Fitness 0.0000, RMSE 0.0000
+Fitness:
+0.0
+
+RMSE of all inlier correspondences:
+0.0
+
+The estimated transformation matrix:
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+
+Correspondence Set:
+std::vector<Eigen::Vector2i> with 0 elements.
+Use numpy.asarray() to access data.
 Build o3d.pipelines.registration.PoseGraph
 Optimizing PoseGraph ...
 [Open3D DEBUG] Validating PoseGraph - finished.
@@ -71,13 +86,11 @@ Transform points and display
  [0. 1. 0. 0.]
  [0. 0. 1. 0.]
  [0. 0. 0. 1.]]
-Multiway REGISTRATION Finished 06/28/2023, 11:44:14 
-Global registration took 106.899 sec.
+Multiway REGISTRATION Finished 06/30/2023, 11:30:07 
+Global registration took 105.149 sec.
 
 WARNING: Using soft CircularBuffer (6144 KiB)
-FEngine (64 bits) created at 0x55b7091362d0 (threading is enabled)
+FEngine (64 bits) created at 0x564ec6970200 (threading is enabled)
 FEngine resolved backend: OpenGL
-[Open3D INFO] [o3d] name: multiwayMobile_vis1.png.
-[Open3D INFO] [o3d] name: multiwayMobile_obj1_vis1.png.
-[Open3D INFO] [o3d] name: multiwayMobile_obj2_vis1.png.
+
 

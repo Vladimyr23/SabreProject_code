@@ -1,0 +1,179 @@
+voxel_size = 0.0006 # in pairwise_registration(...) radius=0.0006 * 2.0,max_nn=30
+        pcds_down = []
+        source_down = sour.voxel_down_sample(voxel_size=voxel_size)
+        pcds_down.append(source_down)
+        target_down = targ.voxel_down_sample(voxel_size=voxel_size)
+        pcds_down.append(target_down)
+        print("Full registration ...")
+        max_correspondence_distance_coarse = voxel_size * 25
+        max_correspondence_distance_fine = voxel_size * 2.5
+Terminal:
+/home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/bin/python /home/mekala/PycharmProjects/SabreProject_code/PointCloudGUI/main.py 
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_003.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+point 12000000
+point 13000000
+point 14000000
+point 15000000
+point 16000000
+point 17000000
+loop end
+4
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_003.pts
+-------PCD: 
+ PointCloud with 17814760 points.
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_004.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+point 12000000
+point 13000000
+point 14000000
+point 15000000
+point 16000000
+point 17000000
+point 18000000
+loop end
+4
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_004.pts
+-------PCD: 
+ PointCloud with 18256983 points.
+
+Multiway REGISTRATION Started 06/30/2023, 11:35:29 
+
+Full registration ...
+Pcd's #:  2
+Apply point-to-plane ICP
+ PointCloud with 17008159 points. PointCloud with 17494243 points.
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.2156, RMSE 0.0061
+[Open3D DEBUG] Residual : 2.95e-05 (# of elements : 3667322)
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.1977, RMSE 0.0065
+[Open3D DEBUG] Residual : 3.40e-05 (# of elements : 3363151)
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.1966, RMSE 0.0068
+[Open3D DEBUG] Residual : 3.79e-05 (# of elements : 3343420)
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.1571, RMSE 0.0084
+[Open3D DEBUG] Residual : 5.94e-05 (# of elements : 2671497)
+[Open3D DEBUG] ICP Iteration #4: Fitness 0.1064, RMSE 0.0094
+[Open3D DEBUG] Residual : 7.29e-05 (# of elements : 1809846)
+[Open3D DEBUG] ICP Iteration #5: Fitness 0.1209, RMSE 0.0092
+[Open3D DEBUG] Residual : 6.79e-05 (# of elements : 2055938)
+[Open3D DEBUG] ICP Iteration #6: Fitness 0.1267, RMSE 0.0091
+[Open3D DEBUG] Residual : 6.52e-05 (# of elements : 2154885)
+[Open3D DEBUG] ICP Iteration #7: Fitness 0.1314, RMSE 0.0089
+[Open3D DEBUG] Residual : 6.20e-05 (# of elements : 2234921)
+[Open3D DEBUG] ICP Iteration #8: Fitness 0.1364, RMSE 0.0088
+[Open3D DEBUG] Residual : 6.01e-05 (# of elements : 2320053)
+[Open3D DEBUG] ICP Iteration #9: Fitness 0.1405, RMSE 0.0087
+[Open3D DEBUG] Residual : 5.81e-05 (# of elements : 2389966)
+[Open3D DEBUG] ICP Iteration #10: Fitness 0.1449, RMSE 0.0086
+[Open3D DEBUG] Residual : 5.55e-05 (# of elements : 2464612)
+[Open3D DEBUG] ICP Iteration #11: Fitness 0.1485, RMSE 0.0084
+[Open3D DEBUG] Residual : 5.37e-05 (# of elements : 2525382)
+[Open3D DEBUG] ICP Iteration #12: Fitness 0.1499, RMSE 0.0084
+[Open3D DEBUG] Residual : 5.29e-05 (# of elements : 2550369)
+[Open3D DEBUG] ICP Iteration #13: Fitness 0.1508, RMSE 0.0084
+[Open3D DEBUG] Residual : 5.23e-05 (# of elements : 2565180)
+[Open3D DEBUG] ICP Iteration #14: Fitness 0.1517, RMSE 0.0083
+[Open3D DEBUG] Residual : 5.17e-05 (# of elements : 2580653)
+[Open3D DEBUG] ICP Iteration #15: Fitness 0.1527, RMSE 0.0083
+[Open3D DEBUG] Residual : 5.13e-05 (# of elements : 2597269)
+[Open3D DEBUG] ICP Iteration #16: Fitness 0.1536, RMSE 0.0083
+[Open3D DEBUG] Residual : 5.13e-05 (# of elements : 2612716)
+[Open3D DEBUG] ICP Iteration #17: Fitness 0.1543, RMSE 0.0083
+[Open3D DEBUG] Residual : 5.12e-05 (# of elements : 2624655)
+[Open3D DEBUG] ICP Iteration #18: Fitness 0.1550, RMSE 0.0083
+[Open3D DEBUG] Residual : 5.14e-05 (# of elements : 2635494)
+[Open3D DEBUG] ICP Iteration #19: Fitness 0.1562, RMSE 0.0083
+[Open3D DEBUG] Residual : 5.16e-05 (# of elements : 2656670)
+[Open3D DEBUG] ICP Iteration #20: Fitness 0.1581, RMSE 0.0084
+[Open3D DEBUG] Residual : 5.22e-05 (# of elements : 2689668)
+[Open3D DEBUG] ICP Iteration #21: Fitness 0.1592, RMSE 0.0084
+[Open3D DEBUG] Residual : 5.26e-05 (# of elements : 2707599)
+[Open3D DEBUG] ICP Iteration #22: Fitness 0.1578, RMSE 0.0081
+[Open3D DEBUG] Residual : 4.70e-05 (# of elements : 2684065)
+[Open3D DEBUG] ICP Iteration #23: Fitness 0.1601, RMSE 0.0081
+[Open3D DEBUG] Residual : 4.66e-05 (# of elements : 2722767)
+[Open3D DEBUG] ICP Iteration #24: Fitness 0.1686, RMSE 0.0081
+[Open3D DEBUG] Residual : 4.63e-05 (# of elements : 2867251)
+[Open3D DEBUG] ICP Iteration #25: Fitness 0.1739, RMSE 0.0081
+[Open3D DEBUG] Residual : 4.73e-05 (# of elements : 2958416)
+[Open3D DEBUG] ICP Iteration #26: Fitness 0.1820, RMSE 0.0082
+[Open3D DEBUG] Residual : 4.83e-05 (# of elements : 3094838)
+[Open3D DEBUG] ICP Iteration #27: Fitness 0.1977, RMSE 0.0083
+[Open3D DEBUG] Residual : 5.03e-05 (# of elements : 3362603)
+[Open3D DEBUG] ICP Iteration #28: Fitness 0.2151, RMSE 0.0083
+[Open3D DEBUG] Residual : 4.93e-05 (# of elements : 3658364)
+[Open3D DEBUG] ICP Iteration #29: Fitness 0.2212, RMSE 0.0083
+[Open3D DEBUG] Residual : 4.91e-05 (# of elements : 3761783)
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.0086, RMSE 0.0011
+[Open3D DEBUG] Residual : 4.40e-07 (# of elements : 146011)
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.0086, RMSE 0.0011
+[Open3D DEBUG] Residual : 4.39e-07 (# of elements : 146317)
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.0086, RMSE 0.0011
+[Open3D DEBUG] Residual : 4.38e-07 (# of elements : 146348)
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.0086, RMSE 0.0011
+[Open3D DEBUG] Residual : 4.38e-07 (# of elements : 146422)
+Fitness:
+0.008609279816822033
+
+RMSE of all inlier correspondences:
+0.0011390136622288249
+
+The estimated transformation matrix:
+[[ 9.99920492e-01 -1.19265577e-03 -1.25533780e-02  9.79699283e+02]
+ [ 1.15476599e-03  9.99994758e-01 -3.02510888e-03 -4.28219215e+02]
+ [ 1.25569201e-02  3.01037215e-03  9.99916627e-01 -7.06215379e+03]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+
+Correspondence Set:
+std::vector<Eigen::Vector2i> with 146428 elements.
+Use numpy.asarray() to access data.
+Build o3d.pipelines.registration.PoseGraph
+Optimizing PoseGraph ...
+[Open3D DEBUG] Validating PoseGraph - finished.
+[Open3D DEBUG] [GlobalOptimizationLM] Optimizing PoseGraph having 2 nodes and 1 edges.
+[Open3D DEBUG] Line process weight : 0.329463
+[Open3D DEBUG] [Initial     ] residual : 1.448453e-20, lambda : 1.131971e+12
+[Open3D DEBUG] Delta.norm() < 1.000000e-06 * (x.norm() + 1.000000e-06)
+[Open3D DEBUG] [GlobalOptimizationLM] total time : 0.000 sec.
+[Open3D DEBUG] [GlobalOptimizationLM] Optimizing PoseGraph having 2 nodes and 1 edges.
+[Open3D DEBUG] Line process weight : 0.329463
+[Open3D DEBUG] [Initial     ] residual : 1.448453e-20, lambda : 1.131971e+12
+[Open3D DEBUG] Delta.norm() < 1.000000e-06 * (x.norm() + 1.000000e-06)
+[Open3D DEBUG] [GlobalOptimizationLM] total time : 0.000 sec.
+[Open3D DEBUG] CompensateReferencePoseGraphNode : reference : 0
+Transform points and display
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+[[ 9.99920492e-01  1.15476599e-03  1.25569201e-02 -8.90447995e+02]
+ [-1.19265577e-03  9.99994758e-01  3.01037215e-03  4.50645125e+02]
+ [-1.25533780e-02 -3.02510888e-03  9.99916627e-01  7.07256812e+03]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+Multiway REGISTRATION Finished 06/30/2023, 11:44:37 
+Global registration took 548.110 sec.
+
+WARNING: Using soft CircularBuffer (6144 KiB)
+FEngine (64 bits) created at 0x55ab9ce6cdf0 (threading is enabled)
+FEngine resolved backend: OpenGL
+
+

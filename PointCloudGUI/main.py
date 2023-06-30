@@ -198,7 +198,7 @@ class AppWithGUI(tk.Tk):
         # open target and source files button
         self.open_strip_match_button = ttk.Button(
             self,
-            text='Open a source and target Point Cloud Files',
+            text='Open source and target Point Cloud Files',
             command=lambda: [self.select_load_file(), self.select_load_file()]
         )
         self.open_strip_match_button.pack(expand=True)
