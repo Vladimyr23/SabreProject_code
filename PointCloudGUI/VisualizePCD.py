@@ -7,7 +7,7 @@ import argparse
 from datetime import datetime
 
 
-class VisualizePCD():
+class VisualizePCD(Thread):
 
     def __init__(self):
         super().__init__()
