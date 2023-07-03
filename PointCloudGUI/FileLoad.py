@@ -100,6 +100,7 @@ class FileLoad(Thread):
                 print("[Info] Successfully read", file_name)
                 # Point cloud
                 return self.pcd
+
         elif file_name.endswith(".pts"):
             try:
                 with open(file_name, "r") as f:
@@ -137,7 +138,7 @@ class FileLoad(Thread):
                     return self.pcd
 
             except Exception:
-                print("[Info] Unsuccessfully read .pts file", file_name)
+                print("[Info] Reading .pts file failed", file_name)
 
         else:
             self.pcd = None
