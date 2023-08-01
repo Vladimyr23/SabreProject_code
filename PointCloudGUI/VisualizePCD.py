@@ -148,19 +148,22 @@ class VisualizePCD(Thread):
         target_temp.paint_uniform_color([0, 0.651, 0.929])
         o3d.visualization.draw([source_temp, target_temp])
 
-    def visualize_mw(self, sour, targ):
+    def visualize_mw(self, sour, targ, voxel_size=0.0006):
         # Multiway REGISTRATION START--------------------
         start = datetime.now()
         # getting the date and time from the current date and time in the given format
         start_date_time = start.strftime("%m/%d/%Y, %H:%M:%S")
         print('\nMultiway REGISTRATION Started', start_date_time, '\n')
 
-        voxel_size = 0.0006  # in pairwise_registration(...) radius=0.0006 * 2.0,max_nn=30
+        voxel_size = voxel_size  # in pairwise_registration(...) radius=0.0006 * 2.0,max_nn=30
+        print("voxel_size =", voxel_size)
         pcds_down = []
         source_down = sour.voxel_down_sample(voxel_size=voxel_size)
         pcds_down.append(source_down)
+        print(f"Source Pointcloud down sampled from {len(np.asarray(sour.points))} points to {len(np.asarray(source_down.points))} points.")
         target_down = targ.voxel_down_sample(voxel_size=voxel_size)
         pcds_down.append(target_down)
+        print(f"Target Pointcloud down sampled from {len(np.asarray(targ.points))} points to {len(np.asarray(target_down.points))} points.")
         print("Full registration ...")
         max_correspondence_distance_coarse = voxel_size * 25
         max_correspondence_distance_fine = voxel_size * 2.5
@@ -201,7 +204,7 @@ class VisualizePCD(Thread):
         o3d.visualization.draw([source, target])
         # --------------------Multiway REGISTRATION END
 
-    def visualize_ransac(self, sour, targ):
+    def visualize_ransac(self, sour, targ, voxel_size=0.3):
         # ROBUST ICP REGISTRATION START--------------------
         # trans_init = np.asarray([[1.0, 0.0, 0.0, 0.0],
         #                          [0.0, 1.0, 0.0, 0.0],
@@ -336,7 +339,7 @@ class VisualizePCD(Thread):
         start_date_time = start.strftime("%m/%d/%Y, %H:%M:%S")
         print('\nRANSAC Started', start_date_time, '\n')
 
-        voxel_size = args.voxel_size
+        voxel_size = voxel_size
         print("voxel_size =", voxel_size)
         print("distance_multiplier =", args.distance_multiplier)
         distance_threshold = args.distance_multiplier * voxel_size
