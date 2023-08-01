@@ -19,7 +19,8 @@ class AppWithGUI(tk.Tk):
         self.open_strip_match_button = None
         self.save_button = None
         self.visualize_button = None
-        self.visualize_strip_button = None
+        self.visualize_ransac_button = None
+        self.visualize_mw_button = None
         self.close_vis_button = None
 
         self.title('Tkinter Open File Dialog')
@@ -96,7 +97,8 @@ class AppWithGUI(tk.Tk):
                 print("-------PCD: \n", self.pcd1)
                 # print("------Points: \n",self.points)
                 #self.visualize_button.config(state="disabled")
-                self.visualize_strip_button.config(state="normal")
+                self.visualize_ransac_button.config(state="normal")
+                self.visualize_mw_button.config(state="normal")
                 #self.close_vis_button.config(state="normal")
                 self.save_button.config(state="normal")
 
@@ -171,9 +173,13 @@ class AppWithGUI(tk.Tk):
         self.close_vis_button.config(state="normal")
         self.vis_pcd.visualize(self.pcd)
 
-    def visualize_strip_pcd(self):
+    def visualize_ransac_pcd(self):
         self.close_vis_button.config(state="normal")
-        self.vis_pcd.visualize_strip(self.pcd, self.pcd1)
+        self.vis_pcd.visualize_ransac(self.pcd, self.pcd1)
+
+    def visualize_mw_pcd(self):
+        self.close_vis_button.config(state="normal")
+        self.vis_pcd.visualize_mw(self.pcd, self.pcd1)
 
     def close_vis(self):
         self.vis_pcd.vis_close()
@@ -181,6 +187,8 @@ class AppWithGUI(tk.Tk):
         self.pcd1 = None
         self.vis_pcd = None
         self.visualize_button.config(state="disabled")
+        self.visualize_ransac_button.config(state="disabled")
+        self.visualize_mw_button.config(state="disabled")
         self.close_vis_button.config(state="disabled")
         self.save_button.config(state="disabled")
 
@@ -215,7 +223,7 @@ class AppWithGUI(tk.Tk):
         # visualize Point Cloud button
         self.visualize_button = ttk.Button(
             self,
-            text='Visualize a Point Cloud File',
+            text='Edit Point Cloud',
             state="disabled",
             command=self.visualize_pcd
         )
@@ -223,14 +231,24 @@ class AppWithGUI(tk.Tk):
         self.visualize_button.pack(expand=True)
 
         # visualize Strip match Point Cloud button
-        self.visualize_strip_button = ttk.Button(
+        self.visualize_ransac_button = ttk.Button(
             self,
-            text='Visualize source and target registration',
+            text='Visualize RANSAC registration',
             state="disabled",
-            command=self.visualize_strip_pcd
+            command=self.visualize_ransac_pcd
         )
         #self.visualize_strip_button["state"] = "disabled"
-        self.visualize_strip_button.pack(expand=True)
+        self.visualize_ransac_button.pack(expand=True)
+
+        # visualize Strip match Point Cloud button
+        self.visualize_mw_button = ttk.Button(
+            self,
+            text='Visualize Multiway registration',
+            state="disabled",
+            command=self.visualize_mw_pcd
+        )
+        # self.visualize_strip_button["state"] = "disabled"
+        self.visualize_mw_button.pack(expand=True)
 
         # close visualization Point Cloud button
         self.close_vis_button = ttk.Button(

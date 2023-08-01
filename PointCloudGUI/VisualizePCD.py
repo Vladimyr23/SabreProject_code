@@ -148,7 +148,60 @@ class VisualizePCD(Thread):
         target_temp.paint_uniform_color([0, 0.651, 0.929])
         o3d.visualization.draw([source_temp, target_temp])
 
-    def visualize_strip(self, sour, targ):
+    def visualize_mw(self, sour, targ):
+        # Multiway REGISTRATION START--------------------
+        start = datetime.now()
+        # getting the date and time from the current date and time in the given format
+        start_date_time = start.strftime("%m/%d/%Y, %H:%M:%S")
+        print('\nMultiway REGISTRATION Started', start_date_time, '\n')
+
+        voxel_size = 0.0006  # in pairwise_registration(...) radius=0.0006 * 2.0,max_nn=30
+        pcds_down = []
+        source_down = sour.voxel_down_sample(voxel_size=voxel_size)
+        pcds_down.append(source_down)
+        target_down = targ.voxel_down_sample(voxel_size=voxel_size)
+        pcds_down.append(target_down)
+        print("Full registration ...")
+        max_correspondence_distance_coarse = voxel_size * 25
+        max_correspondence_distance_fine = voxel_size * 2.5
+        with o3d.utility.VerbosityContextManager(
+                o3d.utility.VerbosityLevel.Debug) as cm:
+            pose_graph = self.full_registration(pcds_down,
+                                           max_correspondence_distance_coarse,
+                                           max_correspondence_distance_fine)
+
+        print("Optimizing PoseGraph ...")
+        option = o3d.pipelines.registration.GlobalOptimizationOption(
+            max_correspondence_distance=max_correspondence_distance_fine,
+            edge_prune_threshold=0.25,
+            reference_node=0)
+        with o3d.utility.VerbosityContextManager(
+                o3d.utility.VerbosityLevel.Debug) as cm:
+            o3d.pipelines.registration.global_optimization(
+                pose_graph,
+                o3d.pipelines.registration.GlobalOptimizationLevenbergMarquardt(),
+                o3d.pipelines.registration.GlobalOptimizationConvergenceCriteria(),
+                option)
+
+        print("Transform points and display")
+        for point_id in range(len(pcds_down)):
+            print(pose_graph.nodes[point_id].pose)
+            pcds_down[point_id].transform(pose_graph.nodes[point_id].pose)
+
+        finish = datetime.now()
+        # getting the date and time from the current date and time in the given format
+        finish_date_time = finish.strftime("%m/%d/%Y, %H:%M:%S")
+        print('Multiway REGISTRATION Finished', finish_date_time,
+              "\nGlobal registration took %.3f sec.\n" % (finish - start).total_seconds())
+
+        source = pcds_down[0]
+        target = pcds_down[1]
+        source.paint_uniform_color([1, 0.706, 0])
+        target.paint_uniform_color([0, 0.651, 0.929])
+        o3d.visualization.draw([source, target])
+        # --------------------Multiway REGISTRATION END
+
+    def visualize_ransac(self, sour, targ):
         # ROBUST ICP REGISTRATION START--------------------
         # trans_init = np.asarray([[1.0, 0.0, 0.0, 0.0],
         #                          [0.0, 1.0, 0.0, 0.0],
@@ -357,58 +410,6 @@ class VisualizePCD(Thread):
         # print(result_icp_refined)
         # o3d.visualization.draw([sour.transform(result.transformation).transform(result_icp_refined.transformation), targ])
         # --------------------RANSAC REGISTRATION END
-
-        # # Multiway REGISTRATION START--------------------
-        # start = datetime.now()
-        # # getting the date and time from the current date and time in the given format
-        # start_date_time = start.strftime("%m/%d/%Y, %H:%M:%S")
-        # print('\nMultiway REGISTRATION Started', start_date_time, '\n')
-        #
-        # voxel_size = 0.0006  # in pairwise_registration(...) radius=0.0006 * 2.0,max_nn=30
-        # pcds_down = []
-        # source_down = sour.voxel_down_sample(voxel_size=voxel_size)
-        # pcds_down.append(source_down)
-        # target_down = targ.voxel_down_sample(voxel_size=voxel_size)
-        # pcds_down.append(target_down)
-        # print("Full registration ...")
-        # max_correspondence_distance_coarse = voxel_size * 25
-        # max_correspondence_distance_fine = voxel_size * 2.5
-        # with o3d.utility.VerbosityContextManager(
-        #         o3d.utility.VerbosityLevel.Debug) as cm:
-        #     pose_graph = self.full_registration(pcds_down,
-        #                                    max_correspondence_distance_coarse,
-        #                                    max_correspondence_distance_fine)
-        #
-        # print("Optimizing PoseGraph ...")
-        # option = o3d.pipelines.registration.GlobalOptimizationOption(
-        #     max_correspondence_distance=max_correspondence_distance_fine,
-        #     edge_prune_threshold=0.25,
-        #     reference_node=0)
-        # with o3d.utility.VerbosityContextManager(
-        #         o3d.utility.VerbosityLevel.Debug) as cm:
-        #     o3d.pipelines.registration.global_optimization(
-        #         pose_graph,
-        #         o3d.pipelines.registration.GlobalOptimizationLevenbergMarquardt(),
-        #         o3d.pipelines.registration.GlobalOptimizationConvergenceCriteria(),
-        #         option)
-        #
-        # print("Transform points and display")
-        # for point_id in range(len(pcds_down)):
-        #     print(pose_graph.nodes[point_id].pose)
-        #     pcds_down[point_id].transform(pose_graph.nodes[point_id].pose)
-        #
-        # finish = datetime.now()
-        # # getting the date and time from the current date and time in the given format
-        # finish_date_time = finish.strftime("%m/%d/%Y, %H:%M:%S")
-        # print('Multiway REGISTRATION Finished', finish_date_time,
-        #       "\nGlobal registration took %.3f sec.\n" % (finish - start).total_seconds())
-        #
-        # source = pcds_down[0]
-        # target = pcds_down[1]
-        # source.paint_uniform_color([1, 0.706, 0])
-        # target.paint_uniform_color([0, 0.651, 0.929])
-        # o3d.visualization.draw([source, target])
-        # # --------------------Multiway REGISTRATION END
 
     def pick_points(self, pcd):
         print("")
