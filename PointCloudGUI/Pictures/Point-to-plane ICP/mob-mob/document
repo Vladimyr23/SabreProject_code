@@ -1,0 +1,50 @@
+/home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/bin/python /home/mekala/PycharmProjects/SabreProject_code/PointCloudGUI/main.py 
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/Highway Sample Set 1/18MAY23S1_ - 0001.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+loop end
+4
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/Highway Sample Set 1/18MAY23S1_ - 0001.pts
+-------PCD: 
+ PointCloud with 7937217 points.
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/Highway Sample Set 1/18MAY23S1_ - 0002.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+point 12000000
+point 13000000
+loop end
+4
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/Highway Sample Set 1/18MAY23S1_ - 0002.pts
+-------PCD: 
+ PointCloud with 13927496 points.
+Apply point-to-plane ICP
+RegistrationResult with fitness=0.000000e+00, inlier_rmse=0.000000e+00, and correspondence_set size of 0
+Access transformation to get result.
+Transformation is:
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+RegistrationResult with fitness=0.000000e+00, inlier_rmse=0.000000e+00, and correspondence_set size of 0
+Access transformation to get result. 
+
+WARNING: Using soft CircularBuffer (6144 KiB)
+FEngine (64 bits) created at 0x561ce0724240 (threading is enabled)
+FEngine resolved backend: OpenGL
+
+Process finished with exit code 0
+

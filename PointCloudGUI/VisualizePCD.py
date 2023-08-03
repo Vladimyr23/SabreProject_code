@@ -160,10 +160,12 @@ class VisualizePCD(Thread):
         pcds_down = []
         source_down = sour.voxel_down_sample(voxel_size=voxel_size)
         pcds_down.append(source_down)
-        print(f"Source Pointcloud down sampled from {len(np.asarray(sour.points))} points to {len(np.asarray(source_down.points))} points.")
+        print(
+            f'Source Pointcloud down sampled from {len(np.asarray(sour.points))} points to {len(np.asarray(source_down.points))} points.')
         target_down = targ.voxel_down_sample(voxel_size=voxel_size)
         pcds_down.append(target_down)
-        print(f"Target Pointcloud down sampled from {len(np.asarray(targ.points))} points to {len(np.asarray(target_down.points))} points.")
+        print(
+            f'Target Pointcloud down sampled from {len(np.asarray(targ.points))} points to {len(np.asarray(target_down.points))} points.')
         print("Full registration ...")
         max_correspondence_distance_coarse = voxel_size * 25
         max_correspondence_distance_fine = voxel_size * 2.5
@@ -204,8 +206,39 @@ class VisualizePCD(Thread):
         o3d.visualization.draw([source, target])
         # --------------------Multiway REGISTRATION END
 
+    def visualize_mob_strips(self, sour, targ):
+        sour.paint_uniform_color([1, 0.706, 0])
+        targ.paint_uniform_color([0, 0.651, 0.929])
+        o3d.visualization.draw([sour, targ])
+
     def visualize_ransac(self, sour, targ, voxel_size=0.3):
-        # ROBUST ICP REGISTRATION START--------------------
+        # # Point-to-plane ICP REGISTRATION START--------------------
+        # # Not working on mob-stat. Stat-stat places point clouds one on the top of another.
+        # threshold = voxel_size
+        # trans_init = np.asarray([[1.0, 0.0, 0.0, 0.0],
+        #                          [0.0, 1.0, 0.0, 0.0],
+        #                          [0.0, 0.0, 1.0, 0.0],
+        #                          [0.0, 0.0, 0.0, 1.0]])
+        # sour.estimate_normals(
+        #     o3d.geometry.KDTreeSearchParamHybrid(radius=0.0006 * 2.0,
+        #                                          max_nn=30))  # VY voxel_size=0.02
+        # targ.estimate_normals(
+        #     o3d.geometry.KDTreeSearchParamHybrid(radius=0.0006 * 2.0,
+        #                                          max_nn=30))  # VY voxel_size=0.02
+        # print("Apply point-to-plane ICP")
+        # reg_p2l = o3d.pipelines.registration.registration_icp(
+        #     sour, targ, threshold, trans_init,
+        #     o3d.pipelines.registration.TransformationEstimationPointToPlane())
+        # print(reg_p2l)
+        # print("Transformation is:")
+        # print(reg_p2l.transformation)
+        # evaluation = o3d.pipelines.registration.evaluate_registration(
+        #     sour, targ, threshold, trans_init)
+        # print(evaluation, "\n")
+        # self.draw_registration_result(sour, targ, reg_p2l.transformation)
+        # # Point-to-plane ICP REGISTRATION FINISH--------------------
+
+        # # ROBUST ICP REGISTRATION START--------------------
         # trans_init = np.asarray([[1.0, 0.0, 0.0, 0.0],
         #                          [0.0, 1.0, 0.0, 0.0],
         #                          [0.0, 0.0, 1.0, 0.0],
@@ -219,30 +252,31 @@ class VisualizePCD(Thread):
         # print("Using robust loss:", loss)
         # p2l = o3d.pipelines.registration.TransformationEstimationPointToPlane(loss)
         # reg_p2l = o3d.pipelines.registration.registration_icp(
-        #     source, target, threshold, init=trans_init)
+        #     sour, targ, threshold, init=trans_init, p2l)
         # print(reg_p2l)
         # print("Transformation is:")
         # print(reg_p2l.transformation)
         #
-        # source_temp = copy.deepcopy(source)
-        # target_temp = copy.deepcopy(target)
+        # source_temp = copy.deepcopy(sour)
+        # target_temp = copy.deepcopy(targ)
         # source_temp.paint_uniform_color([1, 0.706, 0])
         # target_temp.paint_uniform_color([0, 0.651, 0.929])
         # source_temp.transform(reg_p2l.transformation)
         # o3d.visualization.draw([source_temp, target_temp])
-        # --------------------ROBUST ICP REGISTRATION END
+        # # --------------------ROBUST ICP REGISTRATION END
 
         # #FGR REGISTRATION START--------------------
+        # #Not working on mob-stat. Stat-stat?
         # parser = argparse.ArgumentParser(
         #     'Global point cloud registration example with RANSAC')
         # parser.add_argument('src',
         #                     type=str,
-        #                     default=source,
+        #                     default=sour,
         #                     nargs='?',
         #                     help='path to src point cloud')
         # parser.add_argument('dst',
         #                     type=str,
-        #                     default=target,
+        #                     default=targ,
         #                     nargs='?',
         #                     help='path to dst point cloud')
         # parser.add_argument('--voxel_size',
@@ -258,39 +292,79 @@ class VisualizePCD(Thread):
         #          'Threshold is computed by voxel_size * distance_multiplier.')
         # parser.add_argument('--max_iterations',
         #                     type=int,
-        #                     default=64,
+        #                     default=1000000,# VY was 64
         #                     help='number of max FGR iterations')
         # parser.add_argument(
         #     '--max_tuples',
         #     type=int,
-        #     default=1000,
+        #     default=1000000,# VY was 1000
         #     help='max number of accepted tuples for correspondence filtering')
         #
         # args = parser.parse_args()
-        #
-        # voxel_size = args.voxel_size
+        # trans_init = np.asarray(
+        #     [
+        #         [1.0, 0.0, 0.0, 0.0],
+        #         [0.0, 1.0, 0.0, 0.0],
+        #         [0.0, 0.0, 1.0, 0.0],
+        #         [0.0, 0.0, 0.0, 1.0],
+        #     ]
+        # )
+        # voxel_size = voxel_size
         # distance_threshold = args.distance_multiplier * voxel_size
         # print("Distance threshold: ", distance_threshold)
         #
         # o3d.utility.set_verbosity_level(o3d.utility.VerbosityLevel.Debug)
-        # print('Reading inputs')
-        # src = source
-        # dst = target
+        # src = sour
+        # dst = targ
         #
         # print('Down sampling inputs')
         # src_down, src_fpfh = self.preprocess_point_cloud(src, voxel_size)
         # dst_down, dst_fpfh = self.preprocess_point_cloud(dst, voxel_size)
-        # start = time.time()
-        # print('FGR Started', start)
+        # # getting the current date and time
+        # start = datetime.now()
+        # # getting the date and time from the current date and time in the given format
+        # start_date_time = start.strftime("%m/%d/%Y, %H:%M:%S")
+        # print('\n Fast Global Registration Started ', start_date_time, '\n')
+        # print("voxel_size =", voxel_size)
+        # print("distance_multiplier =", args.distance_multiplier)
+        # print("Distance threshold: ", distance_threshold)
         # result = o3d.pipelines.registration.registration_fgr_based_on_feature_matching(
         #     src_down, dst_down, src_fpfh, dst_fpfh,
         #     o3d.pipelines.registration.FastGlobalRegistrationOption(
         #         maximum_correspondence_distance=distance_threshold,
         #         iteration_number=args.max_iterations,
         #         maximum_tuple_count=args.max_tuples))
-        # print('FGR Finished', time.time(), "Global registration took %.3f sec.\n" % (time.time() - start))
-        # src.paint_uniform_color([1, 0, 0])
-        # dst.paint_uniform_color([0, 1, 0])
+        # # getting the current date and time
+        # finish = datetime.now()
+        # # getting the date and time from the current date and time in the given format
+        # finish_date_time = finish.strftime("%m/%d/%Y, %H:%M:%S")
+        # print('Fast Global Registration Finished', finish_date_time,
+        #       "\nGlobal registration took %.3f sec.\n" % (finish - start).total_seconds())
+        #
+        # evaluation = o3d.pipelines.registration.evaluate_registration(src, dst, distance_threshold, trans_init)
+        # print(evaluation)
+        #
+        # fitness = result.fitness
+        # print("Fitness:")
+        # print(fitness)
+        # print("")
+        #
+        # rmse = result.inlier_rmse
+        # print("RMSE of all inlier correspondences:")
+        # print(rmse)
+        # print("")
+        #
+        # trans = result.transformation
+        # print("The estimated transformation matrix:")
+        # print(trans)
+        # print("")
+        #
+        # correspondences = result.correspondence_set
+        # print("Correspondence Set:")
+        # print(correspondences)
+        # print("")
+        # src.paint_uniform_color([1, 0.706, 0])
+        # dst.paint_uniform_color([0, 0.651, 0.929])
         # o3d.visualization.draw([src.transform(result.transformation), dst])
         # #--------------------FGR REGISTRATION END
 

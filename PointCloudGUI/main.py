@@ -20,6 +20,7 @@ class AppWithGUI(tk.Tk):
         self.open_strip_match_button = None
         self.save_button = None
         self.visualize_button = None
+        self.visualize_mob_strips_button = None
         self.visualize_ransac_button = None
         self.ransac_vox_size_text = None
         self.ransac_vox_size_lbl = None
@@ -106,6 +107,7 @@ class AppWithGUI(tk.Tk):
                 #self.visualize_button.config(state="disabled")
                 self.visualize_ransac_button.config(state="normal")
                 self.visualize_mw_button.config(state="normal")
+                self.visualize_mob_strips_button.config(state="normal")
                 #self.close_vis_button.config(state="normal")
                 self.save_button.config(state="normal")
 
@@ -180,10 +182,14 @@ class AppWithGUI(tk.Tk):
         self.close_vis_button.config(state="normal")
         self.vis_pcd.visualize(self.pcd)
 
+    def visualize_mob_strips(self):
+        self.close_vis_button.config(state="normal")
+        self.vis_pcd.visualize_mob_strips(self.pcd, self.pcd1)
+
     def visualize_ransac_pcd(self):
         self.close_vis_button.config(state="normal")
         self.ransac_vox_size = float(self.ransac_vox_size_text.get())
-        if self.ransac_vox_size != 0 or self.ransac_vox_size != None:
+        if self.ransac_vox_size != 0 or self.ransac_vox_size is not None:
             self.vis_pcd.visualize_ransac(self.pcd, self.pcd1, self.ransac_vox_size)
         else:
             print("Voxel size changed to default value 0.3")
@@ -191,8 +197,8 @@ class AppWithGUI(tk.Tk):
 
     def visualize_mw_pcd(self):
         self.close_vis_button.config(state="normal")
-        self.ransac_vox_size = float(self.mw_vox_size_text.get())
-        if self.ransac_vox_size != 0 or self.ransac_vox_size != None:
+        self.mw_vox_size = float(self.mw_vox_size_text.get())
+        if self.mw_vox_size != 0 or self.mw_vox_size is not None:
             self.vis_pcd.visualize_mw(self.pcd, self.pcd1, self.mw_vox_size)
         else:
             print("Voxel size changed to default value 0.0006")
@@ -216,6 +222,7 @@ class AppWithGUI(tk.Tk):
         self.pcd1 = None
         self.vis_pcd = None
         self.visualize_button.config(state="disabled")
+        self.visualize_mob_strips_button.config(state="disabled")
         self.visualize_ransac_button.config(state="disabled")
         self.visualize_mw_button.config(state="disabled")
         self.close_vis_button.config(state="disabled")
@@ -258,6 +265,15 @@ class AppWithGUI(tk.Tk):
         )
         self.visualize_button.grid(row=3, column=0, columnspan=3)
 
+        # visualize Mobile Strips button
+        self.visualize_mob_strips_button = ttk.Button(
+            self,
+            text='Visualize mobile strips',
+            state="disabled",
+            command=self.visualize_mob_strips
+        )
+        self.visualize_mob_strips_button.grid(row=4, column=0, columnspan=3)
+
         # visualize RANSAC Point Clouds Registration button
         self.visualize_ransac_button = ttk.Button(
             self,
@@ -265,17 +281,17 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.visualize_ransac_pcd
         )
-        self.visualize_ransac_button.grid(row=4, column=0)
+        self.visualize_ransac_button.grid(row=5, column=0)
 
         # RANSAC Voxel size textbox
         vcmd = (self.register(self.validate),
                 '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
         self.ransac_vox_size_text = tk.Entry(self, width= 7, validate='key', validatecommand=vcmd)
         self.ransac_vox_size_text.insert(0, str(self.ransac_vox_size))
-        self.ransac_vox_size_text.grid(row=4, column=1)
+        self.ransac_vox_size_text.grid(row=5, column=1)
         # RANSAC Voxel size textbox label
         self.ransac_vox_size_lbl = Label(self, text="Voxel size")
-        self.ransac_vox_size_lbl.grid(row=4, column=2)
+        self.ransac_vox_size_lbl.grid(row=5, column=2)
 
         # visualize Multiway Point Clouds Registration button
         self.visualize_mw_button = ttk.Button(
@@ -284,15 +300,15 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.visualize_mw_pcd
         )
-        self.visualize_mw_button.grid(row=5, column=0)
+        self.visualize_mw_button.grid(row=6, column=0)
 
         # Multiway Voxel size textbox
         self.mw_vox_size_text = tk.Entry(self, width= 7, validate='key', validatecommand=vcmd)
         self.mw_vox_size_text.insert(0, str(self.mw_vox_size))
-        self.mw_vox_size_text.grid(row=5, column=1)
+        self.mw_vox_size_text.grid(row=6, column=1)
         # Multiway Voxel size textbox label
         self.mw_vox_size_lbl = Label(self, text="Voxel size")
-        self.mw_vox_size_lbl.grid(row=5, column=2)
+        self.mw_vox_size_lbl.grid(row=6, column=2)
 
         # close visualization Point Cloud button
         self.close_vis_button = ttk.Button(
@@ -301,7 +317,7 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.close_vis
         )
-        self.close_vis_button.grid(row=6, column=0, columnspan=3)
+        self.close_vis_button.grid(row=7, column=0, columnspan=3)
 
 
 if __name__ == "__main__":

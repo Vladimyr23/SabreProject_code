@@ -1,0 +1,74 @@
+/home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/bin/python /home/mekala/PycharmProjects/SabreProject_code/PointCloudGUI/main.py 
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_003.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+point 12000000
+point 13000000
+point 14000000
+point 15000000
+point 16000000
+point 17000000
+loop end
+4
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_003.pts
+-------PCD: 
+ PointCloud with 17814760 points.
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_004.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+point 12000000
+point 13000000
+point 14000000
+point 15000000
+point 16000000
+point 17000000
+point 18000000
+loop end
+4
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_004.pts
+-------PCD: 
+ PointCloud with 18256983 points.
+Apply point-to-plane ICP
+RegistrationResult with fitness=1.337587e-02, inlier_rmse=0.000000e+00, and correspondence_set size of 238288
+Access transformation to get result.
+Transformation is:
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+RegistrationResult with fitness=1.337587e-02, inlier_rmse=0.000000e+00, and correspondence_set size of 238288
+Access transformation to get result. 
+
+WARNING: Using soft CircularBuffer (6144 KiB)
+FEngine (64 bits) created at 0x55c3f5ff1880 (threading is enabled)
+FEngine resolved backend: OpenGL
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/tkinter/__init__.py", line 1921, in __call__
+    return self.func(*args)
+  File "/home/mekala/PycharmProjects/SabreProject_code/PointCloudGUI/main.py", line 214, in close_vis
+    self.vis_pcd.vis_close()
+  File "/home/mekala/PycharmProjects/SabreProject_code/PointCloudGUI/VisualizePCD.py", line 533, in vis_close
+    self.vis.destroy_window()
+AttributeError: 'NoneType' object has no attribute 'destroy_window'
+
+Process finished with exit code 0
+
