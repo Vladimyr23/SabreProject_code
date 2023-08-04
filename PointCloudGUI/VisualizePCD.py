@@ -52,24 +52,49 @@ class VisualizePCD(Thread):
 
     # Function to calculate rotational and translational error
     def registration_error(self, sour, targ, transformation):
-        # Make source and target of the same size
-        minimum_len = min(len(sour), len(targ))
-        source = sour[:minimum_len, :3]
-        target = sour[:minimum_len, :3]
-        # Apply transformation to point cloud
-        source_transformed = np.dot(transformation[:3, :3], source.T).T + transformation[:3, 3]
-        # Compute the difference between the transformed source and target point clouds
-        diff = target - source_transformed
-        # RMSE of the difference
-        rmse = np.sqrt(np.mean(np.sum(diff ** 2, axis=1)))
-        # Compute the rotational error using quaternions
-        r = R.from_matrix(transformation[:3, :3])
-        q = r.as_quat()
-        q_target = R.from_matrix(np.identity(3)).as_quat()
-        rot_error = np.arccos(np.abs(np.dot(q, q_target))) * 180 / np.pi
-        # Compute the translational error
-        trans_error = np.linalg.norm(transformation[:3, 3] - np.array([0, 0, 0]))
-        return rmse, rot_error, trans_error
+        # # Make source and target of the same size
+        # minimum_len = min(len(sour), len(targ))
+        # source = sour[:minimum_len, :3]
+        # target = sour[:minimum_len, :3]
+        # # Apply transformation to point cloud
+        # source_transformed = np.dot(transformation[:3, :3], source.T).T + transformation[:3, 3]
+        # # Compute the difference between the transformed source and target point clouds
+        # diff = np.subtract(target, source_transformed)
+        # # RMSE of the difference
+        # rmse = np.sqrt(np.mean(np.sum(diff ** 2, axis=1)))
+        # # Compute the rotational error using quaternions
+        # r = R.from_matrix(transformation)
+        # q = r.as_quat()
+        # q_target = R.from_matrix(np.identity(3)).as_quat()
+        # rot_error = np.arccos(np.abs(np.dot(q, q_target))) * 180 / np.pi
+        # # Compute the translational error
+        # trans_error = np.linalg.norm(transformation - np.array([0, 0, 0]))
+        # return rmse, rot_error, trans_error
+
+        # Calculate the centroid of the source and target points
+        source_centroid = np.mean(sour, axis=0)
+        target_centroid = np.mean(targ, axis=0)
+
+        # Calculate the covariance matrix of the source and target points
+        source_covariance = np.cov(sour.T)
+        target_covariance = np.cov(targ.T)
+
+        # Calculate the singular value decomposition of the covariance matrices
+        U_source, S_source, Vt_source = np.linalg.svd(source_covariance)
+        U_target, S_target, Vt_target = np.linalg.svd(target_covariance)
+
+        # Calculate the rotation matrix
+        rot = Vt_target.T @ U_source.T
+
+        # Calculate the translation vector
+        transl = target_centroid - rot @ source_centroid
+
+        rot_err = rot - np.eye(3)
+        transl_err = transl
+        # Calculate the mean squared error
+        #mse = np.mean(np.sum((targ - (sour @ rot.T + transl)) ** 2, axis=1))
+
+        return rot_err, transl_err
 
     # Pre-process data for FGR and RANSAC Registration
     def preprocess_point_cloud(self, pcd, voxel_size):
@@ -120,9 +145,8 @@ class VisualizePCD(Thread):
         print(trans)
         print("")
 
-        rmse_f, rot_err, transl_err = self.registration_error(np.asarray(source.points), np.asarray(target.points),
-                                                              trans)
-        print(f"RMSE: {rmse_f}, Rotational error: {rot_err}, Translational error: {transl_err}")
+        rot_err, transl_err = self.registration_error(np.asarray(source.points), np.asarray(target.points), trans)
+        print(f'Rotational error: {rot_err}, Translational error: {transl_err}')
         print("")
 
         correspondences = icp_fine.correspondence_set
@@ -494,8 +518,8 @@ class VisualizePCD(Thread):
         print(trans)
         print("")
 
-        rmse_f, rot_err, transl_err = self.registration_error(np.asarray(sour.points), np.asarray(targ.points), trans)
-        print(f"RMSE: {rmse_f}, Rotational error: {rot_err}, Translational error: {transl_err}")
+        rot_err, transl_err = self.registration_error(np.asarray(sour.points), np.asarray(targ.points), trans)
+        print(f"Rotational error: {rot_err}, Translational error: {transl_err}")
         print("")
 
         correspondences = result.correspondence_set
