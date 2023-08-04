@@ -108,7 +108,7 @@ class AppWithGUI(tk.Tk):
                 self.visualize_ransac_button.config(state="normal")
                 self.visualize_mw_button.config(state="normal")
                 self.visualize_mob_strips_button.config(state="normal")
-                #self.close_vis_button.config(state="normal")
+                #self.close_vis_button.config(stcyber securiyate="normal")
                 self.save_button.config(state="normal")
 
 

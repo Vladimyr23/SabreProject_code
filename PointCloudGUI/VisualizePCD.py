@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import copy
 import argparse
 from datetime import datetime
+from scipy.spatial.transform import Rotation as R
 
 
 class VisualizePCD(Thread):
@@ -48,6 +49,27 @@ class VisualizePCD(Thread):
         # pcd.colors = o3d.utility.Vector3dVector(colors[:, :3])
         # o3d.visualization.draw_geometries([pcd])
         # ---------------DBSCAN clustering method end
+
+    # Function to calculate rotational and translational error
+    def registration_error(self, sour, targ, transformation):
+        # Make source and target of the same size
+        minimum_len = min(len(sour), len(targ))
+        source = sour[:minimum_len, :3]
+        target = sour[:minimum_len, :3]
+        # Apply transformation to point cloud
+        source_transformed = np.dot(transformation[:3, :3], source.T).T + transformation[:3, 3]
+        # Compute the difference between the transformed source and target point clouds
+        diff = target - source_transformed
+        # RMSE of the difference
+        rmse = np.sqrt(np.mean(np.sum(diff ** 2, axis=1)))
+        # Compute the rotational error using quaternions
+        r = R.from_matrix(transformation[:3, :3])
+        q = r.as_quat()
+        q_target = R.from_matrix(np.identity(3)).as_quat()
+        rot_error = np.arccos(np.abs(np.dot(q, q_target))) * 180 / np.pi
+        # Compute the translational error
+        trans_error = np.linalg.norm(transformation[:3, 3] - np.array([0, 0, 0]))
+        return rmse, rot_error, trans_error
 
     # Pre-process data for FGR and RANSAC Registration
     def preprocess_point_cloud(self, pcd, voxel_size):
@@ -96,6 +118,11 @@ class VisualizePCD(Thread):
         trans = icp_fine.transformation
         print("The estimated transformation matrix:")
         print(trans)
+        print("")
+
+        rmse_f, rot_err, transl_err = self.registration_error(np.asarray(source.points), np.asarray(target.points),
+                                                              trans)
+        print(f"RMSE: {rmse_f}, Rotational error: {rot_err}, Translational error: {transl_err}")
         print("")
 
         correspondences = icp_fine.correspondence_set
@@ -172,8 +199,8 @@ class VisualizePCD(Thread):
         with o3d.utility.VerbosityContextManager(
                 o3d.utility.VerbosityLevel.Debug) as cm:
             pose_graph = self.full_registration(pcds_down,
-                                           max_correspondence_distance_coarse,
-                                           max_correspondence_distance_fine)
+                                                max_correspondence_distance_coarse,
+                                                max_correspondence_distance_fine)
 
         print("Optimizing PoseGraph ...")
         option = o3d.pipelines.registration.GlobalOptimizationOption(
@@ -433,7 +460,7 @@ class VisualizePCD(Thread):
 
         print('Running RANSAC\n')
         result = o3d.pipelines.registration.registration_ransac_based_on_feature_matching(
-            src_down, dst_down, src_fpfh, dst_fpfh, #True,
+            src_down, dst_down, src_fpfh, dst_fpfh,  # True,
             mutual_filter=args.mutual_filter,
             max_correspondence_distance=distance_threshold,
             estimation_method=o3d.pipelines.registration.
@@ -465,6 +492,10 @@ class VisualizePCD(Thread):
         trans = result.transformation
         print("The estimated transformation matrix:")
         print(trans)
+        print("")
+
+        rmse_f, rot_err, transl_err = self.registration_error(np.asarray(sour.points), np.asarray(targ.points), trans)
+        print(f"RMSE: {rmse_f}, Rotational error: {rot_err}, Translational error: {transl_err}")
         print("")
 
         correspondences = result.correspondence_set
