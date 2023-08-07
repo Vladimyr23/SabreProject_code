@@ -140,6 +140,36 @@ class FileLoad(Thread):
             except Exception:
                 print("[Info] Reading .pts file failed", file_name)
 
+        # elif file_name.endswith(".kml"):
+        #     try:
+        #         with open(file_name, "r") as f:
+        #             # Log every 1000000 lines.
+        #             LOG_EVERY_N = 1000000
+        #             points_np = []
+        #             for line in f:
+        #                 print(line)
+        #                 if len(line.split(",")) == 3 and (line[0].isdigit() or line.startswith("-")):
+        #                     y, x, z = [num for num in line.split(",")]
+        #                     points_np.append([float(x), float(y), float(z)])
+        #                     if (len(points_np) % LOG_EVERY_N) == 0:
+        #                         print('point', len(points_np))
+        #                 else:
+        #                     print("[Info] The file has unregistered format")
+        #         print('loop end')
+        #         points_arr = np.array(points_np).transpose()
+        #         print(len(points_arr))
+        #         point_xyz = points_arr[:3].transpose()
+        #         # points_intensity = points_arr[3]
+        #         self.pcd = o3d.geometry.PointCloud()
+        #         self.pcd.points = o3d.utility.Vector3dVector(point_xyz)
+        #         if self.pcd is not None:
+        #             print("[Info] Successfully read", file_name)
+        #             # Point cloud
+        #             return self.pcd
+        #
+        #     except Exception:
+        #         print("[Info] Reading .kml file failed", file_name)
+
         else:
             self.pcd = None
             geometry_type = o3d.io.read_file_geometry_type(file_name)

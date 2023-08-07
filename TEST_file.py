@@ -1,28 +1,43 @@
-import tkinter as tk
+import numpy as np
+from scipy.spatial import cKDTree
+import xml.etree.ElementTree as ET
+from pykml import parser
 
-class window2:
-    def __init__(self, master1):
-        self.panel2 = tk.Frame(master1)
-        self.panel2.grid()
-        self.button2 = tk.Button(self.panel2, text = "Quit", command = self.panel2.quit)
-        self.button2.grid()
-        vcmd = (master1.register(self.validate),
-                '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
-        self.text1 = tk.Entry(self.panel2, validate = 'key', validatecommand = vcmd)
-        self.text1.grid()
-        self.text1.focus()
+# Example point cloud data (latitude, longitude, elevation)
+point_cloud_data = np.array([
+    [40.7128, -74.0060, 10.0],
+    [34.0522, -118.2437, 20.0],
+    # ... more points
+])
 
-    def validate(self, action, index, value_if_allowed,
-                       prior_value, text, validation_type, trigger_type, widget_name):
-        if value_if_allowed:
-            try:
-                float(value_if_allowed)
-                return True
-            except ValueError:
-                return False
-        else:
-            return False
+# Load KML file and extract coordinates
+kml_file = 'path_to_your.kml'
+kml_coordinates = []
 
-root1 = tk.Tk()
-window2(root1)
-root1.mainloop()
+with open(kml_file, 'rb') as f:
+    kml_data = f.read()
+    root = parser.fromstring(kml_data)
+    placemarks = root.findall('.//{http://www.opengis.net/kml/2.2}Placemark')
+
+    for placemark in placemarks:
+        coordinates = placemark.find('.//{http://www.opengis.net/kml/2.2}coordinates')
+        if coordinates is not None and coordinates.text:
+            lat, lon, elev = map(float, coordinates.text.split(','))
+            kml_coordinates.append([lat, lon, elev])
+
+# Create KD-Tree for point cloud data
+point_cloud_tree = cKDTree(point_cloud_data[:, :2])
+
+# Match point cloud data to KML coordinates
+matched_indices = point_cloud_tree.query(kml_coordinates)  # This gives the indices of matched points
+
+# Calculate transformation parameters (translation, rotation, scaling)
+# You may need to use a more advanced algorithm for accurate transformation
+translation = np.mean(point_cloud_data[matched_indices[1]], axis=0) - np.mean(kml_coordinates, axis=0)
+rotation = np.eye(3)  # Identity matrix for simplicity
+scaling = np.array([1.0, 1.0, 1.0])  # No scaling for simplicity
+
+# Apply transformation to entire point cloud
+aligned_point_cloud = (point_cloud_data - translation) * scaling @ rotation.T
+
+# Now you can use the aligned_point_cloud for further processing or visualization
