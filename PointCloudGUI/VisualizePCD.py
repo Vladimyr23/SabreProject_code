@@ -70,10 +70,12 @@ class VisualizePCD(Thread):
         # # Compute the translational error
         # trans_error = np.linalg.norm(transformation - np.array([0, 0, 0]))
         # return rmse, rot_error, trans_error
-
+        print('Calculating errors...')
         # Calculate the centroid of the source and target points
         source_centroid = np.mean(sour, axis=0)
         target_centroid = np.mean(targ, axis=0)
+        print(f'Sour centroid: {source_centroid}')
+        print(f'Targ centroid: {target_centroid}')
 
         # Calculate the covariance matrix of the source and target points
         source_covariance = np.cov(sour.T)
@@ -88,13 +90,19 @@ class VisualizePCD(Thread):
 
         # Calculate the translation vector
         transl = target_centroid - rot @ source_centroid
+        print(f'Transl vector: {transl}')
 
         rot_err = rot - np.eye(3)
-        transl_err = transl
+        # Mean Absolute error for each axis (row in rot_err)
+        rot_mae_xyz = np.mean(np.abs(rot_err), axis=1)
+
+        # Calculating translational error
+        transl_xyz = np.divide(np.abs(transl), (np.abs(source_centroid)+np.abs(target_centroid)+np.abs(transl))/3)
+        transl_xyz_mae = np.divide(transl_xyz, 100)
         # Calculate the mean squared error
         #mse = np.mean(np.sum((targ - (sour @ rot.T + transl)) ** 2, axis=1))
 
-        return rot_err, transl_err
+        return rot_mae_xyz, transl_xyz_mae
 
     # Pre-process data for FGR and RANSAC Registration
     def preprocess_point_cloud(self, pcd, voxel_size):
@@ -146,7 +154,8 @@ class VisualizePCD(Thread):
         print("")
 
         rot_err, transl_err = self.registration_error(np.asarray(source.points), np.asarray(target.points), trans)
-        print(f'Rotational error: {rot_err}, Translational error: {transl_err}')
+        print(f'Rotational MAE error xyz: {rot_err}, Translational MAE error xyz: {transl_err}')
+        print(f'Rotational MAE: {np.mean(rot_err)}, Translational MAE: {np.mean(transl_err)}')
         print("")
 
         correspondences = icp_fine.correspondence_set
@@ -519,7 +528,8 @@ class VisualizePCD(Thread):
         print("")
 
         rot_err, transl_err = self.registration_error(np.asarray(sour.points), np.asarray(targ.points), trans)
-        print(f"Rotational error: {rot_err}, Translational error: {transl_err}")
+        print(f'Rotational MAE error xyz: {rot_err}, Translational MAE error xyz: {transl_err}')
+        print(f'Rotational MAE: {np.mean(rot_err)}, Translational MAE: {np.mean(transl_err)}')
         print("")
 
         correspondences = result.correspondence_set

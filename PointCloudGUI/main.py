@@ -16,6 +16,9 @@ class AppWithGUI(tk.Tk):
     def __init__(self):
         super().__init__()
         # create the root window
+
+        self.sabre_logo_image = PhotoImage(file="sabre_logo.png")
+        self.sabre_logo_lbl = None
         self.open_button = None
         self.open_strip_match_button = None
         self.save_button = None
@@ -29,9 +32,9 @@ class AppWithGUI(tk.Tk):
         self.mw_vox_size_lbl = None
         self.close_vis_button = None
 
-        self.title('Tkinter Open File Dialog')
+        self.title('Point Cloud Visualization')
         self.resizable(False, False)
-        self.geometry('500x250')
+        self.geometry('350x330')
         self.vis_pcd = None
         self.pcd = None
         self.pcd1 = None
@@ -231,13 +234,17 @@ class AppWithGUI(tk.Tk):
 
     def create_menu_buttons(self):
         """ create a menu buttons """
+        # SABRE logo image
+        self.sabre_logo_lbl = ttk.Label(self, image=self.sabre_logo_image)
+        self.sabre_logo_lbl.grid(row=0, column=0, columnspan=3, rowspan=1, padx=128, pady=5, sticky='nsew')
+
         # open button
         self.open_button = ttk.Button(
             self,
             text='Open a Point Cloud File',
             command=self.select_load_file
         )
-        self.open_button.grid(row=0, column=0, columnspan=3)
+        self.open_button.grid(row=1, column=0, columnspan=3, sticky='nsew')
 
         # open target and source files button
         self.open_strip_match_button = ttk.Button(
@@ -245,7 +252,7 @@ class AppWithGUI(tk.Tk):
             text='Open source and target Point Cloud Files',
             command=lambda: [self.select_load_file(), self.select_load_file()]
         )
-        self.open_strip_match_button.grid(row=1, column=0, columnspan=3)
+        self.open_strip_match_button.grid(row=2, column=0, columnspan=3, sticky='nsew')
 
         # save image button
         self.save_button = ttk.Button(
@@ -254,7 +261,7 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.select_save_file
         )
-        self.save_button.grid(row=2, column=0, columnspan=3)
+        self.save_button.grid(row=3, column=0, columnspan=3, sticky='nsew')
 
         # visualize Point Cloud button
         self.visualize_button = ttk.Button(
@@ -263,7 +270,7 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.visualize_pcd
         )
-        self.visualize_button.grid(row=3, column=0, columnspan=3)
+        self.visualize_button.grid(row=4, column=0, columnspan=3, sticky='nsew')
 
         # visualize Mobile Strips button
         self.visualize_mob_strips_button = ttk.Button(
@@ -272,7 +279,7 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.visualize_mob_strips
         )
-        self.visualize_mob_strips_button.grid(row=4, column=0, columnspan=3)
+        self.visualize_mob_strips_button.grid(row=5, column=0, columnspan=3, sticky='nsew')
 
         # visualize RANSAC Point Clouds Registration button
         self.visualize_ransac_button = ttk.Button(
@@ -281,17 +288,17 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.visualize_ransac_pcd
         )
-        self.visualize_ransac_button.grid(row=5, column=0)
+        self.visualize_ransac_button.grid(row=6, column=0, sticky='nsew')
 
+        # RANSAC Voxel size textbox label
+        self.ransac_vox_size_lbl = Label(self, text="Voxel size")
+        self.ransac_vox_size_lbl.grid(row=6, column=1)
         # RANSAC Voxel size textbox
         vcmd = (self.register(self.validate),
                 '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
         self.ransac_vox_size_text = tk.Entry(self, width= 7, validate='key', validatecommand=vcmd)
         self.ransac_vox_size_text.insert(0, str(self.ransac_vox_size))
-        self.ransac_vox_size_text.grid(row=5, column=1)
-        # RANSAC Voxel size textbox label
-        self.ransac_vox_size_lbl = Label(self, text="Voxel size")
-        self.ransac_vox_size_lbl.grid(row=5, column=2)
+        self.ransac_vox_size_text.grid(row=6, column=2, sticky='nsew')
 
         # visualize Multiway Point Clouds Registration button
         self.visualize_mw_button = ttk.Button(
@@ -300,15 +307,15 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.visualize_mw_pcd
         )
-        self.visualize_mw_button.grid(row=6, column=0)
+        self.visualize_mw_button.grid(row=7, column=0, sticky='nsew')
 
-        # Multiway Voxel size textbox
-        self.mw_vox_size_text = tk.Entry(self, width= 7, validate='key', validatecommand=vcmd)
-        self.mw_vox_size_text.insert(0, str(self.mw_vox_size))
-        self.mw_vox_size_text.grid(row=6, column=1)
         # Multiway Voxel size textbox label
         self.mw_vox_size_lbl = Label(self, text="Voxel size")
-        self.mw_vox_size_lbl.grid(row=6, column=2)
+        self.mw_vox_size_lbl.grid(row=7, column=1)
+        # Multiway Voxel size textbox
+        self.mw_vox_size_text = tk.Entry(self, width=7, validate='key', validatecommand=vcmd)
+        self.mw_vox_size_text.insert(0, str(self.mw_vox_size))
+        self.mw_vox_size_text.grid(row=7, column=2, sticky='nsew')
 
         # close visualization Point Cloud button
         self.close_vis_button = ttk.Button(
@@ -317,7 +324,7 @@ class AppWithGUI(tk.Tk):
             state="disabled",
             command=self.close_vis
         )
-        self.close_vis_button.grid(row=7, column=0, columnspan=3)
+        self.close_vis_button.grid(row=8, column=0, columnspan=3, sticky='nsew')
 
 
 if __name__ == "__main__":
