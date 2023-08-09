@@ -35,6 +35,8 @@ class AppWithGUI(tk.Tk):
         self.title('Point Cloud Visualization')
         self.resizable(False, False)
         self.geometry('350x330')
+        # Add fonts for all the widgets
+        self.option_add("*Font", "aerial 10")
         self.vis_pcd = None
         self.pcd = None
         self.pcd1 = None
