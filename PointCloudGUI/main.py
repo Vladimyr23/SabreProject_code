@@ -33,7 +33,7 @@ class AppWithGUI(tk.Tk):
         self.mw_vox_size_lbl = None
         self.close_vis_button = None
 
-        self.title('Point Cloud Visualization')
+        self.title('SABRE Point Cloud Visualization')
         self.resizable(False, False)
         self.geometry('712x330')
         # Add fonts for all the widgets
