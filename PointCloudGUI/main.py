@@ -16,9 +16,10 @@ class AppWithGUI(tk.Tk):
     def __init__(self):
         super().__init__()
         # create the root window
-
         self.sabre_logo_image = PhotoImage(file="sabre_logo.png")
+        self.sabre_hw_image = PhotoImage(file="sabre_hardware_img_sc.png")
         self.sabre_logo_lbl = None
+        self.sabre_hw_image_lbl = None
         self.open_button = None
         self.open_strip_match_button = None
         self.save_button = None
@@ -34,7 +35,7 @@ class AppWithGUI(tk.Tk):
 
         self.title('Point Cloud Visualization')
         self.resizable(False, False)
-        self.geometry('350x330')
+        self.geometry('712x330')
         # Add fonts for all the widgets
         self.option_add("*Font", "aerial 10")
         self.vis_pcd = None
@@ -239,6 +240,10 @@ class AppWithGUI(tk.Tk):
         # SABRE logo image
         self.sabre_logo_lbl = ttk.Label(self, image=self.sabre_logo_image)
         self.sabre_logo_lbl.grid(row=0, column=0, columnspan=3, rowspan=1, padx=128, pady=5, sticky='nsew')
+
+        # SABRE hardware image
+        self.sabre_hw_image_lbl = ttk.Label(self, image=self.sabre_hw_image)
+        self.sabre_hw_image_lbl.grid(row=0, column=4, columnspan=1, rowspan=8, padx=3, pady=15, sticky='nsew')
 
         # open button
         self.open_button = ttk.Button(
