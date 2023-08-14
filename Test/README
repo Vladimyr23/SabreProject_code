@@ -1,7 +1,7 @@
-Pre-requisites
-
-OS Windows
-Python 3.10.12. Installation guide: https://www.digitalocean.com/community/tutorials/install-python-windows-10
+Pre-requisites:
+OS Windows 10 or above
+Python 3.10. Installation guide:
+https://www.digitalocean.com/community/tutorials/install-python-windows-10
 
 After the prerequisites are fulfilled
 run app_installation.bat from the application main folder, this file installs all necessary libraries for the application and needs to be launched only once.
