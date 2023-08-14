@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import copy
 import argparse
 from datetime import datetime
-from scipy.spatial.transform import Rotation as R
+#from scipy.spatial.transform import Rotation as R
 
 
 class VisualizePCD(Thread):
