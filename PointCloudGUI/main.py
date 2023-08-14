@@ -35,7 +35,7 @@ class AppWithGUI(tk.Tk):
 
         self.title('SABRE Point Cloud Visualization')
         self.resizable(False, False)
-        self.geometry('712x330')
+        self.geometry('712x340')
         # Add fonts for all the widgets
         self.option_add("*Font", "aerial 10")
         self.vis_pcd = None
