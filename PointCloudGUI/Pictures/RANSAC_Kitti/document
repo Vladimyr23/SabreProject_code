@@ -162,26 +162,4 @@ std::vector<Eigen::Vector2i> with 13419 elements.
 Use numpy.asarray() to access data.
 
 [Open3D DEBUG] Write geometry::PointCloud: 249221 vertices.
-WARNING: Using soft CircularBuffer (6144 KiB)
-FEngine (64 bits) created at 0x7f2715042010 (threading is enabled)
-FEngine resolved backend: OpenGL
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLit.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLitTransparency.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLitSSR.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultUnlit.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultUnlitTransparency.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/depth.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitGradient.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/normals.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitSolidColor.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitBackground.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/infiniteGroundPlane.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitLine.filamat
-[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/sabre_deploy/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitPolygonOffset.filamat
-[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
-[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
-[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
-[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
-[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
-[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
 

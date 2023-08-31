@@ -110,7 +110,7 @@ class FileLoad(Thread):
                     for line in f:
                         if len(line.split()) == 4:
                             x, y, z, i = [num for num in line.split()]
-                            points_np.append([float(x), float(y), float(z), int(float(i))])
+                            points_np.append([float(x), float(y), float(z), float(i)])
                             if (len(points_np) % LOG_EVERY_N) == 0:
                                 print('point', len(points_np))
                         elif len(line.split()) == 3:
@@ -120,7 +120,7 @@ class FileLoad(Thread):
                                 print('point', len(points_np))
                         elif len(line.split()) == 5:
                             x, y, z, i, zeroes_v = [num for num in line.split()]
-                            points_np.append([float(x), float(y), float(z), int(float(i))])
+                            points_np.append([float(x), float(y), float(z), float(i)])
                             if (len(points_np) % LOG_EVERY_N) == 0:
                                 print('point', len(points_np))
                         else:
@@ -129,9 +129,17 @@ class FileLoad(Thread):
                 points_arr = np.array(points_np).transpose()
                 print(len(points_arr))
                 point_xyz = points_arr[:3].transpose()
-                # points_intensity = points_arr[3]
+                print("xyz points shape", point_xyz.shape)
                 self.pcd = o3d.geometry.PointCloud()
                 self.pcd.points = o3d.utility.Vector3dVector(point_xyz)
+                if len(points_np)>3:
+                    points_intensity = (points_arr[3])/255.0
+                    print("intensity points len", points_intensity.shape)
+                    points_intensity_rgb = np.vstack((points_intensity,
+                                                      points_intensity,
+                                                      points_intensity)).T
+                    print("intensity_rgb points shape", points_intensity_rgb.shape)
+                    self.pcd.colors = o3d.utility.Vector3dVector(points_intensity_rgb)
                 if self.pcd is not None:
                     print("[Info] Successfully read", file_name)
                     # Point cloud
