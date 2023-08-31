@@ -1,0 +1,213 @@
+/home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/bin/python /home/mekala/PycharmProjects/SabreProject_code/PointCloudGUI/main.py 
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE ADVANCED 3D - Selected MMS Data/SABRE MMS_S3 - 0002.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+loop end
+4
+xyz points shape (11008825, 3)
+intensity points len (11008825,)
+intensity_rgb points shape (11008825, 3)
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE ADVANCED 3D - Selected MMS Data/SABRE MMS_S3 - 0002.pts
+-------PCD: 
+ PointCloud with 11008825 points.
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_003.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+point 12000000
+point 13000000
+point 14000000
+point 15000000
+point 16000000
+point 17000000
+loop end
+4
+xyz points shape (17814760, 3)
+intensity points len (17814760,)
+intensity_rgb points shape (17814760, 3)
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_003.pts
+-------PCD: 
+ PointCloud with 17814760 points.
+
+Multiway REGISTRATION Started 09/05/2023, 10:44:33 
+
+voxel_size = 0.0006
+[Open3D DEBUG] Pointcloud down sampled from 11008825 points to 11008542 points.
+Source Pointcloud down sampled from 11008825 points to 11008542 points.
+[Open3D DEBUG] Pointcloud down sampled from 17814760 points to 17008159 points.
+Target Pointcloud down sampled from 17814760 points to 17008159 points.
+Full registration ...
+Pcd's #:  2
+Apply point-to-plane ICP
+ PointCloud with 11008542 points. PointCloud with 17008159 points.
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.0001, RMSE 0.0112
+[Open3D DEBUG] Residual : 3.72e-05 (# of elements : 1453)
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.0001, RMSE 0.0112
+[Open3D DEBUG] Residual : 3.53e-05 (# of elements : 1471)
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.53e-05 (# of elements : 1452)
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.51e-05 (# of elements : 1452)
+[Open3D DEBUG] ICP Iteration #4: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.57e-05 (# of elements : 1458)
+[Open3D DEBUG] ICP Iteration #5: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.67e-05 (# of elements : 1460)
+[Open3D DEBUG] ICP Iteration #6: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.67e-05 (# of elements : 1477)
+[Open3D DEBUG] ICP Iteration #7: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.65e-05 (# of elements : 1488)
+[Open3D DEBUG] ICP Iteration #8: Fitness 0.0001, RMSE 0.0112
+[Open3D DEBUG] Residual : 3.67e-05 (# of elements : 1497)
+[Open3D DEBUG] ICP Iteration #9: Fitness 0.0001, RMSE 0.0112
+[Open3D DEBUG] Residual : 3.69e-05 (# of elements : 1499)
+[Open3D DEBUG] ICP Iteration #10: Fitness 0.0001, RMSE 0.0112
+[Open3D DEBUG] Residual : 3.78e-05 (# of elements : 1489)
+[Open3D DEBUG] ICP Iteration #11: Fitness 0.0001, RMSE 0.0112
+[Open3D DEBUG] Residual : 3.78e-05 (# of elements : 1487)
+[Open3D DEBUG] ICP Iteration #12: Fitness 0.0001, RMSE 0.0112
+[Open3D DEBUG] Residual : 3.72e-05 (# of elements : 1478)
+[Open3D DEBUG] ICP Iteration #13: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.58e-05 (# of elements : 1446)
+[Open3D DEBUG] ICP Iteration #14: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.60e-05 (# of elements : 1453)
+[Open3D DEBUG] ICP Iteration #15: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.63e-05 (# of elements : 1442)
+[Open3D DEBUG] ICP Iteration #16: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.73e-05 (# of elements : 1431)
+[Open3D DEBUG] ICP Iteration #17: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.70e-05 (# of elements : 1443)
+[Open3D DEBUG] ICP Iteration #18: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.70e-05 (# of elements : 1445)
+[Open3D DEBUG] ICP Iteration #19: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.67e-05 (# of elements : 1440)
+[Open3D DEBUG] ICP Iteration #20: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.71e-05 (# of elements : 1448)
+[Open3D DEBUG] ICP Iteration #21: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.67e-05 (# of elements : 1441)
+[Open3D DEBUG] ICP Iteration #22: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.69e-05 (# of elements : 1446)
+[Open3D DEBUG] ICP Iteration #23: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.68e-05 (# of elements : 1443)
+[Open3D DEBUG] ICP Iteration #24: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.69e-05 (# of elements : 1445)
+[Open3D DEBUG] ICP Iteration #25: Fitness 0.0001, RMSE 0.0111
+[Open3D DEBUG] Residual : 3.71e-05 (# of elements : 1447)
+[Open3D DEBUG] ICP Iteration #0: Fitness 0.0000, RMSE 0.0010
+[Open3D DEBUG] Residual : 6.74e-07 (# of elements : 1)
+[Open3D DEBUG] ICP Iteration #1: Fitness 0.0000, RMSE 0.0008
+[Open3D DEBUG] Residual : 4.47e-07 (# of elements : 2)
+[Open3D DEBUG] ICP Iteration #2: Fitness 0.0000, RMSE 0.0012
+[Open3D DEBUG] Residual : 4.76e-07 (# of elements : 6)
+[Open3D DEBUG] ICP Iteration #3: Fitness 0.0000, RMSE 0.0011
+[Open3D DEBUG] Residual : 2.32e-07 (# of elements : 1)
+[Open3D DEBUG] ICP Iteration #4: Fitness 0.0000, RMSE 0.0011
+[Open3D DEBUG] Residual : 3.35e-07 (# of elements : 2)
+[Open3D DEBUG] ICP Iteration #5: Fitness 0.0000, RMSE 0.0009
+[Open3D DEBUG] Residual : 1.80e-07 (# of elements : 3)
+[Open3D DEBUG] ICP Iteration #6: Fitness 0.0000, RMSE 0.0013
+[Open3D DEBUG] Residual : 6.68e-07 (# of elements : 4)
+[Open3D DEBUG] ICP Iteration #7: Fitness 0.0000, RMSE 0.0015
+[Open3D DEBUG] Residual : 4.00e-07 (# of elements : 1)
+[Open3D DEBUG] ICP Iteration #8: Fitness 0.0000, RMSE 0.0012
+[Open3D DEBUG] Residual : 4.04e-07 (# of elements : 3)
+[Open3D DEBUG] ICP Iteration #9: Fitness 0.0000, RMSE 0.0010
+[Open3D DEBUG] Residual : 3.99e-07 (# of elements : 2)
+[Open3D DEBUG] ICP Iteration #10: Fitness 0.0000, RMSE 0.0008
+[Open3D DEBUG] Residual : 2.58e-20 (# of elements : 2)
+Fitness:
+1.816771012909793e-07
+
+RMSE of all inlier correspondences:
+0.0007960020394227064
+
+The estimated transformation matrix:
+[[ 9.99999994e-01 -2.09418663e-08 -1.05173581e-04  1.71626442e-02]
+ [ 2.14691440e-08  1.00000000e+00  5.01340338e-06 -2.30440169e-02]
+ [ 1.05173581e-04 -5.01340561e-06  9.99999994e-01 -3.50558022e+01]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+Saving the transformation matrix in mw_transformation_matrix.txt ...
+
+Calculating errors...
+Sour centroid: [3.71379935e+05 7.96963720e+05 6.56787574e+01]
+Targ centroid: [3.71349033e+05 7.96967501e+05 6.59245696e+01]
+Transl vector: [-127973.09555591   74660.90335287   45063.94610315]
+Rotational MAE error xyz: [0.06699605 0.08588161 0.03543846], Translational MAE error xyz: [0.00440931 0.00134235 0.02991264]
+Rotational MAE: 0.06277204064258661, Translational MAE: 0.011888098908016112
+
+Correspondence Set:
+std::vector<Eigen::Vector2i> with 2 elements.
+Use numpy.asarray() to access data.
+Build o3d.pipelines.registration.PoseGraph
+Optimizing PoseGraph ...
+[Open3D DEBUG] Validating PoseGraph - finished.
+[Open3D DEBUG] [GlobalOptimizationLM] Optimizing PoseGraph having 2 nodes and 1 edges.
+[Open3D DEBUG] Line process weight : 0.000004
+[Open3D DEBUG] [Initial     ] residual : 1.445920e-28, lambda : 1.546130e+07
+[Open3D DEBUG] Maximum coefficient of right term < 1.000000e-06
+[Open3D DEBUG] [GlobalOptimizationLM] Optimizing PoseGraph having 2 nodes and 1 edges.
+[Open3D DEBUG] Line process weight : 0.000004
+[Open3D DEBUG] [Initial     ] residual : 1.445920e-28, lambda : 1.546130e+07
+[Open3D DEBUG] Maximum coefficient of right term < 1.000000e-06
+[Open3D DEBUG] CompensateReferencePoseGraphNode : reference : 0
+Transform down-sampled points 
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+[[ 9.99999994e-01  2.14691440e-08  1.05173581e-04 -1.34756994e-02]
+ [-2.09418663e-08  1.00000000e+00 -5.01340561e-06  2.28682683e-02]
+ [-1.05173581e-04  5.01340338e-06  9.99999994e-01  3.50558040e+01]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+Transform original points and display
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]]
+[[ 9.99999994e-01  2.14691440e-08  1.05173581e-04 -1.34756994e-02]
+ [-2.09418663e-08  1.00000000e+00 -5.01340561e-06  2.28682683e-02]
+ [-1.05173581e-04  5.01340338e-06  9.99999994e-01  3.50558040e+01]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+Multiway REGISTRATION Finished 09/05/2023, 10:49:08 
+Global registration took 275.403 sec.
+
+[Open3D DEBUG] Write geometry::PointCloud: 28823585 vertices.
+WARNING: Using soft CircularBuffer (6144 KiB)
+FEngine (64 bits) created at 0x5559d5650ac0 (threading is enabled)
+FEngine resolved backend: OpenGL
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLit.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLitTransparency.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLitSSR.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultUnlit.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultUnlitTransparency.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/depth.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitGradient.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/normals.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitSolidColor.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitBackground.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/infiniteGroundPlane.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitLine.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitPolygonOffset.filamat
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+

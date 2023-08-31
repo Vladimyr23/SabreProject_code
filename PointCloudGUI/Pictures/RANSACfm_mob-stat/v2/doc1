@@ -1,0 +1,428 @@
+/home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/bin/python /home/mekala/PycharmProjects/SabreProject_code/PointCloudGUI/main.py 
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE ADVANCED 3D - Selected MMS Data/SABRE MMS_S3 - 0002.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+loop end
+4
+xyz points shape (11008825, 3)
+intensity points len (11008825,)
+intensity_rgb points shape (11008825, 3)
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE ADVANCED 3D - Selected MMS Data/SABRE MMS_S3 - 0002.pts
+-------PCD: 
+ PointCloud with 11008825 points.
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_003.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+point 12000000
+point 13000000
+point 14000000
+point 15000000
+point 16000000
+point 17000000
+loop end
+4
+xyz points shape (17814760, 3)
+intensity points len (17814760,)
+intensity_rgb points shape (17814760, 3)
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_003.pts
+-------PCD: 
+ PointCloud with 17814760 points.
+
+RANSAC Started 09/07/2023, 12:55:51 
+
+voxel_size = 0.3
+distance_multiplier = 2.5
+Distance threshold:  0.75
+Down sampling inputs
+[Open3D DEBUG] Pointcloud down sampled from 11008825 points to 56746 points.
+[Open3D DEBUG] Pointcloud down sampled from 17814760 points to 123234 points.
+max_validation replaces args.confidence in static-static and mobile-static 28373
+Running RANSAC
+
+[Open3D DEBUG] Thread 350237: registration fitness=0.502, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 900536: registration fitness=0.485, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 250317: registration fitness=0.273, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 302126: registration fitness=0.055, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 651187: registration fitness=0.167, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 500377: registration fitness=0.084, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 101315: registration fitness=0.327, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 627175: registration fitness=0.274, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 601747: registration fitness=0.237, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 228202: registration fitness=0.446, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 975403: registration fitness=0.060, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 453425: registration fitness=0.531, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 827999: registration fitness=0.318, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 954234: registration fitness=0.318, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 277936: registration fitness=0.114, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 005263: registration fitness=0.415, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 554541: registration fitness=0.155, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 080722: registration fitness=0.185, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 380458: registration fitness=0.496, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 880467: registration fitness=0.272, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 755051: registration fitness=0.142, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 779057: registration fitness=0.114, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 476615: registration fitness=0.045, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 303926: registration fitness=0.356, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 155880: registration fitness=0.098, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 181445: registration fitness=0.234, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 408076: registration fitness=0.282, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 060373: registration fitness=0.499, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 710374: registration fitness=0.271, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 779996: registration fitness=0.162, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 810268: registration fitness=0.402, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 585654: registration fitness=0.387, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 530074: registration fitness=0.030, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 478763: registration fitness=0.172, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 530922: registration fitness=0.568, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 204737: registration fitness=0.037, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 413937: registration fitness=0.342, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 144424: registration fitness=0.081, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 433195: registration fitness=0.066, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 481296: registration fitness=0.285, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 092815: registration fitness=0.296, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 365766: registration fitness=0.550, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 519602: registration fitness=0.297, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 665517: registration fitness=0.225, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 270410: registration fitness=0.637, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 949268: registration fitness=0.082, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 435581: registration fitness=0.122, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 483245: registration fitness=0.294, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 170621: registration fitness=0.250, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 998362: registration fitness=0.356, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 727540: registration fitness=0.019, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 671723: registration fitness=0.426, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 894485: registration fitness=0.309, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 897167: registration fitness=0.449, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 898316: registration fitness=0.456, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] RANSAC exits after 94 validations. Best inlier ratio 6.372784e-01, RMSE 4.208998e-01
+RANSAC Finished 09/07/2023, 12:55:56 
+Global registration took 5.021 sec.
+
+Fitness:
+0.6372783984774257
+
+RMSE of all inlier correspondences:
+0.4208997808888835
+
+The estimated transformation matrix:
+[[-1.00834207e+00 -1.61724698e-01 -7.30404248e-04  1.93051946e+06]
+ [ 1.61668382e-01 -1.00809385e+00  2.27870042e-02  7.08667826e+06]
+ [-4.32962287e-03  2.23838204e-02  1.02097471e+00 -1.39316634e+05]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+Saving the transformation matrix in ransac_transformation_matrix.txt ...
+
+Calculating errors...
+Sour centroid: [5.31876285e+05 6.32451432e+06 1.15778355e+02]
+Targ centroid: [3.71349031e+05 7.96967610e+05 6.59070194e+01]
+Transl vector: [-2181353.29732628 -4947180.00773328   878048.14285558]
+Rotational MAE error xyz: [0.12862249 0.17801574 0.06460706], Translational MAE error xyz: [0.02121541 0.01229759 0.02999379]
+Rotational MAE: 0.12374842898840817, Translational MAE: 0.02116892956975223
+
+Correspondence Set:
+std::vector<Eigen::Vector2i> with 36163 elements.
+Use numpy.asarray() to access data.
+
+[Open3D DEBUG] Write geometry::PointCloud: 28823585 vertices.
+WARNING: Using soft CircularBuffer (6144 KiB)
+FEngine (64 bits) created at 0x55ed83d44da0 (threading is enabled)
+FEngine resolved backend: OpenGL
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLit.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLitTransparency.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLitSSR.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultUnlit.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultUnlitTransparency.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/depth.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitGradient.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/normals.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitSolidColor.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitBackground.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/infiniteGroundPlane.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitLine.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitPolygonOffset.filamat
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+
+RANSAC Started 09/07/2023, 12:58:39 
+
+voxel_size = 0.1
+distance_multiplier = 2.5
+Distance threshold:  0.25
+Down sampling inputs
+[Open3D DEBUG] Pointcloud down sampled from 11008825 points to 415697 points.
+[Open3D DEBUG] Pointcloud down sampled from 17814760 points to 525362 points.
+max_validation replaces args.confidence in static-static and mobile-static 207848
+Running RANSAC
+
+[Open3D DEBUG] Thread 450575: registration fitness=0.162, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 938228: registration fitness=0.030, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 532568: registration fitness=0.113, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 226139: registration fitness=0.032, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 003815: registration fitness=0.052, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 510735: registration fitness=0.042, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 808154: registration fitness=0.098, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 279251: registration fitness=0.069, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 884057: registration fitness=0.028, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 171386: registration fitness=0.177, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 765157: registration fitness=0.114, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 221176: registration fitness=0.078, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 612328: registration fitness=0.123, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 226508: registration fitness=0.271, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 948984: registration fitness=0.078, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 013685: registration fitness=0.079, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 471696: registration fitness=0.235, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 559877: registration fitness=0.021, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 309361: registration fitness=0.015, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 572433: registration fitness=0.231, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 431842: registration fitness=0.008, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] RANSAC exits after 23 validations. Best inlier ratio 2.708752e-01, RMSE 1.413588e-01
+RANSAC Finished 09/07/2023, 12:59:31 
+Global registration took 51.769 sec.
+
+Fitness:
+0.27087518072057293
+
+RMSE of all inlier correspondences:
+0.14135878382853725
+
+The estimated transformation matrix:
+[[ 9.63885620e-01  1.46830784e-01  2.86350209e-03 -1.03612563e+05]
+ [-1.46850062e-01  9.63439440e-01  2.93678476e-02  8.36690904e+04]
+ [ 1.59310619e-03 -2.94640820e-02  9.74562618e-01  2.28920195e+04]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+Saving the transformation matrix in ransac_transformation_matrix.txt ...
+
+Calculating errors...
+Sour centroid: [3.71375974e+05 7.96964454e+05 6.55420776e+01]
+Targ centroid: [3.71349031e+05 7.96967610e+05 6.59070194e+01]
+Transl vector: [-130305.9505629    76595.11505987   49847.50594915]
+Rotational MAE error xyz: [0.06313228 0.086262   0.02988714], Translational MAE error xyz: [0.00447771 0.00137553 0.0299211 ]
+Rotational MAE: 0.05976047279523183, Translational MAE: 0.01192477740132536
+
+Correspondence Set:
+std::vector<Eigen::Vector2i> with 112602 elements.
+Use numpy.asarray() to access data.
+
+[Open3D DEBUG] Write geometry::PointCloud: 28823585 vertices.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+
+RANSAC Started 09/07/2023, 13:01:52 
+
+voxel_size = 0.08
+distance_multiplier = 2.5
+Distance threshold:  0.2
+Down sampling inputs
+[Open3D DEBUG] Pointcloud down sampled from 11008825 points to 589740 points.
+[Open3D DEBUG] Pointcloud down sampled from 17814760 points to 673053 points.
+max_validation replaces args.confidence in static-static and mobile-static 294870
+Running RANSAC
+
+[Open3D DEBUG] Thread 033843: registration fitness=0.081, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 562559: registration fitness=0.283, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 340801: registration fitness=0.233, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 600982: registration fitness=0.037, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 108084: registration fitness=0.060, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 853263: registration fitness=0.063, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 095421: registration fitness=0.097, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 391273: registration fitness=0.025, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 731387: registration fitness=0.024, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 259032: registration fitness=0.019, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 118065: registration fitness=0.100, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 411467: registration fitness=0.012, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 396207: registration fitness=0.046, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] RANSAC exits after 14 validations. Best inlier ratio 2.828026e-01, RMSE 1.129043e-01
+RANSAC Finished 09/07/2023, 13:03:10 
+Global registration took 77.393 sec.
+
+Fitness:
+0.2828025909722929
+
+RMSE of all inlier correspondences:
+0.11290430712265552
+
+The estimated transformation matrix:
+[[ 9.04094397e-01 -1.76824622e-01  6.55676674e-03  1.76530215e+05]
+ [ 1.76842156e-01  9.04112695e-01 -1.92419704e-03  1.07523197e+04]
+ [-6.06548376e-03  3.14700350e-03  9.21221972e-01 -2.50607311e+02]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+Saving the transformation matrix in ransac_transformation_matrix.txt ...
+
+Calculating errors...
+Sour centroid: [3.71370501e+05 7.96961418e+05 6.57097111e+01]
+Targ centroid: [3.71349031e+05 7.96967610e+05 6.59070194e+01]
+Transl vector: [-15645.30084543   8048.63239098  30162.23921098]
+Rotational MAE error xyz: [0.00932447 0.02085663 0.01725097], Translational MAE error xyz: [0.00061891 0.00015073 0.02986966]
+Rotational MAE: 0.01581069070476054, Translational MAE: 0.0102130982670463
+
+Correspondence Set:
+std::vector<Eigen::Vector2i> with 166780 elements.
+Use numpy.asarray() to access data.
+
+[Open3D DEBUG] Write geometry::PointCloud: 28823585 vertices.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+
+RANSAC Started 09/07/2023, 13:06:58 
+
+voxel_size = 0.5
+distance_multiplier = 2.5
+Distance threshold:  1.25
+Down sampling inputs
+[Open3D DEBUG] Pointcloud down sampled from 11008825 points to 19603 points.
+[Open3D DEBUG] Pointcloud down sampled from 17814760 points to 59357 points.
+max_validation replaces args.confidence in static-static and mobile-static 9801
+Running RANSAC
+
+[Open3D DEBUG] Thread 700330: registration fitness=0.594, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 075486: registration fitness=0.138, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 225957: registration fitness=0.391, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 625857: registration fitness=0.149, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 376229: registration fitness=0.511, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 676225: registration fitness=0.427, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 301363: registration fitness=0.218, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 751529: registration fitness=0.622, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 976348: registration fitness=0.095, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 476839: registration fitness=0.431, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 326724: registration fitness=0.146, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 851641: registration fitness=0.262, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 226855: registration fitness=0.687, corres inlier ratio=0.002, Est. max k = inf
+[Open3D DEBUG] Thread 252743: registration fitness=0.302, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 052185: registration fitness=0.118, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 653126: registration fitness=0.123, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 778355: registration fitness=0.687, corres inlier ratio=0.002, Est. max k = inf
+[Open3D DEBUG] Thread 927961: registration fitness=0.118, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 803801: registration fitness=0.376, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 304051: registration fitness=0.520, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 129245: registration fitness=0.109, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 577017: registration fitness=0.073, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 454885: registration fitness=0.365, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 505128: registration fitness=0.470, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 729672: registration fitness=0.089, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 880054: registration fitness=0.269, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 327944: registration fitness=0.377, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 654493: registration fitness=0.400, corres inlier ratio=0.002, Est. max k = inf
+[Open3D DEBUG] Thread 180796: registration fitness=0.354, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 404974: registration fitness=0.169, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 281187: registration fitness=0.546, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 105483: registration fitness=0.260, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 906158: registration fitness=0.283, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 606379: registration fitness=0.130, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 729847: registration fitness=0.359, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 705243: registration fitness=0.630, corres inlier ratio=0.003, Est. max k = inf
+[Open3D DEBUG] Thread 557570: registration fitness=0.286, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 806496: registration fitness=0.381, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 055819: registration fitness=0.320, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 008327: registration fitness=0.094, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 907767: registration fitness=0.417, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 079126: registration fitness=0.431, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 883296: registration fitness=0.568, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 832845: registration fitness=0.030, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 360212: registration fitness=0.525, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 160318: registration fitness=0.304, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 134421: registration fitness=0.503, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 109265: registration fitness=0.287, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 408441: registration fitness=0.314, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 985760: registration fitness=0.165, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 109719: registration fitness=0.498, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 860273: registration fitness=0.270, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 011458: registration fitness=0.389, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 910293: registration fitness=0.438, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 637666: registration fitness=0.647, corres inlier ratio=0.002, Est. max k = inf
+[Open3D DEBUG] Thread 585042: registration fitness=0.540, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 613112: registration fitness=0.512, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 685529: registration fitness=0.696, corres inlier ratio=0.004, Est. max k = inf
+[Open3D DEBUG] Thread 932664: registration fitness=0.287, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 061755: registration fitness=0.322, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 412121: registration fitness=0.499, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 337568: registration fitness=0.659, corres inlier ratio=0.003, Est. max k = inf
+[Open3D DEBUG] Thread 216645: registration fitness=0.129, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 967232: registration fitness=0.133, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 614706: registration fitness=0.691, corres inlier ratio=0.003, Est. max k = inf
+[Open3D DEBUG] Thread 444409: registration fitness=0.254, corres inlier ratio=0.002, Est. max k = inf
+[Open3D DEBUG] Thread 218612: registration fitness=0.368, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 969749: registration fitness=0.436, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 044496: registration fitness=0.127, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 489972: registration fitness=0.435, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 815506: registration fitness=0.427, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 917820: registration fitness=0.525, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 390718: registration fitness=0.557, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 548976: registration fitness=0.456, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 466776: registration fitness=0.651, corres inlier ratio=0.002, Est. max k = inf
+[Open3D DEBUG] Thread 047390: registration fitness=0.168, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 994527: registration fitness=0.505, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 845017: registration fitness=0.040, corres inlier ratio=0.000, Est. max k = inf
+[Open3D DEBUG] Thread 447283: registration fitness=0.555, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 148934: registration fitness=0.774, corres inlier ratio=0.004, Est. max k = inf
+[Open3D DEBUG] Thread 418225: registration fitness=0.705, corres inlier ratio=0.003, Est. max k = inf
+[Open3D DEBUG] Thread 846920: registration fitness=0.332, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 872816: registration fitness=0.317, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 822383: registration fitness=0.719, corres inlier ratio=0.003, Est. max k = inf
+[Open3D DEBUG] Thread 873056: registration fitness=0.381, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 874763: registration fitness=0.570, corres inlier ratio=0.001, Est. max k = inf
+[Open3D DEBUG] Thread 322687: registration fitness=0.677, corres inlier ratio=0.002, Est. max k = inf
+[Open3D DEBUG] RANSAC exits after 222 validations. Best inlier ratio 7.741672e-01, RMSE 4.254396e-01
+RANSAC Finished 09/07/2023, 13:07:00 
+Global registration took 2.796 sec.
+
+Fitness:
+0.7741672193031679
+
+RMSE of all inlier correspondences:
+0.4254396353263319
+
+The estimated transformation matrix:
+[[ 1.06823800e+00  4.40500085e-02  7.18627681e-03 -6.04331638e+04]
+ [-4.39387720e-02  1.06814724e+00 -1.59789458e-02 -3.79979541e+04]
+ [-7.83773817e-03  1.56696887e-02  1.06902643e+00 -9.58221977e+03]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+Saving the transformation matrix in ransac_transformation_matrix.txt ...
+
+Calculating errors...
+Sour centroid: [3.71362233e+05 7.96969089e+05 6.54245406e+01]
+Targ centroid: [3.71349031e+05 7.96967610e+05 6.59070194e+01]
+Transl vector: [-159969.97185601   96836.5048894    24277.35347026]
+Rotational MAE error xyz: [0.08283666 0.09318832 0.02219668], Translational MAE error xyz: [0.00531649 0.00171821 0.02983858]
+Rotational MAE: 0.06607388640503482, Translational MAE: 0.01229109436198591
+
+Correspondence Set:
+std::vector<Eigen::Vector2i> with 15176 elements.
+Use numpy.asarray() to access data.
+
+[Open3D DEBUG] Write geometry::PointCloud: 28823585 vertices.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+

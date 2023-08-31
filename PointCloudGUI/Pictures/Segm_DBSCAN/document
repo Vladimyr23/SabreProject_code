@@ -1,0 +1,35 @@
+/home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/bin/python /home/mekala/PycharmProjects/SabreProject_code/PointCloudGUI/main.py 
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/xplane sabrescan sample/point cloud/LS1_25JUN23T2003_t111734Z_RGT - 0001.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+loop end
+4
+xyz points shape (6203468, 3)
+intensity points len (6203468,)
+intensity_rgb points shape (6203468, 3)
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/xplane sabrescan sample/point cloud/LS1_25JUN23T2003_t111734Z_RGT - 0001.pts
+-------PCD: 
+ PointCloud with 6203468 points.
+
+DBSCAN Segmentation process started 09/12/2023, 14:53:44 
+
+Down sampling input
+voxel_size = 0.2
+Pointcloud down sampled from 6203468 points to 93147 points.
+[Open3D DEBUG] Precompute neighbors.
+Precompute neighbors.[========================================] 100%
+[Open3D DEBUG] Done Precompute neighbors.
+[Open3D DEBUG] Compute Clusters
+[Open3D DEBUG] Done Compute Clusters: 17
+point cloud has 17 clusters
+DBSCAN Segmentation process Finished 09/12/2023, 14:53:45 
+DBSCAN Segmentation process execution time 0.835 sec.
+
+WARNING: Using soft CircularBuffer (6144 KiB)
+FEngine (64 bits) created at 0x55b3a2b259a0 (threading is enabled)
+FEngine resolved backend: OpenGL
+

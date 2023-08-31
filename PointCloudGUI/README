@@ -1,13 +1,20 @@
-Pre-requisites:
+Pre-requisites.
+
 OS Windows 10 or above
 Python 3.10. Installation guide:
 https://www.digitalocean.com/community/tutorials/install-python-windows-10
+
+
+Installation Process.
 
 After the prerequisites are fulfilled
 run app_installation.bat from the application main folder, this file installs all necessary libraries for the application and needs to be launched only once.
 
 Now we are ready to launch our application,
 launch file: viz_run.bat
+
+Main interface.
+
 
 Edit screen keys:
 

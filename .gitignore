@@ -1,2 +1,5 @@
 /Sabre_proj/
 /venv_sabre3d/
+/PointCloudGUI/real-time_workdir/
+*.ply
+*.pts

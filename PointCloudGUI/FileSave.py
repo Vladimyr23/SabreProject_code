@@ -1,17 +1,22 @@
+import os
+
 import numpy as np
 import open3d as o3d
+from scipy.spatial import cKDTree
 import laspy
 import pye57
 
 class FileSave:
 
-    def __init__(self, file_name, pcd):
-        self.file_name = str(file_name)
-        self.pcd = pcd
+    def __init__(self):
+        super().__init__()
+        self.file_name = None
+        self.pcd = None
         # self.points = points
 
-    def save_file(self):
-        # TODO add code to save point cloud in a different formats
+    def save_pcd_file(self, file_name, pcd):
+        self.file_name = str(file_name)
+        self.pcd = pcd
         try:
             if self.pcd is not None:
                 print("Saving point cloud to file: ", self.file_name)
@@ -133,3 +138,40 @@ class FileSave:
         #             self.points = point_xyz
         #         else:
         #             print("[WARNING] Failed to read points", self.file_name)
+
+    def save_kml_split(self, pcd, kml_coordinates):
+        self.pcd = pcd
+        # Create KD-Tree for point cloud data
+        point_cloud_tree = cKDTree(np.asarray(self.pcd.points))
+
+        # Match point cloud data to KML coordinates
+        matched_indices = point_cloud_tree.query(kml_coordinates)  # This gives the indices of matched points
+
+        # Calculate transformation parameters (translation, rotation, scaling)
+        translation = np.mean(np.asarray(self.pcd.points)[matched_indices[1]], axis=0) - np.mean(kml_coordinates, axis=0)
+        rotation = np.eye(3)  # Identity matrix for simplicity
+        scaling = np.array([1.0, 1.0, 1.0])  # No scaling for simplicity
+
+        # Apply transformation to entire point cloud
+        aligned_point_cloud = (np.asarray(self.pcd.points) - translation) * scaling @ rotation.T
+
+        # print("KML coordinates matrix: \n", kml_coordinates)
+        mypath = str(os.getcwd()) + '/kml_cropped_workdir/'
+        if aligned_point_cloud is not None and len(kml_coordinates)>0:
+            # Loop through each coordinate and split the point cloud
+            for i in range(len(kml_coordinates) - 1):
+                start_coord = kml_coordinates[i]
+                end_coord = kml_coordinates[i + 1]
+
+                # Define a bounding box based on start and end coordinates
+                min_bound = np.minimum(start_coord, end_coord)
+                max_bound = np.maximum(start_coord, end_coord)
+                bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound, max_bound)
+
+                # Crop point cloud within bounding box
+                cropped_cloud = self.pcd.crop(bbox)
+
+                # Save the cropped point cloud
+                file = f"section_{i}.ply"
+                fullpath = os.path.join(mypath, file)
+                o3d.io.write_point_cloud(fullpath, cropped_cloud)

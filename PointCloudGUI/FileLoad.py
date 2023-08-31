@@ -2,7 +2,9 @@ import numpy as np
 import open3d as o3d
 import laspy
 import pye57
+from pykml import parser
 import struct
+import re
 from threading import Thread
 
 class FileLoad(Thread):
@@ -110,7 +112,7 @@ class FileLoad(Thread):
                     for line in f:
                         if len(line.split()) == 4:
                             x, y, z, i = [num for num in line.split()]
-                            points_np.append([float(x), float(y), float(z), int(float(i))])
+                            points_np.append([float(x), float(y), float(z), float(i)])
                             if (len(points_np) % LOG_EVERY_N) == 0:
                                 print('point', len(points_np))
                         elif len(line.split()) == 3:
@@ -120,18 +122,47 @@ class FileLoad(Thread):
                                 print('point', len(points_np))
                         elif len(line.split()) == 5:
                             x, y, z, i, zeroes_v = [num for num in line.split()]
-                            points_np.append([float(x), float(y), float(z), int(float(i))])
+                            points_np.append([float(x), float(y), float(z), float(i)])
+                            if (len(points_np) % LOG_EVERY_N) == 0:
+                                print('point', len(points_np))
+                        elif len(line.split()) == 7:
+                            x, y, z, r, g, b, i = [num for num in line.split()]
+                            points_np.append([float(x), float(y), float(z),
+                                              float(r), float(g), float(b),
+                                              float(i)])
                             if (len(points_np) % LOG_EVERY_N) == 0:
                                 print('point', len(points_np))
                         else:
                             print("[Info] The file has unregistered format")
+                            return
                 print('loop end')
                 points_arr = np.array(points_np).transpose()
                 print(len(points_arr))
                 point_xyz = points_arr[:3].transpose()
-                # points_intensity = points_arr[3]
+                print("xyz points shape", point_xyz.shape)
                 self.pcd = o3d.geometry.PointCloud()
                 self.pcd.points = o3d.utility.Vector3dVector(point_xyz)
+                if len(points_arr) == 4:
+                    points_intensity = (points_arr[3])/255.0
+                    print("intensity points len", points_intensity.shape)
+                    points_intensity_rgb = np.vstack((points_intensity,
+                                                      points_intensity,
+                                                      points_intensity)).T
+                    print("intensity_rgb points shape", points_intensity_rgb.shape)
+                    self.pcd.colors = o3d.utility.Vector3dVector(points_intensity_rgb)
+                elif len(points_arr) == 7:
+                    points_red = (points_arr[4]) / 255.0
+                    points_green = (points_arr[5]) / 255.0
+                    points_blue = (points_arr[6]) / 255.0
+                    points_rgb = np.vstack((points_red,
+                                            points_green,
+                                            points_blue)).T
+
+                    # points_intensity = ((points_arr[3]) / 255.0).T
+                    # print("intensity points len", points_intensity.shape)
+                    print("rgb points shape", points_rgb.shape)
+                    self.pcd.colors = o3d.utility.Vector3dVector(points_rgb)
+                    #self.pcd.intensities = o3d.utility.Vector3dVector(points_intensity)
                 if self.pcd is not None:
                     print("[Info] Successfully read", file_name)
                     # Point cloud
@@ -210,6 +241,50 @@ class FileLoad(Thread):
                 except Exception as e:
                     print(e)
 
+    def load_kml(self, file_name):
+        kml_coordinates = []
+        # gpd.io.file.fiona.drvsupport.supported_drivers['kml'] = 'rw'  # enable KML support which is disabled by default
+        # gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'  # enable KML support which is disabled by default
+
+        try:
+            # # Load the KML trajectory
+            # # Load KML location data (assuming it contains timestamped GPS coordinates)
+            # kml_data = gpd.read_file(file_name)
+            #
+            # # Extract timestamp and coordinates from KML data
+            # timestamps = kml_data['timestamp']
+            # latitudes = kml_data['latitude']
+            # longitudes = kml_data['longitude']
+            # altitudes = kml_data['altitude']
+            #
+            # kml_coordinates = np.vstack((latitudes, longitudes, altitudes)).T
+
+            with open(file_name) as f:
+                pm = parser.parse(f).getroot().Document.Placemark
+                # print("got :")
+                # print(pm.LineString.coordinates)
+
+            pattern = r'[-+]?\d*\.\d+|[-+]?\d+'  # Regular expression pattern for float numbers
+            lines = pm.LineString.coordinates.text.strip().split('\n')  # Split text into lines
+
+            # print(pm.LineString.coordinates.text)
+            for line in lines:
+                coord = re.findall(pattern, line)
+                coord_list = [float(x) for x in coord]
+                kml_coordinates.append(coord_list)
+                #print(coord_list)
+            # for coord in pm.LineString.coordinates:
+            #     print(coord)
+            #     coord = coord.text.strip()
+            #     coord = re.split(',| ', coord)
+            #     coord = [float(c) for c in coord]
+            #     kml_coordinates.append(coord)
+            # print(kml_coordinates)
+            return kml_coordinates
+
+        except Exception as e:
+            print(e, "[WARNING] Failed to read .kml file:", file_name)
+            return
 
     # def export_image(self, path, width, height):
     #     def on_image(image):
