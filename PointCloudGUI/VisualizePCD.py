@@ -7,7 +7,7 @@ from threading import Thread
 # from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 from probreg import cpd
-from probreg import callbacks
+# from probreg import callbacks
 import copy
 import argparse
 from datetime import datetime
