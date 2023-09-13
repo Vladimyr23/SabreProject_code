@@ -1,0 +1,117 @@
+/home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/bin/python /home/mekala/PycharmProjects/SabreProject_code/PointCloudGUI/main.py 
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE ADVANCED 3D - Selected MMS Data/SABRE MMS_S3 - 0002.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+loop end
+4
+xyz points shape (11008825, 3)
+intensity points len (11008825,)
+intensity_rgb points shape (11008825, 3)
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE ADVANCED 3D - Selected MMS Data/SABRE MMS_S3 - 0002.pts
+-------PCD: 
+ PointCloud with 11008825 points.
+/home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_003.pts
+point 1000000
+point 2000000
+point 3000000
+point 4000000
+point 5000000
+point 6000000
+point 7000000
+point 8000000
+point 9000000
+point 10000000
+point 11000000
+point 12000000
+point 13000000
+point 14000000
+point 15000000
+point 16000000
+point 17000000
+loop end
+4
+xyz points shape (17814760, 3)
+intensity points len (17814760,)
+intensity_rgb points shape (17814760, 3)
+[Info] Successfully read /home/mekala/PycharmProjects/SabreProject_code/Sabre_proj/SABRE - Selected Static Scan Data/SABRE - Selected Static Scan Data/SABRE Static Scan_T17_003.pts
+-------PCD: 
+ PointCloud with 17814760 points.
+Distance threshold:  15.0
+Down sampling inputs
+[Open3D DEBUG] Pointcloud down sampled from 11008825 points to 56746 points.
+[Open3D DEBUG] Pointcloud down sampled from 17814760 points to 123234 points.
+
+ Fast Global Registration Started  09/13/2023, 16:07:24 
+
+voxel_size = 0.3
+distance_multiplier = 50
+Distance threshold:  15.0
+[Open3D DEBUG] normalize points :: mean = [531883.551040 6324521.269813 116.285062]
+[Open3D DEBUG] normalize points :: mean = [371357.971783 796928.823239 72.364357]
+[Open3D DEBUG] normalize points :: global scale : 309.098565
+[Open3D DEBUG] 	[cross check] 
+[Open3D DEBUG] Initial matchings : 18006
+[Open3D DEBUG] 	[tuple constraint] 
+[Open3D DEBUG] 257 tuples (1800600 trial, 1800600 actual).
+[Open3D DEBUG] 	[final] matches 771.
+[Open3D DEBUG] Pairwise rigid pose optimization
+Fast Global Registration Finished 09/13/2023, 16:07:44 
+Global registration took 20.841 sec.
+
+RegistrationResult with fitness=0.000000e+00, inlier_rmse=0.000000e+00, and correspondence_set size of 0
+Access transformation to get result.
+Fitness:
+0.8901244140556163
+
+RMSE of all inlier correspondences:
+7.958963724806601
+
+The estimated transformation matrix:
+[[-7.67593664e-01 -5.71173558e-01 -2.90793281e-01  4.39205512e+06]
+ [ 6.28076597e-01 -7.60748880e-01 -1.63648801e-01  5.27428089e+06]
+ [-1.27748795e-01 -3.08256237e-01  9.42686765e-01  2.01747923e+06]
+ [ 0.00000000e+00  0.00000000e+00 -0.00000000e+00  1.00000000e+00]]
+
+Calculating errors...
+Sour centroid: [5.31876285e+05 6.32451432e+06 1.15778355e+02]
+Targ centroid: [3.71349031e+05 7.96967610e+05 6.59070194e+01]
+Transl vector: [-2181353.29732628 -4947180.00773328   878048.14285558]
+Rotational MAE error xyz: [0.12862249 0.17801574 0.06460706], Translational MAE error xyz: [0.02121541 0.01229759 0.02999379]
+Rotational MAE: 0.12374842898840817, Translational MAE: 0.02116892956975223
+
+Correspondence Set:
+std::vector<Eigen::Vector2i> with 50511 elements.
+Use numpy.asarray() to access data.
+
+WARNING: Using soft CircularBuffer (6144 KiB)
+FEngine (64 bits) created at 0x55a597efe670 (threading is enabled)
+FEngine resolved backend: OpenGL
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLit.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLitTransparency.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultLitSSR.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultUnlit.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/defaultUnlitTransparency.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/depth.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitGradient.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/normals.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitSolidColor.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitBackground.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/infiniteGroundPlane.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitLine.filamat
+[Open3D DEBUG] LoadMaterialFromFile(): /home/mekala/PycharmProjects/SabreProject_code/venv_sabre3d/lib/python3.10/site-packages/open3d//resources/unlitPolygonOffset.filamat
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+[Open3D DEBUG] Trying to destroy default resource [Texture, 1, hash: 655361]. Nothing will happen.
+

@@ -10,3 +10,4 @@ laspy~=2.4.1
 pye57~=0.4.1
 PyQt5~=5.15.9
 matplotlib~=3.7.1
+probreg~=0.3.6

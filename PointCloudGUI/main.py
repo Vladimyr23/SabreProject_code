@@ -300,7 +300,7 @@ class AppWithGUI(tk.Tk):
         self.close_vis_button.config(state="normal")
         self.ransac_vox_size = float(self.ransac_vox_size_text.get())
         if self.ransac_vox_size != 0 or self.ransac_vox_size is not None:
-            self.vis_pcd.visualize_ransac(self.pcd, self.pcd1, self.ransac_vox_size,
+            self.vis_pcd.visualize_FGR(self.pcd, self.pcd1, self.ransac_vox_size,
                                           self.source_color, self.target_color)
         else:
             print("Voxel size changed to default value 0.3")
