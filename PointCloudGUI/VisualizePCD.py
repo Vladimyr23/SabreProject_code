@@ -24,6 +24,7 @@ class VisualizePCD(Thread):
         # self.pcd = pcd
         # self.pcd.points = pcd
         self.real_time_flag = False
+        self.my_registration_flag = False
         self.real_time_files_savedSet = set()
         self.load = FileLoad()
         self.save = FileSave()
@@ -776,13 +777,16 @@ class VisualizePCD(Thread):
         # self.cpd_affine(sour.transform(result.transformation), targ, 0.6)
 
         # o3d.visualization.draw([sour.transform(result.transformation), targ])
-        if not self.real_time_flag:
+        if not self.real_time_flag or not self.my_registration_flag:
             # sour.paint_uniform_color(source_color)
             # targ.paint_uniform_color(target_color)
             #o3d.visualization.draw([sour.transform(result.transformation), targ])
             o3d.visualization.draw(pcd_combined) # VY Visualization that worked last
             # o3d.visualization.draw_geometries([sour.transform(result.transformation), targ])
             # self.draw_registration_result(sour, targ, trans, source_color, target_color)
+        elif self.my_registration_flag:
+            return trans
+
         # # result ICP Local refinement
         # distance_threshold = voxel_size * 0.02 # changed from * 0.4
         # print(":: Point-to-plane ICP registration is applied on original point")
@@ -982,18 +986,108 @@ class VisualizePCD(Thread):
         colors[labels < 0] = 0
         pcd_down.colors = o3d.utility.Vector3dVector(colors[:, :3])
 
-        # getting the current date and time
-        finish = datetime.now()
-        # getting the date and time from the current date and time in the given format
-        finish_date_time = finish.strftime("%m/%d/%Y, %H:%M:%S")
-        print('DBSCAN Segmentation process Finished', finish_date_time,
-              "\nDBSCAN Segmentation process execution time %.3f sec.\n" % (finish - start_time).total_seconds())
-        # current_t = datetime.now()
-        # exec_times.append((datetime.now() - s).total_seconds())
+        points = np.asarray(pcd_down.points)
+        output_directory = str(os.getcwd()) + '/clusters'
+        # Get unique cluster labels
+        unique_labels = np.unique(labels)
 
-        # Display:
-        o3d.visualization.draw([pcd_down])
+        if self.my_registration_flag:
+            # Add each cluster as a separate point cloud
+            pcds = []
+            for label in unique_labels:
+                if label == -1:  # Noise points
+                    continue
 
+                cluster_points = points[labels == label]
+                cluster_pcd = o3d.geometry.PointCloud()
+                cluster_pcd.points = o3d.utility.Vector3dVector(cluster_points)
+
+                pcds.append(cluster_pcd)
+                print(f"Added cluster {label} to pcds")
+
+            # getting the current date and time
+            finish = datetime.now()
+            # getting the date and time from the current date and time in the given format
+            finish_date_time = finish.strftime("%m/%d/%Y, %H:%M:%S")
+            print('DBSCAN Segmentation process Finished', finish_date_time,
+                  "\nDBSCAN Segmentation process execution time %.3f sec.\n" % (finish - start_time).total_seconds())
+            return pcds
+
+        else:
+            # Save each cluster as a separate point cloud
+            for label in unique_labels:
+                if label == -1:  # Noise points
+                    continue
+
+                cluster_points = points[labels == label]
+                cluster_pcd = o3d.geometry.PointCloud()
+                cluster_pcd.points = o3d.utility.Vector3dVector(cluster_points)
+
+                output_path = f"{output_directory}/cluster_{label}.ply"
+                o3d.io.write_point_cloud(output_path, cluster_pcd)
+                print(f"Saved cluster {label} to {output_path}")
+
+            # getting the current date and time
+            finish = datetime.now()
+            # getting the date and time from the current date and time in the given format
+            finish_date_time = finish.strftime("%m/%d/%Y, %H:%M:%S")
+            print('DBSCAN Segmentation process Finished', finish_date_time,
+                  "\nDBSCAN Segmentation process execution time %.3f sec.\n" % (finish - start_time).total_seconds())
+            # current_t = datetime.now()
+            # exec_times.append((datetime.now() - s).total_seconds())
+
+            # Display:
+            o3d.visualization.draw([pcd_down])
+
+    @staticmethod
+    def cos_sim(points1, points2):
+        # Compute the centroids of the point clouds
+        centroid_pc1 = np.mean(points1, axis=0)
+        centroid_pc2 = np.mean(points2, axis=0)
+
+        # Compute the cosine similarity between the centroids
+        dot_product = np.dot(centroid_pc1, centroid_pc2)
+        magnitude_pc1 = np.linalg.norm(centroid_pc1)
+        magnitude_pc2 = np.linalg.norm(centroid_pc2)
+
+        cosine_sim = dot_product / (magnitude_pc1 * magnitude_pc2)
+
+        return cosine_sim
+
+    def my_registration(self, pcd1, pcd2, voxel_size=0.3, source_color=(1, 0.706, 0), target_color=(0, 0.651, 0.929)):
+        self.my_registration_flag = True
+        pcd1_clusters = self.vis_segm_DBSCAN(pcd1)
+        pcd2_clusters = self.vis_segm_DBSCAN(pcd2)
+
+        # Clusters cosine similarity calculation
+        cosine_similarities = []
+        max_similarity = 0
+        max_ind1 = 0
+        max_ind2 = 0
+        print("\nFinding clusters similarities ... \n")
+        for indx1 in range(len(pcd1_clusters)):
+            cluster_pcd1_points = np.asarray(pcd1_clusters[indx1].points)
+            for indx2 in range(len(pcd2_clusters)):
+                cluster_pcd2_points = np.asarray(pcd2_clusters[indx2].points)
+                cosine_similarity = self.cos_sim(cluster_pcd1_points, cluster_pcd2_points)
+                cosine_similarities.append(cosine_similarity)
+                print(f"pcd1 cluster {indx1} and pcd2 {indx2} similarity {cosine_similarity}")
+                # Finding clusters with max similarity
+                if cosine_similarity > max_similarity:
+                    max_similarity = cosine_similarity
+                    max_ind1 = indx1
+                    max_ind2 = indx2
+
+        # Applying RANSAC on the most similar clusters
+        sour_pcd = o3d.geometry.PointCloud()
+        sour_pcd.points = o3d.utility.Vector3dVector(np.asarray(pcd1_clusters[max_ind1]))
+        targ_pcd = o3d.geometry.PointCloud()
+        targ_pcd.points = o3d.utility.Vector3dVector(np.asarray(pcd2_clusters[max_ind2]))
+        transf_matr = self.visualize_ransac(sour_pcd, targ_pcd, voxel_size, source_color, target_color)
+
+        # Applying transformation on raw pcd's
+        pcd_combined = pcd1.transform(transf_matr) + pcd2
+        o3d.visualization.draw(pcd_combined)
 
     def vis_close(self):
         # self.vis.remove_geometry(pcd)

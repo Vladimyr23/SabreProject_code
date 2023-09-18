@@ -3,3 +3,4 @@
 /PointCloudGUI/real-time_workdir/
 *.ply
 *.pts
+/PointCloudGUI/clusters/
