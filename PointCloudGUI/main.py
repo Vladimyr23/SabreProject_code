@@ -417,7 +417,7 @@ class AppWithGUI(tk.Tk):
         # Manual points based registration button
         self.manual_registration_button = ttk.Button(
             self,
-            text='Manual points based registration',
+            text='Manual points-based registration',
             state="disabled",
             command=self.manual_registration_visualization
         )
