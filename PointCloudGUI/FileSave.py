@@ -3,8 +3,9 @@ import os
 import numpy as np
 import open3d as o3d
 from scipy.spatial import cKDTree
-import laspy
-import pye57
+# import laspy
+# import pye57
+
 
 class FileSave:
 
@@ -148,7 +149,8 @@ class FileSave:
         matched_indices = point_cloud_tree.query(kml_coordinates)  # This gives the indices of matched points
 
         # Calculate transformation parameters (translation, rotation, scaling)
-        translation = np.mean(np.asarray(self.pcd.points)[matched_indices[1]], axis=0) - np.mean(kml_coordinates, axis=0)
+        translation = np.mean(np.asarray(self.pcd.points)[matched_indices[1]], axis=0) - np.mean(kml_coordinates,
+                                                                                                 axis=0)
         rotation = np.eye(3)  # Identity matrix for simplicity
         scaling = np.array([1.0, 1.0, 1.0])  # No scaling for simplicity
 
@@ -157,7 +159,7 @@ class FileSave:
 
         # print("KML coordinates matrix: \n", kml_coordinates)
         mypath = str(os.getcwd()) + '/kml_cropped_workdir/'
-        if aligned_point_cloud is not None and len(kml_coordinates)>0:
+        if aligned_point_cloud is not None and len(kml_coordinates) > 0:
             # Loop through each coordinate and split the point cloud
             for i in range(len(kml_coordinates) - 1):
                 start_coord = kml_coordinates[i]

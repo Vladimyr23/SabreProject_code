@@ -20,6 +20,7 @@ from VisualizePCD import VisualizePCD
 class AppWithGUI(tk.Tk):
     def __init__(self):
         super().__init__()
+        self.thread = None
         # create the root window
         self.sabre_logo_image = PhotoImage(file="sabre_logo.png")
         self.sabre_hw_image = PhotoImage(file="sabre_hardware_img599-470.png")
@@ -59,7 +60,7 @@ class AppWithGUI(tk.Tk):
         default_font = tkFont.nametofont("TkDefaultFont")
         default_font.configure(size=10)
         self.option_add("*Font", default_font)
-        self.vis_pcd = None
+        # self.vis_pcd = None
         self.pcd = None
         self.pcd1 = None
         self.transf_mtrx = None
@@ -341,9 +342,9 @@ class AppWithGUI(tk.Tk):
 
     def close_vis(self):
         self.vis_pcd.vis_close()
-        self.pcd = None
-        self.pcd1 = None
-        self.vis_pcd = None
+        # self.pcd = None
+        # self.pcd1 = None
+        # self.vis_pcd = None
         self.edit_pt_cld_button.config(state="disabled")
         self.visualize_mob_strips_button.config(state="disabled")
         self.visualize_ransac_button.config(state="disabled")
@@ -351,6 +352,11 @@ class AppWithGUI(tk.Tk):
         self.visualize_real_time_button.config(state="disabled")
         self.close_vis_button.config(state="disabled")
         self.save_button.config(state="disabled")
+        if self.thread:
+            self.thread.stop()
+            self.thread = None
+        else:
+            print("no thread running")
 
     def create_menu_buttons(self):
         """ create a menu buttons """
@@ -536,6 +542,11 @@ class AppWithGUI(tk.Tk):
         self.quit_button.grid(row=15, column=0, columnspan=3, sticky='nsew')
 
     def destroy_it(self):
+        if self.thread:
+            self.thread.stop()
+            self.thread = None
+        else:
+            print("no thread running")
         app.destroy()
 
 if __name__ == "__main__":

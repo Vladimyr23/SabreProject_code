@@ -6,7 +6,7 @@ from threading import Thread
 # from sklearn.cluster import KMeans, DBSCAN
 # from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
-from probreg import cpd
+# from probreg import cpd
 # from probreg import callbacks
 import copy
 import argparse
@@ -20,6 +20,7 @@ class VisualizePCD(Thread):
 
     def __init__(self):
         super().__init__()
+        self.thread_running = False
         self.vis = None
         # self.pcd = pcd
         # self.pcd.points = pcd
@@ -28,6 +29,9 @@ class VisualizePCD(Thread):
         self.real_time_files_savedSet = set()
         self.load = FileLoad()
         self.save = FileSave()
+
+    def stop_thread(self):
+        self.thread_running = False
 
     def pick_points(self, pcd):
         print("")
@@ -74,6 +78,7 @@ class VisualizePCD(Thread):
             print("Select at least 2 points to calculate Dist")
 
     def visualize(self, pcd):
+        self.thread_running = True
         # Create a visualizer object
         self.vis = o3d.visualization.VisualizerWithEditing()
         self.vis.create_window()
@@ -118,6 +123,7 @@ class VisualizePCD(Thread):
         # ---------------DBSCAN clustering method end
 
     def visualize_mob_strips(self, sour, targ, source_color=(1, 0.706, 0), target_color=(0, 0.651, 0.929)):
+        self.thread_running = True
         pcd_combined = sour + targ
         self.save.save_pcd_file("combined_point_cloud.ply", pcd_combined)
         sour.paint_uniform_color(source_color)
@@ -125,6 +131,7 @@ class VisualizePCD(Thread):
         o3d.visualization.draw([sour, targ])
 
     def visualize_pcd_transf(self, pcd, transf_mtrx):
+        self.thread_running = True
         # Create a visualizer object
         self.vis = o3d.visualization.VisualizerWithEditing()
         self.vis.create_window()
@@ -153,6 +160,7 @@ class VisualizePCD(Thread):
 
 
     def manual_registration(self, source, target, threshold=0.2, source_color=(1, 0.706, 0), target_color=(0, 0.651, 0.929)):
+        self.thread_running = True
         print("Visualization of two point clouds before manual alignment")
         self.draw_registration_result(source, target, np.identity(4), source_color, target_color)
 
@@ -180,46 +188,46 @@ class VisualizePCD(Thread):
         self.draw_registration_result(source, target, reg_p2p.transformation, source_color, target_color)
         print("")
 
-    def cpd_affine(self, sour, targ, voxel_size=0.7, source_color=(1, 0.706, 0), target_color=(0, 0.651, 0.929)):
-        use_cuda = True
-        if use_cuda:
-            import cupy as cp
-            to_cpu = cp.asnumpy
-            cp.cuda.set_allocator(cp.cuda.MemoryPool().malloc)
-        else:
-            cp = np
-            to_cpu = lambda x: x
-
-        # getting the current date and time
-        start = datetime.now()
-        # getting the date and time from the current date and time in the given format
-        start_date_time = start.strftime("%m/%d/%Y, %H:%M:%S")
-        print('\nCPD_Affine Started', start_date_time, '\n')
-
-        source_down = sour.voxel_down_sample(voxel_size=voxel_size)
-        target_down = targ.voxel_down_sample(voxel_size=voxel_size)
-        source_down_pt = cp.asarray(source_down.points, dtype=cp.float32)
-        target_down_pt = cp.asarray(target_down.points, dtype=cp.float32)
-
-        acpd = cpd.AffineCPD(source_down_pt, use_cuda=use_cuda)
-        tf_param, _, _ = acpd.registration(target_down_pt)
-
-        finish = datetime.now()
-        # getting the date and time from the current date and time in the given format
-        finish_date_time = finish.strftime("%m/%d/%Y, %H:%M:%S")
-        print('CPD_Affine REGISTRATION Finished', finish_date_time,
-              "\nNon-rigid registration took %.3f sec.\n" % (finish - start).total_seconds())
-        print("result: ", to_cpu(tf_param.b), to_cpu(tf_param.t))
-
-        print("Performing Non-Rigid transformation on raw data ...")
-        sour_result = tf_param.transform(source_down_pt)
-        sour_pc = o3d.geometry.PointCloud()
-        sour_pc.points = o3d.utility.Vector3dVector(to_cpu(sour_result))
-
-        if not self.real_time_flag:
-            sour_pc.paint_uniform_color(source_color)
-            target_down.paint_uniform_color(target_color)
-            o3d.visualization.draw_geometries([sour_pc, target_down])
+    # def cpd_affine(self, sour, targ, voxel_size=0.7, source_color=(1, 0.706, 0), target_color=(0, 0.651, 0.929)):
+    #     use_cuda = True
+    #     if use_cuda:
+    #         import cupy as cp
+    #         to_cpu = cp.asnumpy
+    #         cp.cuda.set_allocator(cp.cuda.MemoryPool().malloc)
+    #     else:
+    #         cp = np
+    #         to_cpu = lambda x: x
+    #
+    #     # getting the current date and time
+    #     start = datetime.now()
+    #     # getting the date and time from the current date and time in the given format
+    #     start_date_time = start.strftime("%m/%d/%Y, %H:%M:%S")
+    #     print('\nCPD_Affine Started', start_date_time, '\n')
+    #
+    #     source_down = sour.voxel_down_sample(voxel_size=voxel_size)
+    #     target_down = targ.voxel_down_sample(voxel_size=voxel_size)
+    #     source_down_pt = cp.asarray(source_down.points, dtype=cp.float32)
+    #     target_down_pt = cp.asarray(target_down.points, dtype=cp.float32)
+    #
+    #     acpd = cpd.AffineCPD(source_down_pt, use_cuda=use_cuda)
+    #     tf_param, _, _ = acpd.registration(target_down_pt)
+    #
+    #     finish = datetime.now()
+    #     # getting the date and time from the current date and time in the given format
+    #     finish_date_time = finish.strftime("%m/%d/%Y, %H:%M:%S")
+    #     print('CPD_Affine REGISTRATION Finished', finish_date_time,
+    #           "\nNon-rigid registration took %.3f sec.\n" % (finish - start).total_seconds())
+    #     print("result: ", to_cpu(tf_param.b), to_cpu(tf_param.t))
+    #
+    #     print("Performing Non-Rigid transformation on raw data ...")
+    #     sour_result = tf_param.transform(source_down_pt)
+    #     sour_pc = o3d.geometry.PointCloud()
+    #     sour_pc.points = o3d.utility.Vector3dVector(to_cpu(sour_result))
+    #
+    #     if not self.real_time_flag:
+    #         sour_pc.paint_uniform_color(source_color)
+    #         target_down.paint_uniform_color(target_color)
+    #         o3d.visualization.draw_geometries([sour_pc, target_down])
 
 
     # Function to calculate rotational and translational error
@@ -375,6 +383,7 @@ class VisualizePCD(Thread):
         return pose_graph, trans
 
     def visualize_mw(self, sour, targ, voxel_size=0.0006, source_color=(1, 0.706, 0), target_color=(0, 0.651, 0.929)):
+        self.thread_running = True
         # Multiway REGISTRATION START--------------------
         start = datetime.now()
         # getting the date and time from the current date and time in the given format
@@ -447,6 +456,7 @@ class VisualizePCD(Thread):
 
     def visualize_ICP(self, sour, targ, voxel_size=0.02,
                       source_color=(1, 0.706, 0), target_color=(0, 0.651, 0.929)):
+        self.thread_running = True
         # # Point-to-plane ICP REGISTRATION START--------------------
         # point to plane ICP
         o3d.visualization.draw_geometries([sour, targ])
@@ -551,6 +561,7 @@ class VisualizePCD(Thread):
 
     def visualize_FGR(self, sour, targ, voxel_size=0.3, source_color=(1, 0.706, 0),
                              target_color=(0, 0.651, 0.929)):
+        self.thread_running = True
         #FGR REGISTRATION START--------------------
         #Not working on mob-stat. Stat-stat?
         parser = argparse.ArgumentParser(
@@ -660,6 +671,7 @@ class VisualizePCD(Thread):
         #--------------------FGR REGISTRATION END
 
     def visualize_ransac(self, sour, targ, voxel_size=0.3, source_color=(1, 0.706, 0), target_color=(0, 0.651, 0.929)):
+        self.thread_running = True
         # RANSAC REGISTRATION START--------------------
         parser = argparse.ArgumentParser(
             'Global point cloud registration example with RANSAC')
@@ -835,6 +847,7 @@ class VisualizePCD(Thread):
             return target
 
     def visualize_real_time(self, source):
+        self.thread_running = True
         self.real_time_flag = True
         # to add new points each dt secs.
         dt = 20
@@ -852,8 +865,9 @@ class VisualizePCD(Thread):
         # run non-blocking visualization.
         # To exit, press 'q' or click the 'x' of the window.
         keep_running = True
+        pause = False
         while keep_running:
-            if (datetime.now() - previous_t).total_seconds() > dt:
+            if (datetime.now() - previous_t).total_seconds() > dt and not pause:
                 target = self.real_time_search_load_pcd()
                 if target is not None:
                     dists = source.compute_point_cloud_distance(target)
@@ -873,10 +887,20 @@ class VisualizePCD(Thread):
                     # pcd.points.extend(np.random.rand(n_new, 3).tolist())
 
                     self.vis.update_geometry(source)
+                    print('Next data search in 20 seconds.\n Do you want to pause the real-time data search? (Answer Yes or Y)')
+                    pause_str = input()
+                    if pause_str.lower() == 'y' or pause_str.lower() == 'yes':
+                        pause = True
                 previous_t = datetime.now()
 
             keep_running = self.vis.poll_events()
             self.vis.update_renderer()
+            if pause:
+                print('Do you want to restart the real-time data search? (Answer Yes or Y)')
+                pause_str = input()
+                if pause_str.lower() == 'y' or pause_str.lower() == 'yes':
+                    pause = False
+
 
         self.vis.destroy_window()
         # # Global settings.
@@ -941,6 +965,7 @@ class VisualizePCD(Thread):
         # self.vis.destroy_window()
 
     def vis_segm_DBSCAN(self, pcd):
+        self.thread_running = True
         # getting the current date and time
         start_time = datetime.now()
         # getting the date and time from the current date and time in the given format
@@ -1055,6 +1080,7 @@ class VisualizePCD(Thread):
         return cosine_sim
 
     def my_registration(self, pcd1, pcd2, voxel_size=0.3, source_color=(1, 0.706, 0), target_color=(0, 0.651, 0.929)):
+        self.thread_running = True
         self.my_registration_flag = True
         pcd1_clusters = self.vis_segm_DBSCAN(pcd1)
         pcd2_clusters = self.vis_segm_DBSCAN(pcd2)

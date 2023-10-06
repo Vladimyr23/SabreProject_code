@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import open3d as o3d
 import laspy
@@ -164,9 +165,13 @@ class FileLoad(Thread):
                     self.pcd.colors = o3d.utility.Vector3dVector(points_rgb)
                     #self.pcd.intensities = o3d.utility.Vector3dVector(points_intensity)
                 if self.pcd is not None:
+                    filename_ply = str(os.getcwd())+'/pcd_temp/'+str((file_name[:-3].rsplit('/', 1)[-1:])[0])+'ply'
+                    print(filename_ply)
+                    o3d.io.write_point_cloud(filename_ply, self.pcd)
+                    pcd_ply = o3d.io.read_point_cloud(filename_ply)
                     print("[Info] Successfully read", file_name)
                     # Point cloud
-                    return self.pcd
+                    return pcd_ply
 
             except Exception:
                 print("[Info] Reading .pts file failed", file_name)
